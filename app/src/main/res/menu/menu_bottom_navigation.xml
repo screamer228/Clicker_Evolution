@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/shopFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_shop_bn"
+        android:title="" />
+    <item
+        android:id="@+id/homeFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_home_bn"
+        android:iconTint="@null"
+        android:title="" />
+    <item
+        android:id="@+id/upgradeFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_upgrade_bn"
+        android:title="" />
+</menu>
