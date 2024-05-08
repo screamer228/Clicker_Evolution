@@ -1,4 +1,4 @@
-package com.example.clickerevolution
+package com.example.clickerevolution.presentation
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -9,7 +9,6 @@ class HomeViewModel : ViewModel() {
     private val _resources = MutableStateFlow(0)
     val resourcesFlow: StateFlow<Int> = _resources
 
-    // Функция для увеличения количества ресурсов
     fun incrementResources() {
         _resources.value += 1
     }
