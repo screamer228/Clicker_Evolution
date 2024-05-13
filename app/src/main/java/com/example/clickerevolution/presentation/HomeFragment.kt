@@ -8,24 +8,32 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.clickerevolution.R
+import com.example.clickerevolution.app.App
 import com.example.clickerevolution.databinding.FragmentHomeBinding
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var imageToClick: ImageView
     private lateinit var counterTV: TextView
-    private val viewModel: HomeViewModel by activityViewModels()
+
+    @Inject
+    lateinit var viewModelFactory: SharedViewModelFactory
+    private lateinit var viewModel: SharedViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
+        (requireActivity().applicationContext as App).appComponent.injectHomeFragment(this)
+        viewModel =
+            ViewModelProvider(requireActivity(), viewModelFactory)[SharedViewModel::class.java]
+
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         bindViews()
         return binding.root

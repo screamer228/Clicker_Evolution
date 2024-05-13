@@ -25,6 +25,19 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "PREFS_NAME", "\"sharedPrefsGoldValue\"")
+            buildConfigField("String", "PREFS_TITLE_KEY", "\"prefsGoldValueKey\"")
+            buildConfigField("String", "PREFS_DEFAULT_VALUE", "\"0\"")
+        }
+        debug {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            buildConfigField("String", "PREFS_NAME", "\"sharedPrefsGoldValue\"")
+            buildConfigField("String", "PREFS_TITLE_KEY", "\"prefsGoldValueKey\"")
+            buildConfigField("String", "PREFS_DEFAULT_VALUE", "\"0\"")
         }
     }
     compileOptions {
@@ -36,6 +49,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -46,17 +60,17 @@ dependencies {
 
     implementation("io.coil-kt:coil:2.6.0")
 
+    //dagger
+    val daggerVersion = "2.50"
+    implementation("com.google.dagger:dagger:$daggerVersion")
+    kapt("com.google.dagger:dagger-compiler:$daggerVersion")
+
     //coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation(libs.androidx.legacy.support.v4)
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
-
-    //koin
-    val koinVersion = "3.5.6"
-    implementation ("io.insert-koin:koin-android:$koinVersion")
-    implementation("io.insert-koin:koin-android:$koinVersion")
 
     //room
     val roomVersion = "2.6.1"
