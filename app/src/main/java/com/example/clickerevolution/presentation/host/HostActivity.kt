@@ -44,9 +44,9 @@ class HostActivity : AppCompatActivity() {
         prepareBottomNav()
 
         lifecycleScope.launch {
-            viewModel.resourcesFlow.collect { resources ->
+            viewModel.resourcesFlow.collect {
 
-                topBarCounterTV.text = resources.toString()
+                topBarCounterTV.text = it.gold.toString()
             }
         }
 

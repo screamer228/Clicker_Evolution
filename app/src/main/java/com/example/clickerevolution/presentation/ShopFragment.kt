@@ -6,10 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
 import com.example.clickerevolution.databinding.FragmentHomeBinding
 import com.example.clickerevolution.databinding.FragmentShopBinding
+import com.example.clickerevolution.presentation.adapter.SkinsAdapter
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ShopFragment : Fragment() {
@@ -18,6 +21,7 @@ class ShopFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: SharedViewModelFactory
     private lateinit var viewModel: SharedViewModel
+    private val adapter: SkinsAdapter = SkinsAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +39,12 @@ class ShopFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.recyclerViewSkins.adapter = adapter
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.resourcesFlow.collect {
+                adapter.updateList(it.skinsList)
+            }
+        }
     }
 }

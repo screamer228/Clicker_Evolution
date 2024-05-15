@@ -43,9 +43,9 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.resourcesFlow.collect { resources ->
+            viewModel.resourcesFlow.collect {
 
-                binding.textViewCounter.text = resources.toString()
+                binding.textViewCounter.text = it.gold.toString()
             }
         }
 
