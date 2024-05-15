@@ -2,19 +2,18 @@ package com.example.clickerevolution.presentation.host
 
 import android.os.Bundle
 import android.widget.TextView
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.clickerevolution.presentation.HomeFragment
-import com.example.clickerevolution.presentation.SharedViewModel
+import com.example.clickerevolution.presentation.viewmodel.SharedViewModel
 import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
 import com.example.clickerevolution.presentation.ShopFragment
 import com.example.clickerevolution.presentation.UpgradeFragment
 import com.example.clickerevolution.databinding.ActivityHostBinding
-import com.example.clickerevolution.presentation.SharedViewModelFactory
+import com.example.clickerevolution.presentation.viewmodel.SharedViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 import javax.inject.Inject

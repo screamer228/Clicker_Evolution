@@ -1,12 +1,13 @@
-package com.example.clickerevolution.presentation
+package com.example.clickerevolution.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.clickerevolution.data.PrefsRepository
+import com.example.clickerevolution.data.repository.PrefsRepository
 import com.example.clickerevolution.presentation.model.Resources
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,7 +18,7 @@ class SharedViewModel @Inject constructor(
     var tickValue = 1
 
     private val _resources = MutableStateFlow(Resources())
-    val resourcesFlow: StateFlow<Resources> = _resources
+    val resourcesFlow: StateFlow<Resources> = _resources.asStateFlow()
 
     init {
         getGoldValue()

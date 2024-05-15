@@ -16,25 +16,17 @@ class SkinsDiffUtil(
     }
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition].title == newList[newItemPosition].title
+        return oldList[oldItemPosition].id == newList[newItemPosition].id
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return when {
+        val oldItem = oldList[oldItemPosition]
+        val newItem = newList[newItemPosition]
 
-            oldList[oldItemPosition].title != newList[newItemPosition].title -> {
-                false
-            }
-
-            oldList[oldItemPosition].imageId != newList[newItemPosition].imageId -> {
-                false
-            }
-
-            oldList[oldItemPosition].price != newList[newItemPosition].price -> {
-                false
-            }
-
-            else -> true
-        }
+        return oldItem.title == newItem.title &&
+                oldItem.imageId == newItem.imageId &&
+                oldItem.price == newItem.price &&
+                oldItem.isPurchased == newItem.isPurchased &&
+                oldItem.isEquipped == newItem.isEquipped
     }
 }

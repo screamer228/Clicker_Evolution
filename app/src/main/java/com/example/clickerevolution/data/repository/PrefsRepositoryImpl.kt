@@ -1,4 +1,4 @@
-package com.example.clickerevolution.data
+package com.example.clickerevolution.data.repository
 
 import android.content.SharedPreferences
 import com.example.clickerevolution.BuildConfig

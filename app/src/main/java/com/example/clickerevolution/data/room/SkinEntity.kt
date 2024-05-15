@@ -1,9 +1,12 @@
-package com.example.clickerevolution.presentation.model
+package com.example.clickerevolution.data.room
 
 import androidx.annotation.DrawableRes
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-data class Skin(
-    val id: Int,
+@Entity(tableName = "skins")
+data class SkinEntity(
+    @PrimaryKey val id: Int,
     val title: String,
     @DrawableRes val imageId: Int,
     val price: Int,

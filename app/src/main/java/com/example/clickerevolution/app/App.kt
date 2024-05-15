@@ -12,6 +12,8 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
+//        deleteDatabase("skins_db")
+
         appComponent = DaggerAppComponent
             .builder()
             .appModule(AppModule(context = this))

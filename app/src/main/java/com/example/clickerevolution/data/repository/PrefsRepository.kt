@@ -1,4 +1,4 @@
-package com.example.clickerevolution.data
+package com.example.clickerevolution.data.repository
 
 interface PrefsRepository {
     suspend fun saveGoldValueInPrefs(value: String)

@@ -1,8 +1,8 @@
-package com.example.clickerevolution.presentation
+package com.example.clickerevolution.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.clickerevolution.data.PrefsRepository
+import com.example.clickerevolution.data.repository.PrefsRepository
 
 class SharedViewModelFactory(
     private val prefsRepository: PrefsRepository

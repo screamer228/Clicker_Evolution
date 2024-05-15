@@ -58,6 +58,7 @@ dependencies {
     //splashScreen
     implementation("androidx.core:core-splashscreen:1.0.1")
 
+    //coil
     implementation("io.coil-kt:coil:2.6.0")
 
     //dagger
