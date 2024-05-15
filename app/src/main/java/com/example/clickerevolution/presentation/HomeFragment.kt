@@ -58,7 +58,7 @@ class HomeFragment : Fragment() {
 
         binding.imageViewImageToClick.setOnClickListener {
 
-            viewModel.incrementResources()
+            viewModel.incrementGold()
 
             soundPool.play(soundId, 1.0f, 1.0f, 1, 0, 1.0f)
 

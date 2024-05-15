@@ -10,6 +10,7 @@ import com.example.clickerevolution.presentation.model.Skin
 import com.example.clickerevolution.utils.SkinsDiffUtil
 
 class SkinsAdapter(
+//    var gold: Int,
     private val onAction: (Skin, Action) -> Unit
 //    private val itemClickListener: ItemClickListener
 ) : RecyclerView.Adapter<SkinsAdapter.ViewHolder>() {
@@ -17,7 +18,7 @@ class SkinsAdapter(
     private var skinsList: List<Skin> = emptyList()
 
     inner class ViewHolder(
-        private val binding: ItemSkinBinding,
+        private val binding: ItemSkinBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Skin) {

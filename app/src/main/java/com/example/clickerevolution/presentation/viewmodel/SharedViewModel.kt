@@ -24,9 +24,14 @@ class SharedViewModel @Inject constructor(
         getGoldValue()
     }
 
-    fun incrementResources() {
+    fun incrementGold() {
         val incrementedGold = resourcesFlow.value.gold + tickValue
         _resources.value = _resources.value.copy(gold = incrementedGold)
+    }
+
+    fun subtractGold(price: Int) {
+        val reducedGold = resourcesFlow.value.gold - price
+        _resources.value = _resources.value.copy(gold = reducedGold)
     }
 
     private fun getGoldValue() {

@@ -1,10 +1,12 @@
 package com.example.clickerevolution.presentation
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.clickerevolution.app.App
@@ -14,15 +16,18 @@ import com.example.clickerevolution.presentation.viewmodel.SharedViewModel
 import com.example.clickerevolution.presentation.viewmodel.SharedViewModelFactory
 import com.example.clickerevolution.presentation.viewmodel.ShopViewModel
 import com.example.clickerevolution.presentation.viewmodel.ShopViewModelFactory
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ShopFragment : Fragment() {
 
     private lateinit var binding: FragmentShopBinding
+
     @Inject
     lateinit var sharedViewModelFactory: SharedViewModelFactory
     private lateinit var sharedViewModel: SharedViewModel
+
     @Inject
     lateinit var shopViewModelFactory: ShopViewModelFactory
     private lateinit var shopViewModel: ShopViewModel
@@ -34,7 +39,10 @@ class ShopFragment : Fragment() {
         (requireActivity().applicationContext as App).appComponent.injectShopFragment(this)
 
         sharedViewModel =
-            ViewModelProvider(requireActivity(), sharedViewModelFactory)[SharedViewModel::class.java]
+            ViewModelProvider(
+                requireActivity(),
+                sharedViewModelFactory
+            )[SharedViewModel::class.java]
 
         shopViewModel =
             ViewModelProvider(this, shopViewModelFactory)[ShopViewModel::class.java]
@@ -48,7 +56,16 @@ class ShopFragment : Fragment() {
 
         val adapter = SkinsAdapter { skin, action ->
             when (action) {
-                SkinsAdapter.Action.PURCHASE -> shopViewModel.purchaseSkin(skin.id)
+                SkinsAdapter.Action.PURCHASE -> {
+                    if (sharedViewModel.resourcesFlow.value.gold >= skin.price) {
+                        shopViewModel.purchaseSkin(skin.id)
+                        sharedViewModel.subtractGold(skin.price)
+                    } else {
+                        Toast.makeText(requireContext(), "Не хватает золота!", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+
                 SkinsAdapter.Action.EQUIP -> shopViewModel.equipSkin(skin.id)
                 SkinsAdapter.Action.UNEQUIP -> shopViewModel.unequipSkin(skin.id)
             }
@@ -61,5 +78,12 @@ class ShopFragment : Fragment() {
                 adapter.updateList(it)
             }
         }
+
+//        viewLifecycleOwner.lifecycleScope.launch {
+//            sharedViewModel.resourcesFlow.collectLatest {
+//                adapter.gold = it.gold
+//                adapter.notifyDataSetChanged() // Обновляем адаптер при изменении золота
+//            }
+//        }
     }
 }
