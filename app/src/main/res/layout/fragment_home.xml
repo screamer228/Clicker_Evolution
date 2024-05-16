@@ -27,6 +27,6 @@
         android:layout_height="250dp"
         android:layout_marginTop="75dp"
         android:scaleType="fitXY"
-        android:src="@drawable/img_cookie" />
+        android:src="@drawable/pig" />
 
 </LinearLayout>

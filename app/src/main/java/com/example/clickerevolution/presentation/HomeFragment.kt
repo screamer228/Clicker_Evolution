@@ -54,7 +54,7 @@ class HomeFragment : Fragment() {
         val soundPool = SoundPool.Builder()
             .setMaxStreams(4)
             .build()
-        val soundId = soundPool.load(requireContext(), R.raw.sound_cookie_click, 1)
+        val soundId = soundPool.load(requireContext(), R.raw.sound_click, 1)
 
         binding.imageViewImageToClick.setOnClickListener {
 
