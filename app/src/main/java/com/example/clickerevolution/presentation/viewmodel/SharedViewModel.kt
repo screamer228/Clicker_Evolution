@@ -18,34 +18,39 @@ class SharedViewModel @Inject constructor(
     private val skinsRepository: SkinsRepository
 ) : ViewModel() {
 
-    var tickValue = 1
-
     private val _currentSkin = MutableStateFlow(CurrentSkin())
     val currentSkin: StateFlow<CurrentSkin> = _currentSkin.asStateFlow()
 
-    private val _currentGold = MutableStateFlow(Resources())
-    val currentGold: StateFlow<Resources> = _currentGold.asStateFlow()
+    private val _currentGold = MutableStateFlow(0)
+    val currentGold: StateFlow<Int> = _currentGold.asStateFlow()
+
+    private val _currentResources = MutableStateFlow(Resources())
+    val currentResources: StateFlow<Resources> = _currentResources.asStateFlow()
 
     init {
         getInitialSkin()
-        getGoldValue()
+        getInitialGoldValue()
     }
 
     fun incrementGold() {
-        val incrementedGold = currentGold.value.gold + tickValue
-        _currentGold.value = _currentGold.value.copy(gold = incrementedGold)
+        val incrementedGold = currentGold.value + currentResources.value.goldClickTickValue
+        setGoldValue(incrementedGold)
     }
 
     fun subtractGold(price: Int) {
-        val reducedGold = currentGold.value.gold - price
-        _currentGold.value = _currentGold.value.copy(gold = reducedGold)
+        val reducedGold = currentGold.value - price
+        setGoldValue(reducedGold)
     }
 
-    private fun getGoldValue() {
+    private fun getInitialGoldValue() {
         viewModelScope.launch(Dispatchers.IO) {
-            val goldValue = prefsRepository.getGoldValueFromPrefs()
-            _currentGold.value = _currentGold.value.copy(gold = goldValue.toInt())
+            val goldValue = prefsRepository.getGoldValueFromPrefs().toInt()
+            setGoldValue(goldValue)
         }
+    }
+
+    private fun setGoldValue(value: Int) {
+        _currentGold.value = value
     }
 
     fun saveGoldValue(value: String) {
@@ -54,7 +59,7 @@ class SharedViewModel @Inject constructor(
         }
     }
 
-    fun getInitialSkin() {
+    private fun getInitialSkin() {
         viewModelScope.launch(Dispatchers.IO) {
             val skin = skinsRepository.getCurrentSkin()
             setCurrentSkin(skin)

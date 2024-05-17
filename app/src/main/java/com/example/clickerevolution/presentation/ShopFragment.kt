@@ -56,7 +56,7 @@ class ShopFragment : Fragment() {
         val adapter = SkinsAdapter { skin, action ->
             when (action) {
                 SkinsAdapter.Action.PURCHASE -> {
-                    if (sharedViewModel.currentGold.value.gold >= skin.price) {
+                    if (sharedViewModel.currentGold.value >= skin.price) {
                         sharedViewModel.subtractGold(skin.price)
                         shopViewModel.purchaseSkin(skin.id)
                     } else {

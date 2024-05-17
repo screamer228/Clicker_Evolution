@@ -1,7 +1,7 @@
 package com.example.clickerevolution.data.repository
 
 import android.content.SharedPreferences
-import com.example.clickerevolution.BuildConfig
+import clickerevolution.BuildConfig
 import javax.inject.Inject
 
 class PrefsRepositoryImpl @Inject constructor(
