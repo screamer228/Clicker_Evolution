@@ -43,7 +43,7 @@ class HostActivity : AppCompatActivity() {
         prepareBottomNav()
 
         lifecycleScope.launch {
-            viewModel.resourcesFlow.collect {
+            viewModel.currentGold.collect {
 
                 topBarCounterTV.text = it.gold.toString()
             }

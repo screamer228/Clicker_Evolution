@@ -1,6 +1,5 @@
 package com.example.clickerevolution.presentation
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,11 +11,11 @@ import androidx.lifecycle.lifecycleScope
 import com.example.clickerevolution.app.App
 import com.example.clickerevolution.databinding.FragmentShopBinding
 import com.example.clickerevolution.presentation.adapter.SkinsAdapter
+import com.example.clickerevolution.presentation.model.CurrentSkin
 import com.example.clickerevolution.presentation.viewmodel.SharedViewModel
 import com.example.clickerevolution.presentation.viewmodel.SharedViewModelFactory
 import com.example.clickerevolution.presentation.viewmodel.ShopViewModel
 import com.example.clickerevolution.presentation.viewmodel.ShopViewModelFactory
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -57,17 +56,24 @@ class ShopFragment : Fragment() {
         val adapter = SkinsAdapter { skin, action ->
             when (action) {
                 SkinsAdapter.Action.PURCHASE -> {
-                    if (sharedViewModel.resourcesFlow.value.gold >= skin.price) {
-                        shopViewModel.purchaseSkin(skin.id)
+                    if (sharedViewModel.currentGold.value.gold >= skin.price) {
                         sharedViewModel.subtractGold(skin.price)
+                        shopViewModel.purchaseSkin(skin.id)
                     } else {
                         Toast.makeText(requireContext(), "Не хватает золота!", Toast.LENGTH_SHORT)
                             .show()
                     }
                 }
 
-                SkinsAdapter.Action.EQUIP -> shopViewModel.equipSkin(skin.id)
-                SkinsAdapter.Action.UNEQUIP -> shopViewModel.unequipSkin(skin.id)
+                SkinsAdapter.Action.EQUIP -> {
+                    sharedViewModel.setCurrentSkin(CurrentSkin(skin.imageId, skin.soundId))
+                    shopViewModel.equipSkin(skin.id)
+                }
+
+                SkinsAdapter.Action.UNEQUIP -> {
+                    sharedViewModel.setCurrentSkin(CurrentSkin())
+                    shopViewModel.unequipSkin(skin.id)
+                }
             }
         }
 

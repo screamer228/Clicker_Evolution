@@ -12,6 +12,9 @@ interface SkinDao {
     @Query("SELECT * FROM skins")
     fun getAllSkins(): Flow<List<SkinEntity>>
 
+    @Query("SELECT * FROM skins WHERE isEquipped = 1")
+    fun getCurrentSkin(): SkinEntity?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSkin(skin: SkinEntity)
 

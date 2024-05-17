@@ -22,7 +22,6 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var imageToClick: ImageView
-    private lateinit var counterTV: TextView
 
     @Inject
     lateinit var viewModelFactory: SharedViewModelFactory
@@ -44,32 +43,34 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.resourcesFlow.collect {
+        var soundIdRes = R.raw.sound_cookie_click
 
-                binding.textViewCounter.text = it.gold.toString()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.currentSkin.collect {
+                imageToClick.setImageResource(it.imageId)
+                soundIdRes = it.soundId
             }
         }
 
         val soundPool = SoundPool.Builder()
             .setMaxStreams(4)
             .build()
-        val soundId = soundPool.load(requireContext(), R.raw.sound_click, 1)
+        val soundId = soundPool.load(requireContext(), soundIdRes, 1)
 
-        binding.imageViewImageToClick.setOnClickListener {
+        imageToClick.setOnClickListener {
 
             viewModel.incrementGold()
 
             soundPool.play(soundId, 1.0f, 1.0f, 1, 0, 1.0f)
 
-            binding.imageViewImageToClick.animate().apply {
+            imageToClick.animate().apply {
                 duration = 50
                 scaleXBy(1.0F)
                 scaleX(0.9F)
                 scaleYBy(1.0F)
                 scaleY(0.9F)
             }.withEndAction {
-                binding.imageViewImageToClick.animate().apply {
+                imageToClick.animate().apply {
                     duration = 50
                     scaleXBy(0.9F)
                     scaleX(1.0F)
@@ -82,6 +83,5 @@ class HomeFragment : Fragment() {
 
     private fun bindViews() {
         imageToClick = binding.imageViewImageToClick
-        counterTV = binding.textViewCounter
     }
 }

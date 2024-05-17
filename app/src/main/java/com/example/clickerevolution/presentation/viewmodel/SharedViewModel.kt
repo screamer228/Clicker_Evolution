@@ -3,6 +3,8 @@ package com.example.clickerevolution.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.clickerevolution.data.repository.PrefsRepository
+import com.example.clickerevolution.data.repository.SkinsRepository
+import com.example.clickerevolution.presentation.model.CurrentSkin
 import com.example.clickerevolution.presentation.model.Resources
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,32 +14,37 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class SharedViewModel @Inject constructor(
-    private val prefsRepository: PrefsRepository
+    private val prefsRepository: PrefsRepository,
+    private val skinsRepository: SkinsRepository
 ) : ViewModel() {
 
     var tickValue = 1
 
-    private val _resources = MutableStateFlow(Resources())
-    val resourcesFlow: StateFlow<Resources> = _resources.asStateFlow()
+    private val _currentSkin = MutableStateFlow(CurrentSkin())
+    val currentSkin: StateFlow<CurrentSkin> = _currentSkin.asStateFlow()
+
+    private val _currentGold = MutableStateFlow(Resources())
+    val currentGold: StateFlow<Resources> = _currentGold.asStateFlow()
 
     init {
+        getInitialSkin()
         getGoldValue()
     }
 
     fun incrementGold() {
-        val incrementedGold = resourcesFlow.value.gold + tickValue
-        _resources.value = _resources.value.copy(gold = incrementedGold)
+        val incrementedGold = currentGold.value.gold + tickValue
+        _currentGold.value = _currentGold.value.copy(gold = incrementedGold)
     }
 
     fun subtractGold(price: Int) {
-        val reducedGold = resourcesFlow.value.gold - price
-        _resources.value = _resources.value.copy(gold = reducedGold)
+        val reducedGold = currentGold.value.gold - price
+        _currentGold.value = _currentGold.value.copy(gold = reducedGold)
     }
 
     private fun getGoldValue() {
         viewModelScope.launch(Dispatchers.IO) {
             val goldValue = prefsRepository.getGoldValueFromPrefs()
-            _resources.value = _resources.value.copy(gold = goldValue.toInt())
+            _currentGold.value = _currentGold.value.copy(gold = goldValue.toInt())
         }
     }
 
@@ -45,5 +52,16 @@ class SharedViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             prefsRepository.saveGoldValueInPrefs(value)
         }
+    }
+
+    fun getInitialSkin() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val skin = skinsRepository.getCurrentSkin()
+            setCurrentSkin(skin)
+        }
+    }
+
+    fun setCurrentSkin(skin: CurrentSkin) {
+        _currentSkin.value = skin
     }
 }

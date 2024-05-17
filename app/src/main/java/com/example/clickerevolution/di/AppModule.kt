@@ -28,10 +28,12 @@ class AppModule(val context: Context) {
 
     @Provides
     fun provideSharedViewModelFactory(
-        prefsRepository: PrefsRepository
+        prefsRepository: PrefsRepository,
+        skinsRepository: SkinsRepository
     ): SharedViewModelFactory {
         return SharedViewModelFactory(
-            prefsRepository
+            prefsRepository,
+            skinsRepository
         )
     }
 
