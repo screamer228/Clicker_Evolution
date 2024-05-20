@@ -45,14 +45,14 @@ class HostActivity : AppCompatActivity() {
         lifecycleScope.launch {
             viewModel.currentGold.collect {
 
-                topBarCounterTV.text = it.gold.toString()
+                topBarCounterTV.text = it.toString()
             }
         }
 
     }
 
     override fun onStop() {
-        viewModel.saveGoldValue(topBarCounterTV.text.toString())
+        viewModel.saveGoldValue()
 
         super.onStop()
     }

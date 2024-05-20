@@ -1,4 +1,4 @@
-package com.example.clickerevolution.data.repository
+package com.example.clickerevolution.data.repository.skins
 
 import com.example.clickerevolution.presentation.model.CurrentSkin
 import com.example.clickerevolution.presentation.model.Skin

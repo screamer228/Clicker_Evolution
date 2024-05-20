@@ -1,10 +1,11 @@
-package com.example.clickerevolution.data.room
+package com.example.clickerevolution.data.room.skins
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import com.example.clickerevolution.data.room.skins.entity.SkinEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

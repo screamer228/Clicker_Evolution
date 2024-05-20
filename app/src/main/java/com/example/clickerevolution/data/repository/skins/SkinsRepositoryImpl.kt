@@ -1,10 +1,9 @@
-package com.example.clickerevolution.data.repository
+package com.example.clickerevolution.data.repository.skins
 
-import com.example.clickerevolution.data.mapper.toCurrentSkin
-import com.example.clickerevolution.data.mapper.toEntity
-import com.example.clickerevolution.data.mapper.toSkin
-import com.example.clickerevolution.data.room.SkinDao
-import com.example.clickerevolution.data.room.SkinEntity
+import com.example.clickerevolution.data.room.skins.mapper.toCurrentSkin
+import com.example.clickerevolution.data.room.skins.mapper.toEntity
+import com.example.clickerevolution.data.room.skins.mapper.toSkin
+import com.example.clickerevolution.data.room.skins.SkinDao
 import com.example.clickerevolution.presentation.model.CurrentSkin
 import com.example.clickerevolution.presentation.model.Skin
 import kotlinx.coroutines.flow.Flow

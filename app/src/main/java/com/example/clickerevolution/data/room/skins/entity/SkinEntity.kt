@@ -1,4 +1,4 @@
-package com.example.clickerevolution.data.room
+package com.example.clickerevolution.data.room.skins.entity
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.RawRes

@@ -2,8 +2,9 @@ package com.example.clickerevolution.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.clickerevolution.data.repository.PrefsRepository
-import com.example.clickerevolution.data.repository.SkinsRepository
+import com.example.clickerevolution.data.repository.prefs.PrefsRepository
+import com.example.clickerevolution.data.repository.resources.ResourcesRepository
+import com.example.clickerevolution.data.repository.skins.SkinsRepository
 import com.example.clickerevolution.presentation.model.CurrentSkin
 import com.example.clickerevolution.presentation.model.Resources
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 class SharedViewModel @Inject constructor(
     private val prefsRepository: PrefsRepository,
-    private val skinsRepository: SkinsRepository
+    private val skinsRepository: SkinsRepository,
+    private val resourcesRepository: ResourcesRepository
 ) : ViewModel() {
 
     private val _currentSkin = MutableStateFlow(CurrentSkin())
@@ -30,6 +32,7 @@ class SharedViewModel @Inject constructor(
     init {
         getInitialSkin()
         getInitialGoldValue()
+        getInitialResources()
     }
 
     fun incrementGold() {
@@ -53,9 +56,9 @@ class SharedViewModel @Inject constructor(
         _currentGold.value = value
     }
 
-    fun saveGoldValue(value: String) {
+    fun saveGoldValue() {
         viewModelScope.launch(Dispatchers.IO) {
-            prefsRepository.saveGoldValueInPrefs(value)
+            prefsRepository.saveGoldValueInPrefs(currentGold.value.toString())
         }
     }
 
@@ -68,5 +71,12 @@ class SharedViewModel @Inject constructor(
 
     fun setCurrentSkin(skin: CurrentSkin) {
         _currentSkin.value = skin
+    }
+
+    private fun getInitialResources() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val resources = resourcesRepository.getResources()
+            _currentResources.value = resources
+        }
     }
 }

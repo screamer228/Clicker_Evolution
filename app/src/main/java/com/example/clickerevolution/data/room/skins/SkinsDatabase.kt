@@ -1,4 +1,4 @@
-package com.example.clickerevolution.data.room
+package com.example.clickerevolution.data.room.skins
 
 import android.content.Context
 import androidx.room.Database
@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.clickerevolution.R
+import com.example.clickerevolution.data.room.skins.entity.SkinEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

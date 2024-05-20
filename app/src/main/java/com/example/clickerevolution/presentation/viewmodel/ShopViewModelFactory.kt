@@ -2,7 +2,7 @@ package com.example.clickerevolution.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.clickerevolution.data.repository.SkinsRepository
+import com.example.clickerevolution.data.repository.skins.SkinsRepository
 
 class ShopViewModelFactory(
     private val skinsRepository: SkinsRepository

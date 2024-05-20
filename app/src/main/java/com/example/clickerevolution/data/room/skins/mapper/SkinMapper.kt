@@ -1,6 +1,6 @@
-package com.example.clickerevolution.data.mapper
+package com.example.clickerevolution.data.room.skins.mapper
 
-import com.example.clickerevolution.data.room.SkinEntity
+import com.example.clickerevolution.data.room.skins.entity.SkinEntity
 import com.example.clickerevolution.presentation.model.CurrentSkin
 import com.example.clickerevolution.presentation.model.Skin
 
