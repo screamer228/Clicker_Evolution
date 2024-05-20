@@ -6,7 +6,7 @@ import com.example.clickerevolution.presentation.UpgradeFragment
 import com.example.clickerevolution.presentation.host.HostActivity
 import dagger.Component
 
-@Component(modules = [AppModule::class])
+@Component(modules = [AppModule::class, RepositoryModule::class, DataModule::class])
 interface AppComponent {
 
     fun injectHostActivity(hostActivity: HostActivity)

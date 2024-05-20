@@ -4,6 +4,7 @@ import android.app.Application
 import com.example.clickerevolution.di.AppComponent
 import com.example.clickerevolution.di.AppModule
 import com.example.clickerevolution.di.DaggerAppComponent
+import com.example.clickerevolution.di.DataModule
 
 class App : Application() {
 

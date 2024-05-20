@@ -47,7 +47,10 @@ abstract class ResourcesDatabase : RoomDatabase() {
             }
 
             suspend fun populateDatabase(skinDao: ResourcesDao) {
-                val initialResources = ResourcesEntity(1, 0)
+                val initialResources = ResourcesEntity(
+                    goldClickTickValue = 1,
+                    goldTickPerSecValue = 0
+                )
                 skinDao.insertResources(initialResources)
             }
         }
