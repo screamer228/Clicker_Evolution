@@ -1,4 +1,4 @@
-package com.example.clickerevolution.presentation
+package com.example.clickerevolution.presentation.shop_fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,18 +10,20 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.clickerevolution.app.App
 import com.example.clickerevolution.databinding.FragmentShopBinding
-import com.example.clickerevolution.presentation.adapter.SkinsAdapter
+import com.example.clickerevolution.presentation.shop_fragment.adapter.SkinsAdapter
 import com.example.clickerevolution.presentation.model.CurrentSkin
 import com.example.clickerevolution.presentation.viewmodel.SharedViewModel
 import com.example.clickerevolution.presentation.viewmodel.SharedViewModelFactory
-import com.example.clickerevolution.presentation.viewmodel.ShopViewModel
-import com.example.clickerevolution.presentation.viewmodel.ShopViewModelFactory
+import com.example.clickerevolution.presentation.shop_fragment.viewmodel.ShopViewModel
+import com.example.clickerevolution.presentation.shop_fragment.viewmodel.ShopViewModelFactory
+import com.example.clickerevolution.presentation.upgrade_fragment.adapter.UpgradesAdapter
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ShopFragment : Fragment() {
 
     private lateinit var binding: FragmentShopBinding
+    private lateinit var adapter: SkinsAdapter
 
     @Inject
     lateinit var sharedViewModelFactory: SharedViewModelFactory
@@ -53,7 +55,7 @@ class ShopFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = SkinsAdapter { skin, action ->
+        adapter = SkinsAdapter { skin, action ->
             when (action) {
                 SkinsAdapter.Action.PURCHASE -> {
                     if (sharedViewModel.currentGold.value >= skin.price) {

@@ -10,8 +10,8 @@ import com.example.clickerevolution.presentation.HomeFragment
 import com.example.clickerevolution.presentation.viewmodel.SharedViewModel
 import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
-import com.example.clickerevolution.presentation.ShopFragment
-import com.example.clickerevolution.presentation.UpgradeFragment
+import com.example.clickerevolution.presentation.shop_fragment.ShopFragment
+import com.example.clickerevolution.presentation.upgrade_fragment.UpgradesFragment
 import com.example.clickerevolution.databinding.ActivityHostBinding
 import com.example.clickerevolution.presentation.viewmodel.SharedViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -77,7 +77,7 @@ class HostActivity : AppCompatActivity() {
                     true
                 }
                 R.id.upgradeFragment -> {
-                    loadFragment(UpgradeFragment())
+                    loadFragment(UpgradesFragment())
                     true
                 }
                 else -> {

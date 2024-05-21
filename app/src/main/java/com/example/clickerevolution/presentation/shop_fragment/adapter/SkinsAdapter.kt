@@ -1,4 +1,4 @@
-package com.example.clickerevolution.presentation.adapter
+package com.example.clickerevolution.presentation.shop_fragment.adapter
 
 import android.view.LayoutInflater
 import android.view.View.GONE

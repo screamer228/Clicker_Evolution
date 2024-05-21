@@ -1,4 +1,4 @@
-package com.example.clickerevolution.presentation.viewmodel
+package com.example.clickerevolution.presentation.shop_fragment.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
