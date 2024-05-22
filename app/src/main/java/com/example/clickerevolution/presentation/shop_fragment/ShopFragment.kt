@@ -1,6 +1,7 @@
 package com.example.clickerevolution.presentation.shop_fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -83,14 +84,8 @@ class ShopFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             shopViewModel.skinsList.collect {
                 adapter.updateList(it)
+                Log.d("colors check", "observer triggered")
             }
         }
-
-//        viewLifecycleOwner.lifecycleScope.launch {
-//            sharedViewModel.resourcesFlow.collectLatest {
-//                adapter.gold = it.gold
-//                adapter.notifyDataSetChanged() // Обновляем адаптер при изменении золота
-//            }
-//        }
     }
 }

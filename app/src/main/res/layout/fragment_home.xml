@@ -9,6 +9,16 @@
     android:padding="16dp"
     tools:context=".presentation.HomeFragment">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:fontFamily="@font/font_piggy"
+        android:text="Piggy Clicker"
+        android:textColor="@color/black"
+        android:textSize="72sp" />
+
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageView_imageToClick"
         android:layout_width="250dp"

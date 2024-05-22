@@ -5,6 +5,6 @@ import androidx.annotation.RawRes
 import com.example.clickerevolution.R
 
 data class CurrentSkin(
-    @DrawableRes val imageId: Int = R.drawable.img_cookie,
+    @DrawableRes val imageId: Int = R.drawable.pig,
     @RawRes val soundId: Int = R.raw.sound_cookie_click
 )

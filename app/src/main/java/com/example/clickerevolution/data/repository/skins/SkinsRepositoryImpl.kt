@@ -14,8 +14,13 @@ class SkinsRepositoryImpl @Inject constructor(
     private val skinDao: SkinDao
 ) : SkinsRepository {
 
-    override val allSkins: Flow<List<Skin>> = skinDao.getAllSkins().map { entities ->
-        entities.map { it.toSkin() }
+//    override val allSkins: Flow<List<Skin>> = skinDao.getAllSkins().map { entities ->
+//        entities.map { it.toSkin() }
+//    }
+
+    override suspend fun getAllSkins(): List<Skin> {
+        val skinList = skinDao.getAllSkins()
+        return skinList.map { it.toSkin() }
     }
 
     override suspend fun getCurrentSkin(): CurrentSkin {

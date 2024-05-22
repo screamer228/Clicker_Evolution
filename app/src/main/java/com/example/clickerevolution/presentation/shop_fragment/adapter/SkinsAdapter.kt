@@ -1,8 +1,10 @@
 package com.example.clickerevolution.presentation.shop_fragment.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View.GONE
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clickerevolution.R
@@ -27,9 +29,20 @@ class SkinsAdapter(
             binding.skinImage.setImageResource(item.imageId)
             binding.skinPrice.text = item.price.toString()
 
+            Log.d("colors check", "Binding item: ${item.id}")
+
             when {
                 !item.isPurchased -> {
-                    binding.skinButtonAction.setCardBackgroundColor(R.color.green)
+                    binding.skinButtonAction.setCardBackgroundColor(
+                        ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.green
+                        )
+                    )
+                    Log.d(
+                        "colors check",
+                        "${item.id} not purchased, color: ${binding.skinButtonAction.cardBackgroundColor}"
+                    )
                     binding.skinActionText.text = "Купить"
                     binding.skinButtonAction.setOnClickListener {
                         onAction(item, Action.PURCHASE)
@@ -37,7 +50,16 @@ class SkinsAdapter(
                 }
 
                 item.isPurchased && !item.isEquipped -> {
-                    binding.skinButtonAction.setCardBackgroundColor(R.color.blue)
+                    binding.skinButtonAction.setCardBackgroundColor(
+                        ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.blue
+                        )
+                    )
+                    Log.d(
+                        "colors check",
+                        "${item.id} purchased, color: ${binding.skinButtonAction.cardBackgroundColor}"
+                    )
                     binding.skinActionLinear.visibility = GONE
                     binding.skinActionText.text = "Одеть"
                     binding.skinButtonAction.setOnClickListener {
@@ -46,7 +68,16 @@ class SkinsAdapter(
                 }
 
                 item.isPurchased && item.isEquipped -> {
-                    binding.skinButtonAction.setCardBackgroundColor(R.color.red)
+                    binding.skinButtonAction.setCardBackgroundColor(
+                        ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.red
+                        )
+                    )
+                    Log.d(
+                        "colors check",
+                        "${item.id} equipped, color: ${binding.skinButtonAction.cardBackgroundColor}"
+                    )
                     binding.skinActionLinear.visibility = GONE
                     binding.skinActionText.text = "Снять"
                     binding.skinButtonAction.setOnClickListener {
