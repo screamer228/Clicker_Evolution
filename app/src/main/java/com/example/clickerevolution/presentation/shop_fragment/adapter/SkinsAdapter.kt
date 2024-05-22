@@ -5,6 +5,7 @@ import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.clickerevolution.R
 import com.example.clickerevolution.databinding.ItemSkinBinding
 import com.example.clickerevolution.presentation.model.Skin
 import com.example.clickerevolution.utils.SkinsDiffUtil
@@ -28,6 +29,7 @@ class SkinsAdapter(
 
             when {
                 !item.isPurchased -> {
+                    binding.skinButtonAction.setCardBackgroundColor(R.color.green)
                     binding.skinActionText.text = "Купить"
                     binding.skinButtonAction.setOnClickListener {
                         onAction(item, Action.PURCHASE)
@@ -35,6 +37,7 @@ class SkinsAdapter(
                 }
 
                 item.isPurchased && !item.isEquipped -> {
+                    binding.skinButtonAction.setCardBackgroundColor(R.color.blue)
                     binding.skinActionLinear.visibility = GONE
                     binding.skinActionText.text = "Одеть"
                     binding.skinButtonAction.setOnClickListener {
@@ -43,6 +46,7 @@ class SkinsAdapter(
                 }
 
                 item.isPurchased && item.isEquipped -> {
+                    binding.skinButtonAction.setCardBackgroundColor(R.color.red)
                     binding.skinActionLinear.visibility = GONE
                     binding.skinActionText.text = "Снять"
                     binding.skinButtonAction.setOnClickListener {

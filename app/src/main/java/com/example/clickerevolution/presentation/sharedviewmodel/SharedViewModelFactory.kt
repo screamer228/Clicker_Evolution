@@ -1,4 +1,4 @@
-package com.example.clickerevolution.presentation.viewmodel
+package com.example.clickerevolution.presentation.sharedviewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

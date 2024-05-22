@@ -5,4 +5,7 @@
     <color name="beige">#F5F5DC</color>
     <color name="transparent">#00000000</color>
     <color name="light_blue">#ADD8E6</color>
+    <color name="green">#009900</color>
+    <color name="blue">#0089FF</color>
+    <color name="red">#FF2400</color>
 </resources>

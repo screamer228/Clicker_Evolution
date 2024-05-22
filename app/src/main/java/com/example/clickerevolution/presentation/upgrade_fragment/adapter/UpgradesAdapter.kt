@@ -5,6 +5,7 @@ import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.clickerevolution.R
 import com.example.clickerevolution.databinding.ItemUpgradeBinding
 import com.example.clickerevolution.presentation.model.Upgrade
 import com.example.clickerevolution.utils.UpgradesDiffUtil
@@ -24,8 +25,9 @@ class UpgradesAdapter(
         fun bind(item: Upgrade) {
             binding.upgradeTitle.text = item.title
 //            binding.upgradeImage.setImageResource(item.imageId)
-            binding.upgradeLevel.text = item.level.toString()
+            binding.upgradeLevel.text = "Уровень: ${item.level}"
             binding.upgradePrice.text = item.price.toString()
+            binding.upgradeButtonUpgrade.setCardBackgroundColor(R.color.green)
             binding.upgradeButtonUpgrade.setOnClickListener {
                 onClick(item)
             }

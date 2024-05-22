@@ -9,7 +9,8 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/light_blue">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -21,9 +22,11 @@
                 android:id="@+id/skin_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="4dp"
                 android:gravity="center"
-                android:text="Название" />
+                android:padding="4dp"
+                android:text="Название"
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/skin_image"
@@ -39,6 +42,7 @@
         android:id="@+id/skin_button_action"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/green"
         app:contentPadding="8dp">
 
         <LinearLayout
@@ -46,6 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <com.google.android.material.imageview.ShapeableImageView
@@ -59,9 +64,10 @@
                 android:id="@+id/skin_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
                 android:paddingEnd="10dp"
-                android:text="1000" />
+                android:text="1000"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <com.google.android.material.textview.MaterialTextView
@@ -70,7 +76,9 @@
             android:layout_height="match_parent"
             android:layout_gravity="center|bottom"
             android:layout_marginTop="20dp"
-            android:text="Купить" />
+            android:text="Купить"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
     </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

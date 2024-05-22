@@ -4,7 +4,7 @@ import android.content.Context
 import com.example.clickerevolution.data.repository.prefs.PrefsRepository
 import com.example.clickerevolution.data.repository.resources.ResourcesRepository
 import com.example.clickerevolution.data.repository.skins.SkinsRepository
-import com.example.clickerevolution.presentation.viewmodel.SharedViewModelFactory
+import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModelFactory
 import com.example.clickerevolution.presentation.shop_fragment.viewmodel.ShopViewModelFactory
 import dagger.Module
 import dagger.Provides

@@ -7,13 +7,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.clickerevolution.presentation.HomeFragment
-import com.example.clickerevolution.presentation.viewmodel.SharedViewModel
+import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModel
 import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
 import com.example.clickerevolution.presentation.shop_fragment.ShopFragment
 import com.example.clickerevolution.presentation.upgrade_fragment.UpgradesFragment
 import com.example.clickerevolution.databinding.ActivityHostBinding
-import com.example.clickerevolution.presentation.viewmodel.SharedViewModelFactory
+import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 import javax.inject.Inject

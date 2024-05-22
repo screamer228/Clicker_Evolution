@@ -7,14 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
 import com.example.clickerevolution.databinding.FragmentHomeBinding
-import com.example.clickerevolution.presentation.viewmodel.SharedViewModel
-import com.example.clickerevolution.presentation.viewmodel.SharedViewModelFactory
+import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModel
+import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModelFactory
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

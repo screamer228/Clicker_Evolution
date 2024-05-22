@@ -12,11 +12,10 @@ import com.example.clickerevolution.app.App
 import com.example.clickerevolution.databinding.FragmentShopBinding
 import com.example.clickerevolution.presentation.shop_fragment.adapter.SkinsAdapter
 import com.example.clickerevolution.presentation.model.CurrentSkin
-import com.example.clickerevolution.presentation.viewmodel.SharedViewModel
-import com.example.clickerevolution.presentation.viewmodel.SharedViewModelFactory
+import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModel
+import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModelFactory
 import com.example.clickerevolution.presentation.shop_fragment.viewmodel.ShopViewModel
 import com.example.clickerevolution.presentation.shop_fragment.viewmodel.ShopViewModelFactory
-import com.example.clickerevolution.presentation.upgrade_fragment.adapter.UpgradesAdapter
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

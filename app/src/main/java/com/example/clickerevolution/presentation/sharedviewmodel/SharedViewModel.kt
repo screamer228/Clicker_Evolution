@@ -1,4 +1,4 @@
-package com.example.clickerevolution.presentation.viewmodel
+package com.example.clickerevolution.presentation.sharedviewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -78,5 +78,10 @@ class SharedViewModel @Inject constructor(
             val resources = resourcesRepository.getResources()
             _currentResources.value = resources
         }
+    }
+
+    fun setCurrentClickTick(plusTickValue: Int) {
+        val incrementedGold = _currentResources.value.goldClickTickValue + plusTickValue
+        _currentResources.value = _currentResources.value.copy(goldClickTickValue = incrementedGold)
     }
 }
