@@ -20,13 +20,12 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/skin_title"
+                style="@style/style_text_default"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="4dp"
-                android:text="Название"
-                android:textStyle="bold"
-                android:textColor="@color/white"/>
+                android:text="Название" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/skin_image"
@@ -62,6 +61,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/skin_price"
+                style="@style/style_text_default"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingEnd="10dp"
@@ -72,13 +72,12 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/skin_actionText"
+            style="@style/style_text_default"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center|bottom"
             android:layout_marginTop="20dp"
-            android:text="Купить"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
+            android:text="Купить" />
 
     </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

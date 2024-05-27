@@ -1,5 +1,6 @@
 package com.example.clickerevolution.presentation.sharedviewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.clickerevolution.data.repository.prefs.PrefsRepository
@@ -47,12 +48,15 @@ class SharedViewModel @Inject constructor(
 
     private fun getInitialGoldValue() {
         viewModelScope.launch(Dispatchers.IO) {
-            val goldValue = prefsRepository.getGoldValueFromPrefs().toInt()
+            val goldValue = prefsRepository.getGoldValueFromPrefs().toIntOrNull() ?: 0
+            Log.d("sharedPrefs check", "prefsRepository instance in viewModel: $prefsRepository")
+            Log.d("sharedPrefs check", "in viewModel: $goldValue")
             setGoldValue(goldValue)
         }
     }
 
     private fun setGoldValue(value: Int) {
+        Log.d("sharedPrefs check", "inViewModel when set: $value")
         _currentGold.value = value
     }
 
@@ -62,7 +66,7 @@ class SharedViewModel @Inject constructor(
         }
     }
 
-    private fun getInitialSkin() {
+    fun getInitialSkin() {
         viewModelScope.launch(Dispatchers.IO) {
             val skin = skinsRepository.getCurrentSkin()
             setCurrentSkin(skin)

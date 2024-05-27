@@ -34,7 +34,7 @@ class HostActivity : AppCompatActivity() {
         binding = ActivityHostBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        (this.applicationContext as App).appComponent.injectHostActivity(this)
+        (application as App).appComponent.injectHostActivity(this)
         viewModel =
             ViewModelProvider(this, viewModelFactory)[SharedViewModel::class.java]
 
@@ -52,9 +52,8 @@ class HostActivity : AppCompatActivity() {
     }
 
     override fun onStop() {
-        viewModel.saveGoldValue()
-
         super.onStop()
+        viewModel.saveGoldValue()
     }
 
     private fun bindViews() {

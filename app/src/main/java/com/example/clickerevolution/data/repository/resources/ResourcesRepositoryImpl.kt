@@ -12,7 +12,7 @@ class ResourcesRepositoryImpl @Inject constructor(
 
     override suspend fun getResources(): Resources {
         val resourcesEntity = resourcesDao.getResources()
-        return resourcesEntity.toResources()
+        return resourcesEntity?.toResources() ?: Resources()
     }
 
     override suspend fun updateResources(resources: Resources) {

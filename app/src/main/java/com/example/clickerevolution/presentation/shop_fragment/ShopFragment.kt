@@ -70,6 +70,7 @@ class ShopFragment : Fragment() {
                 SkinsAdapter.Action.EQUIP -> {
                     sharedViewModel.setCurrentSkin(CurrentSkin(skin.imageId, skin.soundId))
                     shopViewModel.equipSkin(skin.id)
+//                    sharedViewModel.getInitialSkin()
                 }
 
                 SkinsAdapter.Action.UNEQUIP -> {

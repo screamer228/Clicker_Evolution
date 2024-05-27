@@ -28,8 +28,9 @@ abstract class ResourcesDatabase : RoomDatabase() {
                     ResourcesDatabase::class.java,
                     "resources_db"
                 )
-                    .addCallback(DatabaseCallback())
+                    .fallbackToDestructiveMigration()
 //                    .addMigrations(MIGRATION_1_2)
+                    .addCallback(DatabaseCallback())
                     .build()
                 INSTANCE = instance
                 instance
@@ -54,13 +55,5 @@ abstract class ResourcesDatabase : RoomDatabase() {
                 skinDao.insertResources(initialResources)
             }
         }
-
-//        val MIGRATION_1_2 = object : Migration(1, 2) {
-//            override fun migrate(db: SupportSQLiteDatabase) {
-//                // Реализация миграции базы данных
-//                db.execSQL("DROP TABLE skin_table")
-//                db.execSQL("CREATE TABLE skin_table (id INTEGER PRIMARY KEY NOT NULL, title TEXT NOT NULL, imageId INTEGER NOT NULL, price INTEGER NOT NULL, isPurchased INTEGER NOT NULL, isEquipped INTEGER NOT NULL)")
-//            }
-//        }
     }
 }

@@ -5,7 +5,9 @@ import com.example.clickerevolution.presentation.shop_fragment.ShopFragment
 import com.example.clickerevolution.presentation.upgrade_fragment.UpgradesFragment
 import com.example.clickerevolution.presentation.host.HostActivity
 import dagger.Component
+import javax.inject.Singleton
 
+@Singleton
 @Component(modules = [AppModule::class, RepositoryModule::class, DataModule::class])
 interface AppComponent {
 

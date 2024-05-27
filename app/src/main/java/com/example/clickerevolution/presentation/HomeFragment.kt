@@ -2,6 +2,7 @@ package com.example.clickerevolution.presentation
 
 import android.media.SoundPool
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +23,8 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var imageToClick: ImageView
 
+    private lateinit var soundPool: SoundPool
+
     @Inject
     lateinit var viewModelFactory: SharedViewModelFactory
     private lateinit var viewModel: SharedViewModel
@@ -36,6 +39,9 @@ class HomeFragment : Fragment() {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         bindViews()
+
+        soundPool = SoundPool.Builder().setMaxStreams(4).build()
+
         return binding.root
     }
 
@@ -44,6 +50,8 @@ class HomeFragment : Fragment() {
 
         var soundIdRes = R.raw.sound_cookie_click
 
+        Log.d("res check", "${R.raw.sound_click}")
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.currentSkin.collect {
                 imageToClick.setImageResource(it.imageId)
@@ -51,9 +59,7 @@ class HomeFragment : Fragment() {
             }
         }
 
-        val soundPool = SoundPool.Builder()
-            .setMaxStreams(4)
-            .build()
+
         val soundId = soundPool.load(requireContext(), soundIdRes, 1)
 
         imageToClick.setOnClickListener {
@@ -78,6 +84,11 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        soundPool.release()
     }
 
     private fun bindViews() {

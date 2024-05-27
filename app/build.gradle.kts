@@ -25,9 +25,9 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "PREFS_NAME", "\"sharedPrefsGoldValue\"")
-            buildConfigField("String", "PREFS_TITLE_KEY", "\"prefsGoldValueKey\"")
-            buildConfigField("String", "PREFS_DEFAULT_VALUE", "\"0\"")
+            buildConfigField("String", "PREFS_CURRENT_GOLD", "\"sharedPrefsGoldValue\"")
+            buildConfigField("String", "PREFS_CURRENT_GOLD_TITLE_KEY", "\"prefsGoldValueKey\"")
+            buildConfigField("String", "PREFS_CURRENT_GOLD_DEFAULT_VALUE", "\"0\"")
         }
         debug {
             isMinifyEnabled = false
@@ -35,9 +35,9 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "PREFS_NAME", "\"sharedPrefsGoldValue\"")
-            buildConfigField("String", "PREFS_TITLE_KEY", "\"prefsGoldValueKey\"")
-            buildConfigField("String", "PREFS_DEFAULT_VALUE", "\"0\"")
+            buildConfigField("String", "PREFS_CURRENT_GOLD", "\"sharedPrefsGoldValue\"")
+            buildConfigField("String", "PREFS_CURRENT_GOLD_TITLE_KEY", "\"prefsGoldValueKey\"")
+            buildConfigField("String", "PREFS_CURRENT_GOLD_DEFAULT_VALUE", "\"0\"")
         }
     }
     compileOptions {

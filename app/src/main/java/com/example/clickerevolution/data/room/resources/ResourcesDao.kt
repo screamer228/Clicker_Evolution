@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ResourcesDao {
     @Query("SELECT * FROM resources WHERE id = 0")
-    suspend fun getResources(): ResourcesEntity
+    suspend fun getResources(): ResourcesEntity?
 
     @Insert
     suspend fun insertResources(resources: ResourcesEntity)

@@ -26,6 +26,16 @@ class ShopViewModel @Inject constructor(
 //        emptyList()
 //    )
 
+//    init {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            // Заполняем базу данных, если она пуста
+//            if (skinsRepository.getAllSkins().isEmpty()) {
+//                skinsRepository.prepopulateSkinsDatabase()
+//            }
+//            getSkinsList()
+//        }
+//    }
+
     init {
         getSkinsList()
     }
