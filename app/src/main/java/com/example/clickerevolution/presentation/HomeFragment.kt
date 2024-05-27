@@ -59,7 +59,6 @@ class HomeFragment : Fragment() {
             }
         }
 
-
         val soundId = soundPool.load(requireContext(), soundIdRes, 1)
 
         imageToClick.setOnClickListener {
@@ -88,6 +87,8 @@ class HomeFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
+
+        viewModel.saveResources()
         soundPool.release()
     }
 

@@ -7,14 +7,23 @@ import com.example.clickerevolution.data.repository.resources.ResourcesRepositor
 import com.example.clickerevolution.data.repository.resources.ResourcesRepositoryImpl
 import com.example.clickerevolution.data.repository.skins.SkinsRepository
 import com.example.clickerevolution.data.repository.skins.SkinsRepositoryImpl
+import com.example.clickerevolution.data.repository.upgrades.UpgradesRepository
+import com.example.clickerevolution.data.repository.upgrades.UpgradesRepositoryImpl
 import com.example.clickerevolution.data.room.resources.ResourcesDao
 import com.example.clickerevolution.data.room.skins.SkinDao
+import com.example.clickerevolution.data.room.upgrades.UpgradeDao
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
 @Module
 class RepositoryModule {
+
+    @Provides
+    @Singleton
+    fun provideUpgradesRepository(upgradeDao: UpgradeDao): UpgradesRepository {
+        return UpgradesRepositoryImpl(upgradeDao)
+    }
 
     @Provides
     @Singleton

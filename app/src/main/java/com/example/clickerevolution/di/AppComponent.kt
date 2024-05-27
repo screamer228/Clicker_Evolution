@@ -15,5 +15,4 @@ interface AppComponent {
     fun injectHomeFragment(homeFragment: HomeFragment)
     fun injectShopFragment(shopFragment: ShopFragment)
     fun injectUpgradeFragment(upgradesFragment: UpgradesFragment)
-
 }

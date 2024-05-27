@@ -23,22 +23,21 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textview.MaterialTextView
+                style="@style/style_text_default"
                 android:id="@+id/upgrade_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Название"
                 android:textColor="@color/white"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+                android:textSize="16sp"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/upgrade_level"
+                style="@style/style_text_default"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Уровень: 15"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textColor="@color/white" />
         </LinearLayout>
 
         <com.google.android.material.card.MaterialCardView
@@ -60,22 +59,20 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.textview.MaterialTextView
+                    style="@style/style_text_default"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Улучшить"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/white" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/upgrade_price"
+                    style="@style/style_text_default"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="8dp"
                     android:text="500"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/white" />
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="24dp"

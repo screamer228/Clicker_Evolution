@@ -8,12 +8,26 @@ import com.example.clickerevolution.data.room.resources.ResourcesDao
 import com.example.clickerevolution.data.room.resources.ResourcesDatabase
 import com.example.clickerevolution.data.room.skins.SkinDao
 import com.example.clickerevolution.data.room.skins.SkinsDatabase
+import com.example.clickerevolution.data.room.upgrades.UpgradeDao
+import com.example.clickerevolution.data.room.upgrades.UpgradesDatabase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
 @Module
 class DataModule {
+
+    @Provides
+    @Singleton
+    fun provideUpgradeDao(database: UpgradesDatabase): UpgradeDao {
+        return database.upgradeDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideUpgradesDatabase(context: Context): UpgradesDatabase {
+        return UpgradesDatabase.getDatabase(context)
+    }
 
     @Provides
     @Singleton

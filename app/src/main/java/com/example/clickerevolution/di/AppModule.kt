@@ -5,14 +5,26 @@ import android.util.Log
 import com.example.clickerevolution.data.repository.prefs.PrefsRepository
 import com.example.clickerevolution.data.repository.resources.ResourcesRepository
 import com.example.clickerevolution.data.repository.skins.SkinsRepository
+import com.example.clickerevolution.data.repository.upgrades.UpgradesRepository
 import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModelFactory
 import com.example.clickerevolution.presentation.shop_fragment.viewmodel.ShopViewModelFactory
+import com.example.clickerevolution.presentation.upgrade_fragment.viewmodel.UpgradesViewModelFactory
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
 @Module
 class AppModule(private val context: Context) {
+
+    @Provides
+    @Singleton
+    fun provideUpgradesViewModelFactory(
+        upgradesRepository: UpgradesRepository
+    ): UpgradesViewModelFactory {
+        return UpgradesViewModelFactory(
+            upgradesRepository
+        )
+    }
 
     @Provides
     @Singleton

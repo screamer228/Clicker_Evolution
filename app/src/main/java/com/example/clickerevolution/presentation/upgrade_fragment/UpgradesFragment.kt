@@ -28,7 +28,8 @@ class UpgradesFragment : Fragment() {
     lateinit var sharedViewModelFactory: SharedViewModelFactory
     private lateinit var sharedViewModel: SharedViewModel
 
-    var upgradesViewModelFactory: UpgradesViewModelFactory = UpgradesViewModelFactory()
+    @Inject
+    lateinit var upgradesViewModelFactory: UpgradesViewModelFactory
     private lateinit var upgradesViewModel: UpgradesViewModel
 
     override fun onCreateView(
@@ -36,6 +37,7 @@ class UpgradesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         (requireActivity().applicationContext as App).appComponent.injectUpgradeFragment(this)
+
         sharedViewModel =
             ViewModelProvider(
                 requireActivity(),
@@ -54,7 +56,7 @@ class UpgradesFragment : Fragment() {
 
         adapter = UpgradesAdapter { upgrade ->
             sharedViewModel.setCurrentClickTick(upgrade.power)
-
+            upgradesViewModel.upgradeLevelAndPrice(upgrade.id)
         }
 
         binding.recyclerViewUpgrades.adapter = adapter

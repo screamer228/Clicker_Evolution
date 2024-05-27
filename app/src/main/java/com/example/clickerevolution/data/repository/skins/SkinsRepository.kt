@@ -6,7 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface SkinsRepository {
     suspend fun getAllSkins(): List<Skin>
-    suspend fun prepopulateSkinsDatabase()
     suspend fun getCurrentSkin(): CurrentSkin
     suspend fun purchaseSkin(skinId: Int)
     suspend fun equipSkin(skinId: Int)

@@ -88,4 +88,10 @@ class SharedViewModel @Inject constructor(
         val incrementedGold = _currentResources.value.goldClickTickValue + plusTickValue
         _currentResources.value = _currentResources.value.copy(goldClickTickValue = incrementedGold)
     }
+
+    fun saveResources() {
+        viewModelScope.launch(Dispatchers.IO) {
+            resourcesRepository.updateResources(currentResources.value)
+        }
+    }
 }
