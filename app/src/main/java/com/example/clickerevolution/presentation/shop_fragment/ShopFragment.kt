@@ -1,7 +1,7 @@
 package com.example.clickerevolution.presentation.shop_fragment
 
+import android.media.SoundPool
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
 import com.example.clickerevolution.databinding.FragmentShopBinding
 import com.example.clickerevolution.presentation.shop_fragment.adapter.SkinsAdapter
@@ -24,6 +25,11 @@ class ShopFragment : Fragment() {
 
     private lateinit var binding: FragmentShopBinding
     private lateinit var adapter: SkinsAdapter
+
+    private lateinit var soundPoolBuy: SoundPool
+    private lateinit var soundPoolReject: SoundPool
+    private lateinit var soundPoolEquip: SoundPool
+    private lateinit var soundPoolUnequip: SoundPool
 
     @Inject
     lateinit var sharedViewModelFactory: SharedViewModelFactory
@@ -49,33 +55,44 @@ class ShopFragment : Fragment() {
             ViewModelProvider(this, shopViewModelFactory)[ShopViewModel::class.java]
 
         binding = FragmentShopBinding.inflate(inflater, container, false)
+
+        soundPoolBuy = SoundPool.Builder().setMaxStreams(3).build()
+        soundPoolReject = SoundPool.Builder().setMaxStreams(3).build()
+        soundPoolEquip = SoundPool.Builder().setMaxStreams(3).build()
+        soundPoolUnequip = SoundPool.Builder().setMaxStreams(3).build()
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val soundIdBuy = soundPoolBuy.load(requireContext(), R.raw.sound_buy, 1)
+        val soundIdReject = soundPoolReject.load(requireContext(), R.raw.sound_reject, 1)
+        val soundIdEquip = soundPoolEquip.load(requireContext(), R.raw.sound_equip, 1)
+        val soundIdUnequip = soundPoolUnequip.load(requireContext(), R.raw.sound_unequip, 1)
+
         adapter = SkinsAdapter { skin, action ->
             when (action) {
                 SkinsAdapter.Action.PURCHASE -> {
                     if (sharedViewModel.currentGold.value >= skin.price) {
-                        sharedViewModel.subtractGold(skin.price)
-                        shopViewModel.purchaseSkin(skin.id)
+                        buySkin(skin.price, skin.id)
+                        playSound(soundPoolBuy, soundIdBuy)
                     } else {
+                        playSound(soundPoolReject, soundIdReject)
                         Toast.makeText(requireContext(), "Не хватает золота!", Toast.LENGTH_SHORT)
                             .show()
                     }
                 }
 
                 SkinsAdapter.Action.EQUIP -> {
-                    sharedViewModel.setCurrentSkin(CurrentSkin(skin.imageId, skin.soundId))
-                    shopViewModel.equipSkin(skin.id)
-//                    sharedViewModel.getInitialSkin()
+                    equipSkin(skin.imageId, skin.soundId, skin.id)
+                    playSound(soundPoolEquip, soundIdEquip)
                 }
 
                 SkinsAdapter.Action.UNEQUIP -> {
-                    sharedViewModel.setCurrentSkin(CurrentSkin())
-                    shopViewModel.unequipSkin(skin.id)
+                    unequipSkin(skin.id)
+                    playSound(soundPoolUnequip, soundIdUnequip)
                 }
             }
         }
@@ -85,8 +102,26 @@ class ShopFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             shopViewModel.skinsList.collect {
                 adapter.updateList(it)
-                Log.d("colors check", "observer triggered")
             }
         }
+    }
+
+    private fun buySkin(price: Int, id: Int) {
+        sharedViewModel.subtractGold(price)
+        shopViewModel.purchaseSkin(id)
+    }
+
+    private fun equipSkin(imageId: Int, soundId: Int, id: Int) {
+        sharedViewModel.setCurrentSkin(CurrentSkin(imageId, soundId))
+        shopViewModel.equipSkin(id)
+    }
+
+    private fun unequipSkin(id: Int) {
+        sharedViewModel.setCurrentSkin(CurrentSkin())
+        shopViewModel.unequipSkin(id)
+    }
+
+    private fun playSound(soundPool: SoundPool, soundId: Int) {
+        soundPool.play(soundId, 0.9f, 1.0f, 1, 0, 1.0f)
     }
 }

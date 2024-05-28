@@ -51,8 +51,8 @@ class HostActivity : AppCompatActivity() {
 
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroy() {
+        super.onDestroy()
         viewModel.saveGoldValue()
     }
 
@@ -71,14 +71,17 @@ class HostActivity : AppCompatActivity() {
                     loadFragment(ShopFragment())
                     true
                 }
+
                 R.id.homeFragment -> {
                     loadFragment(HomeFragment())
                     true
                 }
+
                 R.id.upgradeFragment -> {
                     loadFragment(UpgradesFragment())
                     true
                 }
+
                 else -> {
                     true
                 }
@@ -86,9 +89,9 @@ class HostActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadFragment(fragment: Fragment){
+    private fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragmentContainerView,fragment)
+        transaction.replace(R.id.fragmentContainerView, fragment)
         transaction.commit()
     }
 }

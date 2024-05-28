@@ -2,7 +2,6 @@ package com.example.clickerevolution.presentation
 
 import android.media.SoundPool
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -51,23 +50,16 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        clickTick = TextViewOutline(context)
-//
-//        (clickTick as TextViewOutline).setOutlineSize(10);
-//        (clickTick as TextViewOutline).setOutlineColor(Color.BLACK)
-
-        var soundIdRes = R.raw.sound_cookie_click
-
-        Log.d("res check", "${R.raw.sound_click}")
+        var resIdClick = R.raw.sound_cookie_click
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.currentSkin.collect {
                 imageToClick.setImageResource(it.imageId)
-                soundIdRes = it.soundId
+                resIdClick = it.soundId
             }
         }
 
-        val soundId = soundPool.load(requireContext(), soundIdRes, 1)
+        val soundIdClick = soundPool.load(requireContext(), resIdClick, 1)
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.currentResources.collect {
@@ -80,7 +72,7 @@ class HomeFragment : Fragment() {
 
             viewModel.incrementGold()
 
-            soundPool.play(soundId, 1.0f, 1.0f, 1, 0, 1.0f)
+            soundPool.play(soundIdClick, 1.0f, 1.0f, 1, 0, 1.0f)
 
             imageToClick.animate().apply {
                 duration = 50
