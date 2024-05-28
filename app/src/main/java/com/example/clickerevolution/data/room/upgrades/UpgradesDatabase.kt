@@ -7,7 +7,6 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.clickerevolution.common.UpgradeType
-import com.example.clickerevolution.data.room.skins.entity.SkinEntity
 import com.example.clickerevolution.data.room.upgrades.entity.UpgradeEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -37,7 +36,7 @@ abstract class UpgradesDatabase : RoomDatabase() {
             }
         }
 
-        private class DatabaseCallback() : RoomDatabase.Callback() {
+        private class DatabaseCallback : Callback() {
             override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)
                 INSTANCE?.let { database ->
@@ -50,34 +49,34 @@ abstract class UpgradesDatabase : RoomDatabase() {
             suspend fun populateDatabase(upgradeDao: UpgradeDao) {
                 val initialUpgradesList = listOf(
                     UpgradeEntity(
-                        title = "Название 1",
+                        title = "Грязь",
                         power = 1,
                         price = 500,
                         type = UpgradeType.CLICK_TICK
                     ),
                     UpgradeEntity(
-                        title = "Название 2",
+                        title = "Солома",
                         power = 3,
                         price = 1000,
                         type = UpgradeType.CLICK_TICK
                     ),
                     UpgradeEntity(
-                        title = "Название 3",
+                        title = "Мусор",
                         power = 5,
                         price = 3000,
                         type = UpgradeType.CLICK_TICK
                     ),
                     UpgradeEntity(
-                        title = "Название 4",
+                        title = "Пердёж",
                         power = 10,
                         price = 6000,
-                        type = UpgradeType.TICK_PER_SEC
+                        type = UpgradeType.CLICK_TICK
                     ),
                     UpgradeEntity(
-                        title = "Название 5",
+                        title = "Рыготня",
                         power = 25,
                         price = 12000,
-                        type = UpgradeType.TICK_PER_SEC
+                        type = UpgradeType.CLICK_TICK
                     )
                 )
                 upgradeDao.insertUpgrades(initialUpgradesList)

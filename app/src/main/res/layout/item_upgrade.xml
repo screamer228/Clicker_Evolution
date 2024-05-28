@@ -22,18 +22,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textview.MaterialTextView
-                style="@style/style_text_default"
+            <com.example.clickerevolution.custom.TextViewOutline
                 android:id="@+id/upgrade_title"
+                style="@style/style_text_outline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Название"
                 android:textColor="@color/white"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
-            <com.google.android.material.textview.MaterialTextView
+            <com.example.clickerevolution.custom.TextViewOutline
                 android:id="@+id/upgrade_level"
-                style="@style/style_text_default"
+                style="@style/style_text_outline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Уровень: 15"

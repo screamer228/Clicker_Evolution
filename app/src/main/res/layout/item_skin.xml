@@ -18,9 +18,9 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <com.google.android.material.textview.MaterialTextView
+            <com.example.clickerevolution.custom.TextViewOutline
                 android:id="@+id/skin_title"
-                style="@style/style_text_default"
+                style="@style/style_text_outline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"

@@ -4,7 +4,6 @@ import android.app.Application
 import com.example.clickerevolution.di.AppComponent
 import com.example.clickerevolution.di.AppModule
 import com.example.clickerevolution.di.DaggerAppComponent
-import com.example.clickerevolution.di.DataModule
 
 class App : Application() {
 
@@ -13,7 +12,10 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
-//        deleteDatabase("skins_db")
+//        clearSharedPreferences()
+        deleteDatabase("resources_db")
+        deleteDatabase("skins_db")
+        deleteDatabase("upgrades_db")
 
         appComponent = DaggerAppComponent
             .builder()

@@ -8,11 +8,17 @@
     android:background="@color/beige"
     tools:context=".presentation.host.HostActivity">
 
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/img_background_main"
+        android:scaleType="centerCrop" />
+
     <View
         android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="74dp"
-        android:background="@color/light_blue"
+        android:background="@color/hard_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,9 +27,9 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         app:dividerColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@+id/topBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topBar" />
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
@@ -39,16 +45,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/textView_topBar_counter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="8dp"
-                android:text="000"
-                android:textSize="26sp"
-                android:textStyle="bold" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:layout_width="32dp"
@@ -56,6 +54,17 @@
                 android:layout_gravity="center_vertical"
                 android:paddingEnd="8dp"
                 android:src="@drawable/ic_coin" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textView_topBar_counter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/font_rubik_mono_one_regular"
+                android:paddingHorizontal="8dp"
+                android:paddingTop="4dp"
+                android:text="1234"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
@@ -80,14 +89,14 @@
         app:dividerColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="74dp"
-        android:background="@color/light_blue"
-        app:itemActiveIndicatorStyle="@null"
+        android:background="@color/hard_blue"
+        app:itemActiveIndicatorStyle="@color/white"
         app:itemIconSize="48dp"
         app:itemIconTint="@null"
         app:itemRippleColor="@null"

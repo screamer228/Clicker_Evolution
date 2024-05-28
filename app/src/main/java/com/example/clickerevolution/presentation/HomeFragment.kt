@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.clickerevolution.R
@@ -22,6 +23,8 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var imageToClick: ImageView
+    private lateinit var clickTick: TextView
+    private lateinit var tickPerSec: TextView
 
     private lateinit var soundPool: SoundPool
 
@@ -48,6 +51,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        clickTick = TextViewOutline(context)
+//
+//        (clickTick as TextViewOutline).setOutlineSize(10);
+//        (clickTick as TextViewOutline).setOutlineColor(Color.BLACK)
+
         var soundIdRes = R.raw.sound_cookie_click
 
         Log.d("res check", "${R.raw.sound_click}")
@@ -60,6 +68,13 @@ class HomeFragment : Fragment() {
         }
 
         val soundId = soundPool.load(requireContext(), soundIdRes, 1)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.currentResources.collect {
+                clickTick.text = "${it.goldClickTickValue} за клик"
+                tickPerSec.text = "${it.goldTickPerSecValue} в секунду"
+            }
+        }
 
         imageToClick.setOnClickListener {
 
@@ -94,5 +109,7 @@ class HomeFragment : Fragment() {
 
     private fun bindViews() {
         imageToClick = binding.imageViewImageToClick
+        clickTick = binding.textViewClickTickValue
+        tickPerSec = binding.textViewTickPerSecondValue
     }
 }
