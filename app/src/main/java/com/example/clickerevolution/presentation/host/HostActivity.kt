@@ -51,6 +51,11 @@ class HostActivity : AppCompatActivity() {
 
     }
 
+    override fun onStop() {
+        super.onStop()
+        viewModel.saveLastExitTime()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         viewModel.saveGoldValue()

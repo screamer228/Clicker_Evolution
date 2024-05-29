@@ -25,9 +25,11 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "PREFS_CURRENT_GOLD", "\"sharedPrefsGoldValue\"")
+            buildConfigField("String", "SHARED_PREFS", "\"sharedPreferences\"")
             buildConfigField("String", "PREFS_CURRENT_GOLD_TITLE_KEY", "\"prefsGoldValueKey\"")
             buildConfigField("String", "PREFS_CURRENT_GOLD_DEFAULT_VALUE", "\"0\"")
+            buildConfigField("String", "PREFS_LAST_EXIT_TIME_TITLE_KEY", "\"prefsExitTimeKey\"")
+            buildConfigField("Long", "PREFS_LAST_EXIT_TIME_DEFAULT_VALUE", "0L")
         }
         debug {
             isMinifyEnabled = false
@@ -35,9 +37,11 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "PREFS_CURRENT_GOLD", "\"sharedPrefsGoldValue\"")
+            buildConfigField("String", "SHARED_PREFS", "\"sharedPreferences\"")
             buildConfigField("String", "PREFS_CURRENT_GOLD_TITLE_KEY", "\"prefsGoldValueKey\"")
             buildConfigField("String", "PREFS_CURRENT_GOLD_DEFAULT_VALUE", "\"0\"")
+            buildConfigField("String", "PREFS_LAST_EXIT_TIME_TITLE_KEY", "\"prefsExitTimeKey\"")
+            buildConfigField("Long", "PREFS_LAST_EXIT_TIME_DEFAULT_VALUE", "0L")
         }
     }
     compileOptions {

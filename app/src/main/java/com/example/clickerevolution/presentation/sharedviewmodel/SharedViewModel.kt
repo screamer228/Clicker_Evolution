@@ -9,9 +9,11 @@ import com.example.clickerevolution.data.repository.skins.SkinsRepository
 import com.example.clickerevolution.presentation.model.CurrentSkin
 import com.example.clickerevolution.presentation.model.Resources
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -34,9 +36,46 @@ class SharedViewModel @Inject constructor(
         getInitialSkin()
         getInitialGoldValue()
         getInitialResources()
+        startPassiveGoldIncrement()
     }
 
-    fun incrementGold() {
+    private fun calculateGoldForOfflineTime() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val lastExitTime = prefsRepository.getLastExitTime()
+            if (lastExitTime > 0) {
+                val currentTime = System.currentTimeMillis()
+                val elapsedTime = (currentTime - lastExitTime) / 1000 // в секундах
+                val goldIncrement = elapsedTime * currentResources.value.goldTickPerSecValue
+//                setGoldValue(currentGold.value + goldIncrement.toInt())
+            }
+        }
+    }
+
+    fun saveLastExitTime() {
+        viewModelScope.launch(Dispatchers.IO) {
+            prefsRepository.saveLastExitTime(System.currentTimeMillis())
+        }
+    }
+
+    private fun startPassiveGoldIncrement() {
+        viewModelScope.launch {
+            flow {
+                while (true) {
+                    emit(Unit)
+                    delay(1000L) // 1 секунда
+                }
+            }.collect {
+                incrementGoldPerSecond()
+            }
+        }
+    }
+
+    private fun incrementGoldPerSecond() {
+        val incrementedGold = currentGold.value + currentResources.value.goldTickPerSecValue
+        setGoldValue(incrementedGold)
+    }
+
+    fun incrementGoldByClick() {
         val incrementedGold = currentGold.value + currentResources.value.goldClickTickValue
         setGoldValue(incrementedGold)
     }

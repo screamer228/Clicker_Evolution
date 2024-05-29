@@ -70,7 +70,7 @@ class HomeFragment : Fragment() {
 
         imageToClick.setOnClickListener {
 
-            viewModel.incrementGold()
+            viewModel.incrementGoldByClick()
 
             soundPool.play(soundIdClick, 1.0f, 1.0f, 1, 0, 1.0f)
 

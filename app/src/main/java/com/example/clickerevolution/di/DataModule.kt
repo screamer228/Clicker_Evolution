@@ -56,12 +56,6 @@ class DataModule {
     @Provides
     @Singleton
     fun providesSharedPreferences(context: Context): SharedPreferences {
-        Log.d("sharedPrefs check", "getting sharedPrefs from dagger")
-        return context.getSharedPreferences(BuildConfig.PREFS_CURRENT_GOLD, Context.MODE_PRIVATE)
+        return context.getSharedPreferences(BuildConfig.SHARED_PREFS, Context.MODE_PRIVATE)
     }
-
-//    @Provides
-//    fun provideContext(): Context {
-//        return context
-//    }
 }
