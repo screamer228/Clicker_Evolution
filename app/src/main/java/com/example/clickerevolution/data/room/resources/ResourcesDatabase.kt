@@ -37,7 +37,7 @@ abstract class ResourcesDatabase : RoomDatabase() {
             }
         }
 
-        private class DatabaseCallback : RoomDatabase.Callback() {
+        private class DatabaseCallback : Callback() {
             override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)
                 INSTANCE?.let { database ->
@@ -50,7 +50,7 @@ abstract class ResourcesDatabase : RoomDatabase() {
             suspend fun populateDatabase(skinDao: ResourcesDao) {
                 val initialResources = ResourcesEntity(
                     goldClickTickValue = 1,
-                    goldTickPerSecValue = 0
+                    goldTickPerSecValue = 1
                 )
                 skinDao.insertResources(initialResources)
             }

@@ -40,8 +40,7 @@ class ShopFragment : Fragment() {
     private lateinit var shopViewModel: ShopViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         (requireActivity().applicationContext as App).appComponent.injectShopFragment(this)
 

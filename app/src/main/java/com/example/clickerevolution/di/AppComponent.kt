@@ -1,5 +1,6 @@
 package com.example.clickerevolution.di
 
+import com.example.clickerevolution.presentation.dialog_fragment.DialogFragment
 import com.example.clickerevolution.presentation.HomeFragment
 import com.example.clickerevolution.presentation.shop_fragment.ShopFragment
 import com.example.clickerevolution.presentation.upgrade_fragment.UpgradesFragment
@@ -15,4 +16,5 @@ interface AppComponent {
     fun injectHomeFragment(homeFragment: HomeFragment)
     fun injectShopFragment(shopFragment: ShopFragment)
     fun injectUpgradeFragment(upgradesFragment: UpgradesFragment)
+    fun injectDialogFragment(dialogFragment: DialogFragment)
 }

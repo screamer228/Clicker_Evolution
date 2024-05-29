@@ -13,6 +13,7 @@ import com.example.clickerevolution.app.App
 import com.example.clickerevolution.presentation.shop_fragment.ShopFragment
 import com.example.clickerevolution.presentation.upgrade_fragment.UpgradesFragment
 import com.example.clickerevolution.databinding.ActivityHostBinding
+import com.example.clickerevolution.presentation.dialog_fragment.DialogFragment
 import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
@@ -48,7 +49,17 @@ class HostActivity : AppCompatActivity() {
                 topBarCounterTV.text = it.toString()
             }
         }
+    }
 
+    override fun onStart() {
+        super.onStart()
+
+        val offlineEarned = viewModel.calculateGoldForOfflineTime()
+
+        if (offlineEarned > 0) {
+            val dialogFragment = DialogFragment(offlineEarned)
+            dialogFragment.show(supportFragmentManager, "Dialog Fragment")
+        }
     }
 
     override fun onStop() {
@@ -82,13 +93,13 @@ class HostActivity : AppCompatActivity() {
                     true
                 }
 
-                R.id.upgradeFragment -> {
+                R.id.upgradesFragment -> {
                     loadFragment(UpgradesFragment())
                     true
                 }
 
                 else -> {
-                    true
+                    false
                 }
             }
         }

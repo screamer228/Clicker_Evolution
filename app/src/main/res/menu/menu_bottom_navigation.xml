@@ -12,7 +12,7 @@
         android:iconTint="@null"
         android:title="" />
     <item
-        android:id="@+id/upgradeFragment"
+        android:id="@+id/upgradesFragment"
         android:enabled="true"
         android:icon="@drawable/ic_upgrade_bn"
         android:title="" />

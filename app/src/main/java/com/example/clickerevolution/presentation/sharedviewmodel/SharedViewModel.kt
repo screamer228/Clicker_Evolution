@@ -37,19 +37,25 @@ class SharedViewModel @Inject constructor(
         getInitialGoldValue()
         getInitialResources()
         startPassiveGoldIncrement()
+//        calculateGoldForOfflineTime()
     }
 
-    private fun calculateGoldForOfflineTime() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val lastExitTime = prefsRepository.getLastExitTime()
-            if (lastExitTime > 0) {
-                val currentTime = System.currentTimeMillis()
-                val elapsedTime = (currentTime - lastExitTime) / 1000 // в секундах
-                val goldIncrement = elapsedTime * currentResources.value.goldTickPerSecValue
-//                setGoldValue(currentGold.value + goldIncrement.toInt())
-            }
-        }
+    fun calculateGoldForOfflineTime(): Int {
+        val lastExitTime = prefsRepository.getLastExitTime()
+        val currentTime = System.currentTimeMillis()
+        val elapsedTime = (currentTime - lastExitTime) / 1000 // в секундах
+        val goldIncrement = elapsedTime * currentResources.value.goldTickPerSecValue
+        return goldIncrement.toInt()
+//        setGoldValue(currentGold.value + goldIncrement.toInt())
     }
+
+    fun incrementGoldEarnedWhileOffline(goldValue: Int) {
+        setGoldValue(currentGold.value + goldValue)
+    }
+
+//    private fun getLastExitTime(): Long {
+//        return prefsRepository.getLastExitTime()
+//    }
 
     fun saveLastExitTime() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -88,14 +94,11 @@ class SharedViewModel @Inject constructor(
     private fun getInitialGoldValue() {
         viewModelScope.launch(Dispatchers.IO) {
             val goldValue = prefsRepository.getGoldValueFromPrefs().toIntOrNull() ?: 0
-            Log.d("sharedPrefs check", "prefsRepository instance in viewModel: $prefsRepository")
-            Log.d("sharedPrefs check", "in viewModel: $goldValue")
             setGoldValue(goldValue)
         }
     }
 
     private fun setGoldValue(value: Int) {
-        Log.d("sharedPrefs check", "inViewModel when set: $value")
         _currentGold.value = value
     }
 
@@ -105,7 +108,7 @@ class SharedViewModel @Inject constructor(
         }
     }
 
-    fun getInitialSkin() {
+    private fun getInitialSkin() {
         viewModelScope.launch(Dispatchers.IO) {
             val skin = skinsRepository.getCurrentSkin()
             setCurrentSkin(skin)

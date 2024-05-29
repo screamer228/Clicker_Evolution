@@ -31,7 +31,7 @@ class PrefsRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getLastExitTime(): Long {
+    override fun getLastExitTime(): Long {
         val value = sharedPreferences.getLong(
             BuildConfig.PREFS_LAST_EXIT_TIME_TITLE_KEY,
             BuildConfig.PREFS_LAST_EXIT_TIME_DEFAULT_VALUE
