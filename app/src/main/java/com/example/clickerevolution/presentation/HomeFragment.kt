@@ -13,7 +13,6 @@ import androidx.lifecycle.lifecycleScope
 import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
 import com.example.clickerevolution.databinding.FragmentHomeBinding
-import com.example.clickerevolution.presentation.dialog_fragment.DialogFragment
 import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModel
 import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModelFactory
 import kotlinx.coroutines.launch
@@ -29,16 +28,16 @@ class HomeFragment : Fragment() {
     private lateinit var soundPool: SoundPool
 
     @Inject
-    lateinit var viewModelFactory: SharedViewModelFactory
-    private lateinit var viewModel: SharedViewModel
+    lateinit var sharedViewModelFactory: SharedViewModelFactory
+    private lateinit var sharedViewModel: SharedViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         (requireActivity().applicationContext as App).appComponent.injectHomeFragment(this)
-        viewModel =
-            ViewModelProvider(requireActivity(), viewModelFactory)[SharedViewModel::class.java]
+
+        injectSharedViewModel()
 
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         bindViews()
@@ -54,7 +53,7 @@ class HomeFragment : Fragment() {
         var resIdClick = R.raw.sound_cookie_click
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.currentSkin.collect {
+            sharedViewModel.currentSkin.collect {
                 imageToClick.setImageResource(it.imageId)
                 resIdClick = it.soundId
             }
@@ -63,7 +62,7 @@ class HomeFragment : Fragment() {
         val soundIdClick = soundPool.load(requireContext(), resIdClick, 1)
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.currentResources.collect {
+            sharedViewModel.currentResources.collect {
                 clickTick.text = "+${it.goldClickTickValue} за клик"
                 tickPerSec.text = "+${it.goldTickPerSecValue} в секунду"
             }
@@ -73,7 +72,7 @@ class HomeFragment : Fragment() {
 
         imageToClick.setOnClickListener {
 
-            viewModel.incrementGoldByClick()
+            sharedViewModel.incrementGoldByClick()
 
             soundPool.play(soundIdClick, 1.0f, 1.0f, 1, 0, 1.0f)
 
@@ -103,6 +102,14 @@ class HomeFragment : Fragment() {
 
     private fun clickListeners() {
 
+    }
+
+    private fun injectSharedViewModel() {
+        sharedViewModel =
+            ViewModelProvider(
+                requireActivity(),
+                sharedViewModelFactory
+            )[SharedViewModel::class.java]
     }
 
     private fun bindViews() {

@@ -43,14 +43,8 @@ class UpgradesFragment : Fragment() {
     ): View {
         (requireActivity().applicationContext as App).appComponent.injectUpgradeFragment(this)
 
-        sharedViewModel =
-            ViewModelProvider(
-                requireActivity(),
-                sharedViewModelFactory
-            )[SharedViewModel::class.java]
-
-        upgradesViewModel =
-            ViewModelProvider(this, upgradesViewModelFactory)[UpgradesViewModel::class.java]
+        injectSharedViewModel()
+        injectUpgradesViewModel()
 
         binding = FragmentUpgradesBinding.inflate(inflater, container, false)
 
@@ -105,5 +99,18 @@ class UpgradesFragment : Fragment() {
 
     private fun playSound(soundPool: SoundPool, soundId: Int) {
         soundPool.play(soundId, 0.9f, 1.0f, 1, 0, 1.0f)
+    }
+
+    private fun injectSharedViewModel() {
+        sharedViewModel =
+            ViewModelProvider(
+                requireActivity(),
+                sharedViewModelFactory
+            )[SharedViewModel::class.java]
+    }
+
+    private fun injectUpgradesViewModel() {
+        upgradesViewModel =
+            ViewModelProvider(this, upgradesViewModelFactory)[UpgradesViewModel::class.java]
     }
 }

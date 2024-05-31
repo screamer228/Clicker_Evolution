@@ -36,8 +36,8 @@ class HostActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         (application as App).appComponent.injectHostActivity(this)
-        viewModel =
-            ViewModelProvider(this, viewModelFactory)[SharedViewModel::class.java]
+
+        injectSharedViewModel()
 
         bindViews()
 
@@ -111,5 +111,10 @@ class HostActivity : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainerView, fragment)
         transaction.commit()
+    }
+
+    private fun injectSharedViewModel() {
+        viewModel =
+            ViewModelProvider(this, viewModelFactory)[SharedViewModel::class.java]
     }
 }

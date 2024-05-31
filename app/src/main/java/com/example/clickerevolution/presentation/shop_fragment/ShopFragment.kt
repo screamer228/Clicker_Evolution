@@ -44,14 +44,8 @@ class ShopFragment : Fragment() {
     ): View {
         (requireActivity().applicationContext as App).appComponent.injectShopFragment(this)
 
-        sharedViewModel =
-            ViewModelProvider(
-                requireActivity(),
-                sharedViewModelFactory
-            )[SharedViewModel::class.java]
-
-        shopViewModel =
-            ViewModelProvider(this, shopViewModelFactory)[ShopViewModel::class.java]
+        injectSharedViewModel()
+        injectShopViewModel()
 
         binding = FragmentShopBinding.inflate(inflater, container, false)
 
@@ -122,5 +116,18 @@ class ShopFragment : Fragment() {
 
     private fun playSound(soundPool: SoundPool, soundId: Int) {
         soundPool.play(soundId, 0.9f, 1.0f, 1, 0, 1.0f)
+    }
+
+    private fun injectSharedViewModel() {
+        sharedViewModel =
+            ViewModelProvider(
+                requireActivity(),
+                sharedViewModelFactory
+            )[SharedViewModel::class.java]
+    }
+
+    private fun injectShopViewModel() {
+        shopViewModel =
+            ViewModelProvider(this, shopViewModelFactory)[ShopViewModel::class.java]
     }
 }
