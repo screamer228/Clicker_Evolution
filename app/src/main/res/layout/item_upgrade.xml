@@ -44,10 +44,10 @@
             android:id="@+id/upgrade_button_upgrade"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/green"
             android:gravity="center"
+            app:cardBackgroundColor="@color/green"
             app:cardCornerRadius="10dp"
-            app:contentPadding="8dp"
+            app:contentPadding="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -62,22 +62,26 @@
                     style="@style/style_text_default"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
                     android:text="Улучшить"
                     android:textColor="@color/white" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="4dp"
+                    android:paddingBottom="2dp"
+                    android:src="@drawable/ic_coin" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/upgrade_price"
                     style="@style/style_text_default"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="8dp"
+                    android:layout_marginEnd="4dp"
                     android:text="500"
                     android:textColor="@color/white" />
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_coin" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

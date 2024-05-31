@@ -40,9 +40,10 @@ class DialogFragment(private val goldEarned: Int) : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.dialogGoldEarned.text = goldEarned.toString()
+        binding.dialogGoldEarned.text = "+$goldEarned"
+        binding.dialogGoldCouldEarned.text = "x2 +${goldEarned * 2}"
 
-        binding.okButton.setOnClickListener {
+        binding.buttonOk.setOnClickListener {
             sharedViewModel.incrementGoldEarnedWhileOffline(goldEarned)
             dismiss()
         }

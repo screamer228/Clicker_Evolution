@@ -25,7 +25,7 @@
         style="@style/style_text_outline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="130dp"
         android:letterSpacing="0.05"
         android:text="+120 за клик"
         android:textColor="@color/white"
@@ -46,7 +46,7 @@
         android:id="@+id/imageView_imageToClick"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:scaleType="fitXY"
         android:src="@drawable/pig" />
 
