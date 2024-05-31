@@ -25,6 +25,7 @@ class UpgradesDiffUtil(
 
         return oldItem.title == newItem.title &&
                 oldItem.level == newItem.level &&
-                oldItem.price == newItem.price
+                oldItem.price == newItem.price &&
+                oldItem.isEnabled == newItem.isEnabled
     }
 }

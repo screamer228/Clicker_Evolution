@@ -44,7 +44,7 @@
             android:id="@+id/upgrade_button_upgrade"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/green"
+            app:cardBackgroundColor="@color/green"
             android:gravity="center"
             app:cardCornerRadius="10dp"
             app:contentPadding="8dp"

@@ -3,6 +3,7 @@ package com.example.clickerevolution.presentation.upgrade_fragment.adapter
 import android.view.LayoutInflater
 import android.view.View.GONE
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clickerevolution.R
@@ -11,7 +12,6 @@ import com.example.clickerevolution.presentation.model.Upgrade
 import com.example.clickerevolution.utils.UpgradesDiffUtil
 
 class UpgradesAdapter(
-//    var gold: Int,
     private val onClick: (Upgrade) -> Unit
 //    private val itemClickListener: ItemClickListener
 ) : RecyclerView.Adapter<UpgradesAdapter.ViewHolder>() {
@@ -22,40 +22,32 @@ class UpgradesAdapter(
         private val binding: ItemUpgradeBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Upgrade) {
+        fun bind(item: Upgrade, isEnabled: Boolean) {
             binding.upgradeTitle.text = item.title
 //            binding.upgradeImage.setImageResource(item.imageId)
             binding.upgradeLevel.text = "Уровень: ${item.level}"
             binding.upgradePrice.text = item.price.toString()
-            binding.upgradeButtonUpgrade.setCardBackgroundColor(R.color.green)
-            binding.upgradeButtonUpgrade.setOnClickListener {
-                onClick(item)
-            }
 
-//            when {
-//                !item.isPurchased -> {
-//                    binding.skinActionText.text = "Купить"
-//                    binding.skinButtonAction.setOnClickListener {
-//                        onAction(item, Action.PURCHASE)
-//                    }
-//                }
-//
-//                item.isPurchased && !item.isEquipped -> {
-//                    binding.skinActionLinear.visibility = GONE
-//                    binding.skinActionText.text = "Одеть"
-//                    binding.skinButtonAction.setOnClickListener {
-//                        onAction(item, Action.EQUIP)
-//                    }
-//                }
-//
-//                item.isPurchased && item.isEquipped -> {
-//                    binding.skinActionLinear.visibility = GONE
-//                    binding.skinActionText.text = "Снять"
-//                    binding.skinButtonAction.setOnClickListener {
-//                        onAction(item, Action.UNEQUIP)
-//                    }
-//                }
-//            }
+            if (isEnabled) {
+                binding.upgradeButtonUpgrade.setCardBackgroundColor(
+                    ContextCompat.getColor(
+                        binding.root.context,
+                        R.color.green
+                    )
+                )
+                binding.upgradeButtonUpgrade.isClickable = true
+                binding.upgradeButtonUpgrade.setOnClickListener {
+                    onClick(item)
+                }
+            } else {
+                binding.upgradeButtonUpgrade.setCardBackgroundColor(
+                    ContextCompat.getColor(
+                        binding.root.context,
+                        R.color.gray
+                    )
+                )
+                binding.upgradeButtonUpgrade.isClickable = false
+            }
         }
     }
 
@@ -69,7 +61,8 @@ class UpgradesAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = upgradesList[position]
-        holder.bind(item)
+        val isEnabled = position == 0 || upgradesList[position - 1].level >= 1
+        holder.bind(item, isEnabled)
 //        holder.itemView.setOnClickListener {
 //            itemClickListener.onItemClick(item.id)
 //        }

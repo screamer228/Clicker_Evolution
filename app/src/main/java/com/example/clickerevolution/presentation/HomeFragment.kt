@@ -95,16 +95,9 @@ class HomeFragment : Fragment() {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-
-
-    }
-
     override fun onDestroy() {
         super.onDestroy()
 
-        viewModel.saveResources()
         soundPool.release()
     }
 

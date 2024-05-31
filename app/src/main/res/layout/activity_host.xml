@@ -96,7 +96,6 @@
         android:layout_width="match_parent"
         android:layout_height="74dp"
         android:background="@color/hard_blue"
-        app:itemActiveIndicatorStyle="@color/white"
         app:itemIconSize="48dp"
         app:itemIconTint="@null"
         app:itemRippleColor="@null"

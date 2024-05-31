@@ -17,7 +17,6 @@
         android:fontFamily="@font/font_piggy"
         android:gravity="center"
         android:text="Piggy Clicker"
-        android:textStyle="italic"
         android:textColor="@color/black"
         android:textSize="72sp" />
 
@@ -28,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:letterSpacing="0.05"
-        android:text="120 за клик"
+        android:text="+120 за клик"
         android:textColor="@color/white"
         android:textSize="14sp" />
 
@@ -40,7 +39,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="50 в секунду"
+        android:text="+50 в секунду"
         android:textSize="14sp" />
 
     <com.google.android.material.imageview.ShapeableImageView

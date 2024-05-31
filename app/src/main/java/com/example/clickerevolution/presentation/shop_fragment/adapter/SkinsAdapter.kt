@@ -39,10 +39,6 @@ class SkinsAdapter(
                             R.color.green
                         )
                     )
-                    Log.d(
-                        "colors check",
-                        "${item.id} not purchased, color: ${binding.skinButtonAction.cardBackgroundColor}"
-                    )
                     binding.skinActionText.text = "Купить"
                     binding.skinButtonAction.setOnClickListener {
                         onAction(item, Action.PURCHASE)
@@ -55,10 +51,6 @@ class SkinsAdapter(
                             binding.root.context,
                             R.color.blue
                         )
-                    )
-                    Log.d(
-                        "colors check",
-                        "${item.id} purchased, color: ${binding.skinButtonAction.cardBackgroundColor}"
                     )
                     binding.skinActionLinear.visibility = GONE
                     binding.skinActionText.text = "Одеть"
@@ -73,10 +65,6 @@ class SkinsAdapter(
                             binding.root.context,
                             R.color.red
                         )
-                    )
-                    Log.d(
-                        "colors check",
-                        "${item.id} equipped, color: ${binding.skinButtonAction.cardBackgroundColor}"
                     )
                     binding.skinActionLinear.visibility = GONE
                     binding.skinActionText.text = "Снять"

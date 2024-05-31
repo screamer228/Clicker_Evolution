@@ -70,6 +70,8 @@ class HostActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         viewModel.saveGoldValue()
+        viewModel.saveResources()
+        viewModel.saveLastExitTime()
     }
 
     private fun bindViews() {

@@ -8,5 +8,6 @@ data class Upgrade(
     val power: Int,
     val level: Int,
     val price: Int,
-    val type: UpgradeType
+    val type: UpgradeType,
+    val isEnabled: Boolean = false
 )

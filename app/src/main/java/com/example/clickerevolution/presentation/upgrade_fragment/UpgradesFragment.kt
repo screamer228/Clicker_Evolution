@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
 import com.example.clickerevolution.databinding.FragmentUpgradesBinding
+import com.example.clickerevolution.presentation.model.Upgrade
 import com.example.clickerevolution.presentation.upgrade_fragment.adapter.UpgradesAdapter
 import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModel
 import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModelFactory
@@ -80,9 +81,20 @@ class UpgradesFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             upgradesViewModel.upgradesList.collect {
-                adapter.updateList(it)
+                updatesAdapterState(it)
             }
         }
+    }
+
+    private fun updatesAdapterState(upgrades: List<Upgrade>) {
+        val updatedList = upgrades.mapIndexed { index, upgrade ->
+            if (index == 0 || upgrades[index - 1].level >= 1) {
+                upgrade.copy(isEnabled = true)
+            } else {
+                upgrade.copy(isEnabled = false)
+            }
+        }
+        adapter.updateList(updatedList)
     }
 
     private fun buyUpgrade(price: Int, power: Int, id: Int) {
