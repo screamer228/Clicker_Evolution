@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -18,36 +18,46 @@
         android:gravity="center"
         android:text="Piggy Clicker"
         android:textColor="@color/black"
-        android:textSize="72sp" />
+        android:textSize="72sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <com.example.clickerevolution.custom.TextViewOutline
         android:id="@+id/textView_ClickTickValue"
         style="@style/style_text_outline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="130dp"
-        android:letterSpacing="0.05"
+        android:layout_marginBottom="8dp"
         android:text="+120 за клик"
         android:textColor="@color/white"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView_tickPerSecondValue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <com.example.clickerevolution.custom.TextViewOutline
         android:id="@+id/textView_tickPerSecondValue"
         style="@style/style_text_outline"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:layout_gravity="center"
-        android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="+50 в секунду"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/imageView_imageToClick"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageView_imageToClick"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
         android:scaleType="fitXY"
-        android:src="@drawable/pig" />
+        android:src="@drawable/img_pig"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

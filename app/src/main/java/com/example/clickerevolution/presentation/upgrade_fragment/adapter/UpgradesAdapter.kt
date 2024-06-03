@@ -26,6 +26,7 @@ class UpgradesAdapter(
             binding.upgradeTitle.text = item.title
 //            binding.upgradeImage.setImageResource(item.imageId)
             binding.upgradeLevel.text = "Уровень: ${item.level}"
+            binding.upgradePower.text = "Сила: +${item.power}"
             binding.upgradePrice.text = item.price.toString()
 
             if (isEnabled) {
