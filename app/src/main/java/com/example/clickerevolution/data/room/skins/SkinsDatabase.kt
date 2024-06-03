@@ -1,13 +1,16 @@
 package com.example.clickerevolution.data.room.skins
 
 import android.content.Context
+import android.provider.ContactsContract.CommonDataKinds
 import android.util.Log
+import androidx.annotation.RawRes
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.clickerevolution.R
+import com.example.clickerevolution.common.Rarity
 import com.example.clickerevolution.data.room.skins.entity.SkinEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -49,11 +52,50 @@ abstract class SkinsDatabase : RoomDatabase() {
 
             suspend fun populateDatabase(skinDao: SkinDao) {
                 val initialSkinsList = listOf(
-                    SkinEntity(1, "Микрочел", R.drawable.img_skin1, R.raw.sound_click,100),
-                    SkinEntity(2, " Челикс ", R.drawable.img_skin2, R.raw.sound_cookie_click,300),
-                    SkinEntity(3, "Горемыка", R.drawable.img_skin3, R.raw.sound_cookie_click,500),
-                    SkinEntity(4, "Милашка", R.drawable.img_skin4, R.raw.sound_cookie_click,1000),
-                    SkinEntity(5, "Оболдуй", R.drawable.img_skin5, R.raw.sound_cookie_click,2000),
+                    SkinEntity(
+                        1, "Микрочел", R.drawable.img_skin1, R.raw.sound_click, 100,
+                        Rarity.COMMON
+                    ),
+                    SkinEntity(
+                        2,
+                        " Челикс ",
+                        R.drawable.img_skin2,
+                        R.raw.sound_cookie_click,
+                        300,
+                        Rarity.COMMON
+                    ),
+                    SkinEntity(
+                        3,
+                        "Горемыка",
+                        R.drawable.img_skin3,
+                        R.raw.sound_cookie_click,
+                        500,
+                        Rarity.RARE
+                    ),
+                    SkinEntity(
+                        4,
+                        "Милашка",
+                        R.drawable.img_skin4,
+                        R.raw.sound_cookie_click,
+                        1000,
+                        Rarity.RARE
+                    ),
+                    SkinEntity(
+                        5,
+                        "Оболдуй",
+                        R.drawable.img_skin5,
+                        R.raw.sound_cookie_click,
+                        2000,
+                        Rarity.EPIC
+                    ),
+                    SkinEntity(
+                        6,
+                        "Жопа)",
+                        R.drawable.img_skin_ass,
+                        R.raw.sound_cookie_click,
+                        5000,
+                        Rarity.LEGENDARY
+                    )
                 )
                 skinDao.insertSkins(initialSkinsList)
                 Log.d("populateDatabase check", "populateSkinsDatabase()")

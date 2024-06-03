@@ -12,7 +12,8 @@ fun SkinEntity.toSkin(): Skin {
         soundId = soundId,
         price = price,
         isPurchased = isPurchased,
-        isEquipped = isEquipped
+        isEquipped = isEquipped,
+        rarity = rarity
     )
 }
 
@@ -31,6 +32,7 @@ fun Skin.toEntity(): SkinEntity {
         soundId = soundId,
         price = price,
         isPurchased = isPurchased,
-        isEquipped = isEquipped
+        isEquipped = isEquipped,
+        rarity = rarity
     )
 }

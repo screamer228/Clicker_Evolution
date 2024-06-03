@@ -10,4 +10,11 @@
     <color name="hard_blue">#4682B4</color>
     <color name="red">#FF2400</color>
     <color name="gray">#C0C0C0</color>
+    <color name="orange">#F5B157</color>
+    <color name="orange_red">#FF4D00</color>
+    <color name="yellow">#FFDC5F</color>
+    <color name="violet">#9C80F7</color>
+    <color name="semi_transparent_gray">#80A0A0A0</color>
+    <color name="semi_transparent_black">#99000000</color>
+    <color name="semi_transparent_white">#99FFFFFF</color>
 </resources>

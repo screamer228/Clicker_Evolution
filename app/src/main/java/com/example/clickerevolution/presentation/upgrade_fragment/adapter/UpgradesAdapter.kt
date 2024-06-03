@@ -1,9 +1,13 @@
 package com.example.clickerevolution.presentation.upgrade_fragment.adapter
 
+import android.graphics.PorterDuff
 import android.view.LayoutInflater
+import android.view.View
 import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clickerevolution.R
@@ -29,11 +33,43 @@ class UpgradesAdapter(
             binding.upgradePower.text = "Сила: +${item.power}"
             binding.upgradePrice.text = item.price.toString()
 
+
+
             if (isEnabled) {
                 binding.upgradeButtonUpgrade.setCardBackgroundColor(
-                    ContextCompat.getColor(
+                    getColor(
                         binding.root.context,
                         R.color.green
+                    )
+                )
+                binding.upgradeTitle.setTextColor(
+                    getColor(
+                        binding.root.context,
+                        R.color.white
+                    )
+                )
+                binding.upgradePower.setTextColor(
+                    getColor(
+                        binding.root.context,
+                        R.color.yellow
+                    )
+                )
+                binding.upgradeLevel.setTextColor(
+                    getColor(
+                        binding.root.context,
+                        R.color.yellow
+                    )
+                )
+                binding.upgradePrice.setTextColor(
+                    getColor(
+                        binding.root.context,
+                        R.color.white
+                    )
+                )
+                binding.upgradeActionText.setTextColor(
+                    getColor(
+                        binding.root.context,
+                        R.color.white
                     )
                 )
                 binding.upgradeButtonUpgrade.isClickable = true
@@ -42,13 +78,46 @@ class UpgradesAdapter(
                 }
             } else {
                 binding.upgradeButtonUpgrade.setCardBackgroundColor(
-                    ContextCompat.getColor(
+                    getColor(
+                        binding.root.context,
+                        R.color.gray
+                    )
+                )
+                binding.upgradeTitle.setTextColor(
+                    getColor(
+                        binding.root.context,
+                        R.color.gray
+                    )
+                )
+                binding.upgradePower.setTextColor(
+                    getColor(
+                        binding.root.context,
+                        R.color.gray
+                    )
+                )
+                binding.upgradeLevel.setTextColor(
+                    getColor(
+                        binding.root.context,
+                        R.color.gray
+                    )
+                )
+                binding.upgradePrice.setTextColor(
+                    getColor(
+                        binding.root.context,
+                        R.color.gray
+                    )
+                )
+                binding.upgradeActionText.setTextColor(
+                    getColor(
                         binding.root.context,
                         R.color.gray
                     )
                 )
                 binding.upgradeButtonUpgrade.isClickable = false
             }
+
+//            binding.overlayView.visibility = if (isEnabled) View.GONE else View.VISIBLE
+
         }
     }
 

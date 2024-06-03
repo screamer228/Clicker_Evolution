@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clickerevolution.R
+import com.example.clickerevolution.common.Rarity
 import com.example.clickerevolution.databinding.ItemSkinBinding
 import com.example.clickerevolution.presentation.model.Skin
 import com.example.clickerevolution.utils.SkinsDiffUtil
@@ -29,7 +30,38 @@ class SkinsAdapter(
             binding.skinImage.setImageResource(item.imageId)
             binding.skinPrice.text = item.price.toString()
 
-            Log.d("colors check", "Binding item: ${item.id}")
+            when (item.rarity) {
+                Rarity.COMMON -> {
+
+                }
+
+                Rarity.RARE -> {
+                    binding.skinCardView.setCardBackgroundColor(
+                        ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.orange
+                        )
+                    )
+                }
+
+                Rarity.EPIC -> {
+                    binding.skinCardView.setCardBackgroundColor(
+                        ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.violet
+                        )
+                    )
+                }
+
+                Rarity.LEGENDARY -> {
+                    binding.skinCardView.setCardBackgroundColor(
+                        ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.orange_red
+                        )
+                    )
+                }
+            }
 
             when {
                 !item.isPurchased -> {
