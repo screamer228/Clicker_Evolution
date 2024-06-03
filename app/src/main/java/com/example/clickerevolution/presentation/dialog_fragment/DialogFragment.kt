@@ -1,5 +1,6 @@
 package com.example.clickerevolution.presentation.dialog_fragment
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,12 @@ class DialogFragment(private val goldEarned: Int) : DialogFragment() {
     @Inject
     lateinit var sharedViewModelFactory: SharedViewModelFactory
     private lateinit var sharedViewModel: SharedViewModel
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = super.onCreateDialog(savedInstanceState)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        return dialog
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,6 +54,11 @@ class DialogFragment(private val goldEarned: Int) : DialogFragment() {
             sharedViewModel.incrementGoldEarnedWhileOffline(goldEarned)
             dismiss()
         }
+
+        binding.buttonDoubleIt.setOnClickListener {
+            sharedViewModel.incrementGoldEarnedWhileOffline(goldEarned * 2)
+            dismiss()
+        }
     }
 
 //    override fun onResume() {
@@ -71,44 +83,6 @@ class DialogFragment(private val goldEarned: Int) : DialogFragment() {
 //                inputFieldDescription.setText(it.description)
 //                //}
 //            }
-//        }
-//    }
-//
-//    private fun okButtonClicker() {
-//        if (isNewItem) {
-//            okAddItemBeenClicked()
-//        } else {
-//            okUpdateItemBeenClicked()
-//        }
-//        dismiss()
-//    }
-//
-//    private fun okAddItemBeenClicked() {
-//        shouldClearPrefs = true
-//
-//        val inputTitleResult = inputFieldTitle.text.toString()
-//        val inputDescriptionResult = inputFieldDescription.text.toString()
-//        mainViewModel.insertItem(ToDoItem(inputTitleResult, inputDescriptionResult))
-//        inputFieldTitle.text.clear()
-//        inputFieldDescription.text.clear()
-//    }
-//
-//    private fun okUpdateItemBeenClicked() {
-//        val inputTitleResult = inputFieldTitle.text.toString()
-//        val inputDescriptionResult = inputFieldDescription.text.toString()
-//        item?.let { ToDoItem(it.id, inputTitleResult, inputDescriptionResult) }
-//            ?.let { mainViewModel.updateItem(it) }
-//    }
-//
-//    override fun onStop() {
-//        super.onStop()
-//        if (isNewItem) {
-//            //if (!shouldClearPrefs) {
-//            val inputTitleResult = inputFieldTitle.text.toString()
-//            val inputDescriptionResult = inputFieldDescription.text.toString()
-//            dialogFragmentViewModel.saveDataInPrefs(PREFS_TITLE_KEY, inputTitleResult)
-//            dialogFragmentViewModel.saveDataInPrefs(PREFS_DESCRIPTION_KEY, inputDescriptionResult)
-//            //}
 //        }
 //    }
 }
