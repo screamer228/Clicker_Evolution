@@ -77,6 +77,36 @@ abstract class UpgradesDatabase : RoomDatabase() {
                         power = 25,
                         price = 12000,
                         type = UpgradeType.CLICK_TICK
+                    ),
+                    UpgradeEntity(
+                        title = "Грязь",
+                        power = 1,
+                        price = 500,
+                        type = UpgradeType.TICK_PER_SEC
+                    ),
+                    UpgradeEntity(
+                        title = "Солома",
+                        power = 3,
+                        price = 1000,
+                        type = UpgradeType.TICK_PER_SEC
+                    ),
+                    UpgradeEntity(
+                        title = "Мусор",
+                        power = 5,
+                        price = 3000,
+                        type = UpgradeType.TICK_PER_SEC
+                    ),
+                    UpgradeEntity(
+                        title = "Пердёж",
+                        power = 10,
+                        price = 6000,
+                        type = UpgradeType.TICK_PER_SEC
+                    ),
+                    UpgradeEntity(
+                        title = "Рыготня",
+                        power = 25,
+                        price = 12000,
+                        type = UpgradeType.TICK_PER_SEC
                     )
                 )
                 upgradeDao.insertUpgrades(initialUpgradesList)

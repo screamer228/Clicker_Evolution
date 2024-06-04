@@ -1,8 +1,7 @@
-package com.example.clickerevolution.presentation.upgrade_fragment.viewmodel
+package com.example.clickerevolution.presentation.upgrades_fragment.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.clickerevolution.data.repository.skins.SkinsRepository
 import com.example.clickerevolution.data.repository.upgrades.UpgradesRepository
 
 class UpgradesViewModelFactory(

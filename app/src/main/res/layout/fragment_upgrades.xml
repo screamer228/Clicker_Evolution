@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.upgrade_fragment.UpgradesFragment">
+    android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_upgrades"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout_upgrades"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="@color/hard_blue"
+        android:contentDescription="tabLayout"
+        app:tabIndicatorColor="@color/hard_blue"
+        app:tabIndicatorFullWidth="true"
+        app:tabIndicatorHeight="2dp"
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextColor="@color/gray" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager_upgrades"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="4dp"
-        android:clipToPadding="false"
-        android:paddingBottom="70dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_upgrade" />
+        android:layout_marginBottom="65dp" />
 
-</FrameLayout>
+</LinearLayout>

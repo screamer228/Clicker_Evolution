@@ -32,7 +32,12 @@ class SkinsAdapter(
 
             when (item.rarity) {
                 Rarity.COMMON -> {
-
+                    binding.skinCardView.setCardBackgroundColor(
+                        ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.light_blue
+                        )
+                    )
                 }
 
                 Rarity.RARE -> {

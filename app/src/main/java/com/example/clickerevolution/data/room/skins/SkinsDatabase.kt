@@ -53,7 +53,11 @@ abstract class SkinsDatabase : RoomDatabase() {
             suspend fun populateDatabase(skinDao: SkinDao) {
                 val initialSkinsList = listOf(
                     SkinEntity(
-                        1, "Микрочел", R.drawable.img_skin1, R.raw.sound_click, 100,
+                        1,
+                        "Микрочел",
+                        R.drawable.img_skin1,
+                        R.raw.sound_click,
+                        100,
                         Rarity.COMMON
                     ),
                     SkinEntity(
@@ -92,13 +96,20 @@ abstract class SkinsDatabase : RoomDatabase() {
                         6,
                         "Жопа)",
                         R.drawable.img_skin_ass,
-                        R.raw.sound_cookie_click,
-                        5000,
+                        R.raw.sound_skin6,
+                        100,
+                        Rarity.LEGENDARY
+                    ),
+                    SkinEntity(
+                        7,
+                        "Костлявый",
+                        R.drawable.img_skin7,
+                        R.raw.sound_skin7,
+                        200,
                         Rarity.LEGENDARY
                     )
                 )
                 skinDao.insertSkins(initialSkinsList)
-                Log.d("populateDatabase check", "populateSkinsDatabase()")
             }
         }
 

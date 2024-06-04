@@ -1,12 +1,7 @@
-package com.example.clickerevolution.presentation.upgrade_fragment.adapter
+package com.example.clickerevolution.presentation.upgrades_fragment.adapter
 
-import android.graphics.PorterDuff
 import android.view.LayoutInflater
-import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView

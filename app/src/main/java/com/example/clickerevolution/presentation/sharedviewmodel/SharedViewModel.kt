@@ -127,8 +127,13 @@ class SharedViewModel @Inject constructor(
     }
 
     fun setCurrentClickTick(plusTickValue: Int) {
-        val incrementedGold = _currentResources.value.goldClickTickValue + plusTickValue
-        _currentResources.value = _currentResources.value.copy(goldClickTickValue = incrementedGold)
+        val incrementedTick = _currentResources.value.goldClickTickValue + plusTickValue
+        _currentResources.value = _currentResources.value.copy(goldClickTickValue = incrementedTick)
+    }
+
+    fun setCurrentTickPerSec(plusTickValue: Int) {
+        val incrementedTick = _currentResources.value.goldTickPerSecValue + plusTickValue
+        _currentResources.value = _currentResources.value.copy(goldTickPerSecValue = incrementedTick)
     }
 
     fun saveResources() {

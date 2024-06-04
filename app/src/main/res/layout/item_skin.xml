@@ -33,7 +33,7 @@
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/skin_image"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="110dp"
                 android:padding="8dp"
                 android:src="@mipmap/ic_launcher"
                 android:scaleType="fitXY"/>

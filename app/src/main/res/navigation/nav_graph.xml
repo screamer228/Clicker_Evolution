@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_shop" />
     <fragment
         android:id="@+id/upgradesFragment"
-        android:name="com.example.clickerevolution.presentation.upgrade_fragment.UpgradesFragment"
+        android:name="com.example.clickerevolution.presentation.upgrades_fragment.UpgradesFragment"
         android:label="fragment_upgrades"
         tools:layout="@layout/fragment_upgrades" />
 </navigation>

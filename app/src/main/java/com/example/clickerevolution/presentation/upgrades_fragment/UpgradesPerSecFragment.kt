@@ -1,29 +1,31 @@
-package com.example.clickerevolution.presentation.upgrade_fragment
+package com.example.clickerevolution.presentation.upgrades_fragment
 
 import android.media.SoundPool
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
-import com.example.clickerevolution.databinding.FragmentUpgradesBinding
+import com.example.clickerevolution.databinding.FragmentUpgradesClickBinding
+import com.example.clickerevolution.databinding.FragmentUpgradesPerSecBinding
 import com.example.clickerevolution.presentation.model.Upgrade
-import com.example.clickerevolution.presentation.upgrade_fragment.adapter.UpgradesAdapter
 import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModel
 import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModelFactory
-import com.example.clickerevolution.presentation.upgrade_fragment.viewmodel.UpgradesViewModel
-import com.example.clickerevolution.presentation.upgrade_fragment.viewmodel.UpgradesViewModelFactory
+import com.example.clickerevolution.presentation.upgrades_fragment.adapter.UpgradesAdapter
+import com.example.clickerevolution.presentation.upgrades_fragment.viewmodel.UpgradesViewModel
+import com.example.clickerevolution.presentation.upgrades_fragment.viewmodel.UpgradesViewModelFactory
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class UpgradesFragment : Fragment() {
+class UpgradesPerSecFragment : Fragment() {
 
-    private lateinit var binding: FragmentUpgradesBinding
+    private lateinit var binding: FragmentUpgradesPerSecBinding
     private lateinit var adapter: UpgradesAdapter
 
     private lateinit var soundPoolBuy: SoundPool
@@ -41,12 +43,12 @@ class UpgradesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        (requireActivity().applicationContext as App).appComponent.injectUpgradeFragment(this)
+        (requireActivity().applicationContext as App).appComponent.injectUpgradesPerSecFragment(this)
 
         injectSharedViewModel()
         injectUpgradesViewModel()
 
-        binding = FragmentUpgradesBinding.inflate(inflater, container, false)
+        binding = FragmentUpgradesPerSecBinding.inflate(inflater, container, false)
 
         soundPoolBuy = SoundPool.Builder().setMaxStreams(3).build()
         soundPoolReject = SoundPool.Builder().setMaxStreams(3).build()
@@ -56,6 +58,8 @@ class UpgradesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        upgradesViewModel.getUpgradesPerSecList()
 
         val soundIdBuy = soundPoolBuy.load(requireContext(), R.raw.sound_buy, 1)
         val soundIdReject = soundPoolReject.load(requireContext(), R.raw.sound_reject, 1)
@@ -71,10 +75,11 @@ class UpgradesFragment : Fragment() {
             }
         }
 
-        binding.recyclerViewUpgrades.adapter = adapter
+        binding.recyclerViewUpgradesPerSec.adapter = adapter
 
         viewLifecycleOwner.lifecycleScope.launch {
-            upgradesViewModel.upgradesList.collect {
+            upgradesViewModel.upgradesPerSecList.collect {
+                Log.d("upgrades check", "UpgradesPerSecFragment observer: ${it.size}")
                 updatesAdapterState(it)
             }
         }
@@ -89,11 +94,12 @@ class UpgradesFragment : Fragment() {
             }
         }
         adapter.updateList(updatedList)
+        Log.d("upgrades check", "UpgradesPerSecFragment updatesAdapterState")
     }
 
     private fun buyUpgrade(price: Int, power: Int, id: Int) {
         sharedViewModel.subtractGold(price)
-        sharedViewModel.setCurrentClickTick(power)
+        sharedViewModel.setCurrentTickPerSec(power)
         upgradesViewModel.upgradeLevelAndPrice(id)
     }
 
@@ -111,6 +117,19 @@ class UpgradesFragment : Fragment() {
 
     private fun injectUpgradesViewModel() {
         upgradesViewModel =
-            ViewModelProvider(this, upgradesViewModelFactory)[UpgradesViewModel::class.java]
+            ViewModelProvider(
+                requireActivity(),
+                upgradesViewModelFactory
+            )[UpgradesViewModel::class.java]
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        Log.d("upgrades check", "UpgradesPerSecFragment onResume()")
+    }
+
+    companion object {
+        fun newInstance() = UpgradesPerSecFragment()
     }
 }

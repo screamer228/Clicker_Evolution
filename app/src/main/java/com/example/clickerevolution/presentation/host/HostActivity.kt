@@ -11,10 +11,13 @@ import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModel
 import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
 import com.example.clickerevolution.presentation.shop_fragment.ShopFragment
-import com.example.clickerevolution.presentation.upgrade_fragment.UpgradesFragment
+import com.example.clickerevolution.presentation.upgrades_fragment.UpgradesClickFragment
 import com.example.clickerevolution.databinding.ActivityHostBinding
 import com.example.clickerevolution.presentation.dialog_fragment.DialogFragment
 import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModelFactory
+import com.example.clickerevolution.presentation.upgrades_fragment.UpgradesFragment
+import com.example.clickerevolution.presentation.upgrades_fragment.viewmodel.UpgradesViewModel
+import com.example.clickerevolution.presentation.upgrades_fragment.viewmodel.UpgradesViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -28,6 +31,10 @@ class HostActivity : AppCompatActivity() {
     @Inject
     lateinit var viewModelFactory: SharedViewModelFactory
     private lateinit var viewModel: SharedViewModel
+
+    @Inject
+    lateinit var upgradesViewModelFactory: UpgradesViewModelFactory
+    private lateinit var upgradesViewModel: UpgradesViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,10 +56,6 @@ class HostActivity : AppCompatActivity() {
                 topBarCounterTV.text = it.toString()
             }
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
 
         val offlineEarned = viewModel.calculateGoldForOfflineTime()
 
@@ -62,10 +65,21 @@ class HostActivity : AppCompatActivity() {
         }
     }
 
-    override fun onStop() {
-        super.onStop()
-        viewModel.saveLastExitTime()
-    }
+//    override fun onStart() {
+//        super.onStart()
+//
+//        val offlineEarned = viewModel.calculateGoldForOfflineTime()
+//
+//        if (offlineEarned > 0) {
+//            val dialogFragment = DialogFragment(offlineEarned)
+//            dialogFragment.show(supportFragmentManager, "Dialog Fragment")
+//        }
+//    }
+
+//    override fun onStop() {
+//        super.onStop()
+//        viewModel.saveLastExitTime()
+//    }
 
     override fun onDestroy() {
         super.onDestroy()
@@ -116,5 +130,8 @@ class HostActivity : AppCompatActivity() {
     private fun injectSharedViewModel() {
         viewModel =
             ViewModelProvider(this, viewModelFactory)[SharedViewModel::class.java]
+
+        upgradesViewModel =
+            ViewModelProvider(this, upgradesViewModelFactory)[UpgradesViewModel::class.java]
     }
 }

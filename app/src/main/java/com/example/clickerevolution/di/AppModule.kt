@@ -8,7 +8,7 @@ import com.example.clickerevolution.data.repository.skins.SkinsRepository
 import com.example.clickerevolution.data.repository.upgrades.UpgradesRepository
 import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModelFactory
 import com.example.clickerevolution.presentation.shop_fragment.viewmodel.ShopViewModelFactory
-import com.example.clickerevolution.presentation.upgrade_fragment.viewmodel.UpgradesViewModelFactory
+import com.example.clickerevolution.presentation.upgrades_fragment.viewmodel.UpgradesViewModelFactory
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
