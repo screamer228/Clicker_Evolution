@@ -50,6 +50,9 @@ class HostActivity : AppCompatActivity() {
 
         prepareBottomNav()
 
+//        upgradesViewModel.getUpgradesClickList()
+//        upgradesViewModel.getUpgradesPerSecList()
+
         lifecycleScope.launch {
             viewModel.currentGold.collect {
 

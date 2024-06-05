@@ -8,7 +8,7 @@ import com.example.clickerevolution.common.Rarity
 
 @Entity(tableName = "skins")
 data class SkinEntity(
-    @PrimaryKey val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val title: String,
     @DrawableRes val imageId: Int,
     @RawRes val soundId: Int,

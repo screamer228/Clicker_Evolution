@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
+import com.example.clickerevolution.common.UpgradeType
 import com.example.clickerevolution.databinding.FragmentUpgradesBinding
 import com.example.clickerevolution.databinding.FragmentUpgradesClickBinding
 import com.example.clickerevolution.presentation.model.Upgrade
@@ -60,11 +61,12 @@ class UpgradesClickFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         upgradesViewModel.getUpgradesClickList()
+        upgradesViewModel.getUpgradesPerSecList()
 
         val soundIdBuy = soundPoolBuy.load(requireContext(), R.raw.sound_buy, 1)
         val soundIdReject = soundPoolReject.load(requireContext(), R.raw.sound_reject, 1)
 
-        adapter = UpgradesAdapter { upgrade ->
+        adapter = UpgradesAdapter(UpgradeType.CLICK_TICK) { upgrade ->
             if (sharedViewModel.currentGold.value >= upgrade.price) {
                 buyUpgrade(upgrade.price, upgrade.power, upgrade.id)
                 playSound(soundPoolBuy, soundIdBuy)

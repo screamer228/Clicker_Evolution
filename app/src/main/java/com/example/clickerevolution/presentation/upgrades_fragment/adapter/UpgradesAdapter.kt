@@ -6,11 +6,13 @@ import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clickerevolution.R
+import com.example.clickerevolution.common.UpgradeType
 import com.example.clickerevolution.databinding.ItemUpgradeBinding
 import com.example.clickerevolution.presentation.model.Upgrade
 import com.example.clickerevolution.utils.UpgradesDiffUtil
 
 class UpgradesAdapter(
+    private val type: UpgradeType,
     private val onClick: (Upgrade) -> Unit
 //    private val itemClickListener: ItemClickListener
 ) : RecyclerView.Adapter<UpgradesAdapter.ViewHolder>() {
@@ -25,10 +27,17 @@ class UpgradesAdapter(
             binding.upgradeTitle.text = item.title
 //            binding.upgradeImage.setImageResource(item.imageId)
             binding.upgradeLevel.text = "Уровень: ${item.level}"
-            binding.upgradePower.text = "Сила: +${item.power}"
+
+            when (type) {
+                UpgradeType.CLICK_TICK -> {
+                    binding.upgradePower.text = "Сила: +${item.power}"
+                }
+                UpgradeType.TICK_PER_SEC -> {
+                    binding.upgradePower.text = "Сила: +${item.power}/сек"
+                }
+            }
+
             binding.upgradePrice.text = item.price.toString()
-
-
 
             if (isEnabled) {
                 binding.upgradeButtonUpgrade.setCardBackgroundColor(
@@ -43,18 +52,31 @@ class UpgradesAdapter(
                         R.color.white
                     )
                 )
-                binding.upgradePower.setTextColor(
-                    getColor(
-                        binding.root.context,
-                        R.color.yellow
-                    )
-                )
+//                binding.upgradePower.setTextColor(
+//                    getColor(
+//                        binding.root.context,
+//                        R.color.yellow
+//                    )
+//                )
                 binding.upgradeLevel.setTextColor(
                     getColor(
                         binding.root.context,
                         R.color.yellow
                     )
                 )
+                binding.upgradePower.setTextColor(
+                    getColor(
+                        binding.root.context,
+                        R.color.light_green
+                    )
+                )
+//                binding.upgradeLevel.setTextColor(
+//                    getColor(
+//                        binding.root.context,
+//                        R.color.light_green
+//                    )
+//                )
+
                 binding.upgradePrice.setTextColor(
                     getColor(
                         binding.root.context,

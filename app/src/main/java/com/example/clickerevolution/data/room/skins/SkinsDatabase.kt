@@ -53,60 +53,53 @@ abstract class SkinsDatabase : RoomDatabase() {
             suspend fun populateDatabase(skinDao: SkinDao) {
                 val initialSkinsList = listOf(
                     SkinEntity(
-                        1,
-                        "Микрочел",
-                        R.drawable.img_skin1,
-                        R.raw.sound_click,
-                        100,
-                        Rarity.COMMON
+                        title = "Микрочел",
+                        imageId = R.drawable.img_skin1,
+                        soundId = R.raw.sound_click,
+                        price = 100,
+                        rarity = Rarity.COMMON
                     ),
                     SkinEntity(
-                        2,
-                        " Челикс ",
-                        R.drawable.img_skin2,
-                        R.raw.sound_cookie_click,
-                        300,
-                        Rarity.COMMON
+                        title = " Челикс ",
+                        imageId = R.drawable.img_skin2,
+                        soundId = R.raw.sound_cookie_click,
+                        price = 300,
+                        rarity = Rarity.COMMON
                     ),
                     SkinEntity(
-                        3,
-                        "Горемыка",
-                        R.drawable.img_skin3,
-                        R.raw.sound_cookie_click,
-                        500,
-                        Rarity.RARE
+                        title = "Горемыка",
+                        imageId = R.drawable.img_skin3,
+                        soundId = R.raw.sound_cookie_click,
+                        price = 500,
+                        rarity = Rarity.RARE
                     ),
                     SkinEntity(
-                        4,
-                        "Милашка",
-                        R.drawable.img_skin4,
-                        R.raw.sound_cookie_click,
-                        1000,
-                        Rarity.RARE
+                        title = "Милашка",
+                        imageId = R.drawable.img_skin4,
+                        soundId = R.raw.sound_cookie_click,
+                        price = 1000,
+                        rarity = Rarity.RARE
                     ),
                     SkinEntity(
-                        5,
-                        "Оболдуй",
-                        R.drawable.img_skin5,
-                        R.raw.sound_cookie_click,
-                        2000,
-                        Rarity.EPIC
+                        title = "Жопа)",
+                        imageId = R.drawable.img_skin_ass,
+                        soundId = R.raw.sound_skin6,
+                        price = 100,
+                        rarity = Rarity.EPIC
                     ),
                     SkinEntity(
-                        6,
-                        "Жопа)",
-                        R.drawable.img_skin_ass,
-                        R.raw.sound_skin6,
-                        100,
-                        Rarity.LEGENDARY
+                        title = "Костлявый",
+                        imageId = R.drawable.img_skin7,
+                        soundId = R.raw.sound_skin7,
+                        price = 200,
+                        rarity = Rarity.LEGENDARY
                     ),
                     SkinEntity(
-                        7,
-                        "Костлявый",
-                        R.drawable.img_skin7,
-                        R.raw.sound_skin7,
-                        200,
-                        Rarity.LEGENDARY
+                        title = "Костлявый",
+                        imageId = R.drawable.img_skin8,
+                        soundId = R.raw.sound_skin8,
+                        price = 200,
+                        rarity = Rarity.LEGENDARY
                     )
                 )
                 skinDao.insertSkins(initialSkinsList)

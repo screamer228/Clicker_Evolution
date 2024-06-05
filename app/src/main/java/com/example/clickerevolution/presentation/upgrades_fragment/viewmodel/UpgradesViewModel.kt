@@ -7,6 +7,7 @@ import com.example.clickerevolution.common.UpgradeType
 import com.example.clickerevolution.data.repository.upgrades.UpgradesRepository
 import com.example.clickerevolution.presentation.model.Upgrade
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -27,6 +28,10 @@ class UpgradesViewModel @Inject constructor(
         Log.d("upgrades check", "init UpgradesViewModel")
         getUpgradesClickList()
         getUpgradesPerSecList()
+        Log.d(
+            "upgrades check",
+            "after init: ${_upgradesClickList.value.size}; ${_upgradesPerSecList.value.size}"
+        )
     }
 
     fun getUpgradesClickList() {
@@ -35,7 +40,7 @@ class UpgradesViewModel @Inject constructor(
         }
         Log.d(
             "upgrades check",
-            "after init: ${_upgradesClickList.value.size}; ${_upgradesPerSecList.value.size}"
+            "clickTick: ${_upgradesClickList.value.size}"
         )
     }
 
@@ -44,6 +49,10 @@ class UpgradesViewModel @Inject constructor(
             _upgradesPerSecList.value =
                 upgradesRepository.getUpgradesByType(UpgradeType.TICK_PER_SEC)
         }
+        Log.d(
+            "upgrades check",
+            "tickPerSec: ${_upgradesPerSecList.value.size}"
+        )
     }
 
     fun upgradeLevelAndPrice(upgradeId: Int) {
