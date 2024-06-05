@@ -2,12 +2,15 @@ package com.example.clickerevolution.presentation.upgrades_fragment
 
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
+import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
 import com.example.clickerevolution.databinding.FragmentUpgradesBinding
 import com.example.clickerevolution.presentation.upgrades_fragment.adapter.ViewPagerAdapter
@@ -50,6 +53,10 @@ class UpgradesFragment : Fragment() {
         bindViews()
 
         prepareViewPager()
+
+        customizeTabLayout()
+
+        setInitialTabTextSize()
     }
 
     private fun prepareViewPager() {
@@ -57,13 +64,58 @@ class UpgradesFragment : Fragment() {
             UpgradesClickFragment.newInstance(),
             UpgradesPerSecFragment.newInstance()
         )
-        val tabTitleArray = arrayOf("Click", "Per Sec")
+        val tabTitleArray = arrayOf("За клик", "В секунду")
 
         viewPager.adapter = ViewPagerAdapter(requireActivity(), fragmentList)
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = tabTitleArray[position]
+            tab.customView = createTabView(tabTitleArray[position])
         }.attach()
+    }
+
+    private fun customizeTabLayout() {
+        val tabTitleArray = arrayOf("За клик", "В секунду")
+
+        for (i in tabTitleArray.indices) {
+            val tab = tabLayout.getTabAt(i)
+            tab?.customView = createTabView(tabTitleArray[i])
+        }
+
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                val tabView = tab.customView as? TextView
+                tabView?.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f) // Increase text size for selected tab
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+                val tabView = tab.customView as? TextView
+                tabView?.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10f) // Reset text size for unselected tab
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab) {
+                // Optionally handle reselection
+            }
+        })
+    }
+
+    private fun setInitialTabTextSize() {
+        val selectedTab = tabLayout.getTabAt(tabLayout.selectedTabPosition)
+        val selectedTabView = selectedTab?.customView as? TextView
+        selectedTabView?.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f) // Increase text size for selected tab
+
+        for (i in 0 until tabLayout.tabCount) {
+            if (i != tabLayout.selectedTabPosition) {
+                val tab = tabLayout.getTabAt(i)
+                val tabView = tab?.customView as? TextView
+                tabView?.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10f) // Reset text size for unselected tab
+            }
+        }
+    }
+
+    private fun createTabView(tabTitle: String): View {
+        val tabView = LayoutInflater.from(context).inflate(R.layout.custom_tab, null) as TextView
+        tabView.text = tabTitle
+        return tabView
     }
 
     override fun onResume() {
