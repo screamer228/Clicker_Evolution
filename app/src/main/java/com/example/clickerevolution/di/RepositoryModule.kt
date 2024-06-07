@@ -3,13 +3,13 @@ package com.example.clickerevolution.di
 import android.content.SharedPreferences
 import com.example.clickerevolution.data.repository.prefs.PrefsRepository
 import com.example.clickerevolution.data.repository.prefs.PrefsRepositoryImpl
-import com.example.clickerevolution.data.repository.resources.ResourcesRepository
-import com.example.clickerevolution.data.repository.resources.ResourcesRepositoryImpl
+import com.example.clickerevolution.data.repository.stats.StatsRepository
+import com.example.clickerevolution.data.repository.stats.StatsRepositoryImpl
 import com.example.clickerevolution.data.repository.skins.SkinsRepository
 import com.example.clickerevolution.data.repository.skins.SkinsRepositoryImpl
 import com.example.clickerevolution.data.repository.upgrades.UpgradesRepository
 import com.example.clickerevolution.data.repository.upgrades.UpgradesRepositoryImpl
-import com.example.clickerevolution.data.room.resources.ResourcesDao
+import com.example.clickerevolution.data.room.stats.StatsDao
 import com.example.clickerevolution.data.room.skins.SkinDao
 import com.example.clickerevolution.data.room.upgrades.UpgradeDao
 import dagger.Module
@@ -27,8 +27,8 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideResourcesRepository(resourcesDao: ResourcesDao): ResourcesRepository {
-        return ResourcesRepositoryImpl(resourcesDao)
+    fun provideResourcesRepository(statsDao: StatsDao): StatsRepository {
+        return StatsRepositoryImpl(statsDao)
     }
 
     @Provides

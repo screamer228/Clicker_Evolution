@@ -13,7 +13,7 @@ class App : Application() {
         super.onCreate()
 
 //        clearSharedPreferences()
-        deleteDatabase("resources_db")
+        deleteDatabase("stats_db")
         deleteDatabase("skins_db")
         deleteDatabase("upgrades_db")
 

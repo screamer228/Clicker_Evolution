@@ -62,7 +62,7 @@ class HomeFragment : Fragment() {
         val soundIdClick = soundPool.load(requireContext(), resIdClick, 1)
 
         viewLifecycleOwner.lifecycleScope.launch {
-            sharedViewModel.currentResources.collect {
+            sharedViewModel.currentStats.collect {
                 clickTick.text = "+${it.goldClickTickValue} за клик"
                 tickPerSec.text = "+${it.goldTickPerSecValue} в секунду"
             }

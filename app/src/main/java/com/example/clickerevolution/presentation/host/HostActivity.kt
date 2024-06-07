@@ -92,7 +92,7 @@ class HostActivity : AppCompatActivity() {
     }
 
     private fun bindViews() {
-        topBarCounterTV = binding.textViewTopBarCounter
+        topBarCounterTV = binding.textViewTopBarGoldCounter
         bottomNavigationView = binding.bottomNavigationView
     }
 

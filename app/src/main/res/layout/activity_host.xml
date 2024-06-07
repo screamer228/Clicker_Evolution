@@ -32,13 +32,14 @@
         app:layout_constraintTop_toBottomOf="@+id/topBar" />
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView_topBar_diamondCounter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="14dp"
         app:cardCornerRadius="20dp"
         app:cardElevation="0dp"
-        app:contentPadding="8dp"
+        app:contentPadding="6dp"
         app:cardBackgroundColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -50,22 +51,64 @@
             android:orientation="horizontal">
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
                 android:layout_gravity="center_vertical"
-                android:paddingEnd="8dp"
+                android:paddingStart="2dp"
+                android:paddingEnd="6dp"
                 android:src="@drawable/ic_coin" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/textView_topBar_counter"
+                android:id="@+id/textView_topBar_goldCounter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/font_rubik_mono_one_regular"
+                android:paddingHorizontal="6dp"
+                android:paddingTop="2dp"
+                android:text="1234"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="14dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp"
+        app:contentPadding="6dp"
+        app:cardBackgroundColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/cardView_topBar_diamondCounter"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="2dp"
+                android:paddingTop="2dp"
+                android:paddingEnd="6dp"
+                android:src="@drawable/ic_diamond" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textView_topBar_diamondCounter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/font_rubik_mono_one_regular"
                 android:paddingHorizontal="8dp"
-                android:paddingTop="4dp"
-                android:text="1234"
+                android:paddingTop="2dp"
+                android:text="1,234"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

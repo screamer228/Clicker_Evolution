@@ -1,32 +1,29 @@
-package com.example.clickerevolution.data.room.resources
+package com.example.clickerevolution.data.room.stats
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.clickerevolution.R
-import com.example.clickerevolution.data.room.resources.entity.ResourcesEntity
-import com.example.clickerevolution.data.room.skins.entity.SkinEntity
+import com.example.clickerevolution.data.room.stats.entity.StatsEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [ResourcesEntity::class], version = 1, exportSchema = false)
-abstract class ResourcesDatabase : RoomDatabase() {
-    abstract fun resourcesDao(): ResourcesDao
+@Database(entities = [StatsEntity::class], version = 1, exportSchema = false)
+abstract class StatsDatabase : RoomDatabase() {
+    abstract fun resourcesDao(): StatsDao
 
     companion object {
         @Volatile
-        private var INSTANCE: ResourcesDatabase? = null
+        private var INSTANCE: StatsDatabase? = null
 
-        fun getDatabase(context: Context): ResourcesDatabase {
+        fun getDatabase(context: Context): StatsDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    ResourcesDatabase::class.java,
-                    "resources_db"
+                    StatsDatabase::class.java,
+                    "stats_db"
                 )
                     .fallbackToDestructiveMigration()
 //                    .addMigrations(MIGRATION_1_2)
@@ -47,10 +44,11 @@ abstract class ResourcesDatabase : RoomDatabase() {
                 }
             }
 
-            suspend fun populateDatabase(skinDao: ResourcesDao) {
-                val initialResources = ResourcesEntity(
+            suspend fun populateDatabase(skinDao: StatsDao) {
+                val initialResources = StatsEntity(
                     goldClickTickValue = 1,
-                    goldTickPerSecValue = 1
+                    goldTickPerSecValue = 1,
+                    diamondProgressBar = 0
                 )
                 skinDao.insertResources(initialResources)
             }

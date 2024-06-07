@@ -3,7 +3,7 @@ package com.example.clickerevolution.di
 import android.content.Context
 import android.util.Log
 import com.example.clickerevolution.data.repository.prefs.PrefsRepository
-import com.example.clickerevolution.data.repository.resources.ResourcesRepository
+import com.example.clickerevolution.data.repository.stats.StatsRepository
 import com.example.clickerevolution.data.repository.skins.SkinsRepository
 import com.example.clickerevolution.data.repository.upgrades.UpgradesRepository
 import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModelFactory
@@ -41,12 +41,12 @@ class AppModule(private val context: Context) {
     fun provideSharedViewModelFactory(
         prefsRepository: PrefsRepository,
         skinsRepository: SkinsRepository,
-        resourcesRepository: ResourcesRepository
+        statsRepository: StatsRepository
     ): SharedViewModelFactory {
         return SharedViewModelFactory(
             prefsRepository,
             skinsRepository,
-            resourcesRepository
+            statsRepository
         )
     }
 

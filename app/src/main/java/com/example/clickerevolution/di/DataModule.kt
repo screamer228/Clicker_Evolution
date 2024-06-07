@@ -2,10 +2,9 @@ package com.example.clickerevolution.di
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 import com.example.clickerevolution.BuildConfig
-import com.example.clickerevolution.data.room.resources.ResourcesDao
-import com.example.clickerevolution.data.room.resources.ResourcesDatabase
+import com.example.clickerevolution.data.room.stats.StatsDao
+import com.example.clickerevolution.data.room.stats.StatsDatabase
 import com.example.clickerevolution.data.room.skins.SkinDao
 import com.example.clickerevolution.data.room.skins.SkinsDatabase
 import com.example.clickerevolution.data.room.upgrades.UpgradeDao
@@ -31,14 +30,14 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideResourcesDao(database: ResourcesDatabase): ResourcesDao {
+    fun provideResourcesDao(database: StatsDatabase): StatsDao {
         return database.resourcesDao()
     }
 
     @Provides
     @Singleton
-    fun provideResourcesDatabase(context: Context): ResourcesDatabase {
-        return ResourcesDatabase.getDatabase(context)
+    fun provideResourcesDatabase(context: Context): StatsDatabase {
+        return StatsDatabase.getDatabase(context)
     }
 
     @Provides
