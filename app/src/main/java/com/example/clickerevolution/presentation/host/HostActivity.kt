@@ -11,13 +11,13 @@ import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModel
 import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
 import com.example.clickerevolution.presentation.shop_fragment.ShopFragment
-import com.example.clickerevolution.presentation.upgrades_fragment.UpgradesClickFragment
 import com.example.clickerevolution.databinding.ActivityHostBinding
 import com.example.clickerevolution.presentation.dialog_fragment.DialogFragment
 import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModelFactory
 import com.example.clickerevolution.presentation.upgrades_fragment.UpgradesFragment
 import com.example.clickerevolution.presentation.upgrades_fragment.viewmodel.UpgradesViewModel
 import com.example.clickerevolution.presentation.upgrades_fragment.viewmodel.UpgradesViewModelFactory
+import com.example.clickerevolution.utils.StringUtil
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -56,7 +56,7 @@ class HostActivity : AppCompatActivity() {
         lifecycleScope.launch {
             viewModel.currentGold.collect {
 
-                topBarCounterTV.text = it.toString()
+                topBarCounterTV.text = StringUtil.addCommaEveryThreeDigits(it)
             }
         }
 

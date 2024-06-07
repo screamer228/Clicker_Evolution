@@ -9,6 +9,7 @@ import com.example.clickerevolution.R
 import com.example.clickerevolution.common.UpgradeType
 import com.example.clickerevolution.databinding.ItemUpgradeBinding
 import com.example.clickerevolution.presentation.model.Upgrade
+import com.example.clickerevolution.utils.StringUtil.addCommaEveryThreeDigits
 import com.example.clickerevolution.utils.UpgradesDiffUtil
 
 class UpgradesAdapter(
@@ -37,7 +38,7 @@ class UpgradesAdapter(
                 }
             }
 
-            binding.upgradePrice.text = item.price.toString()
+            binding.upgradePrice.text = addCommaEveryThreeDigits(item.price)
 
             if (isEnabled) {
                 binding.upgradeButtonUpgrade.setCardBackgroundColor(

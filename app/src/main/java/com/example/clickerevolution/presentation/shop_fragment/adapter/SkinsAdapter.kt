@@ -1,6 +1,5 @@
 package com.example.clickerevolution.presentation.shop_fragment.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View.GONE
 import android.view.ViewGroup
@@ -12,6 +11,7 @@ import com.example.clickerevolution.common.Rarity
 import com.example.clickerevolution.databinding.ItemSkinBinding
 import com.example.clickerevolution.presentation.model.Skin
 import com.example.clickerevolution.utils.SkinsDiffUtil
+import com.example.clickerevolution.utils.StringUtil.addCommaEveryThreeDigits
 
 class SkinsAdapter(
 //    var gold: Int,
@@ -28,7 +28,7 @@ class SkinsAdapter(
         fun bind(item: Skin) {
             binding.skinTitle.text = item.title
             binding.skinImage.setImageResource(item.imageId)
-            binding.skinPrice.text = item.price.toString()
+            binding.skinPrice.text = addCommaEveryThreeDigits(item.price)
 
             when (item.rarity) {
                 Rarity.COMMON -> {
