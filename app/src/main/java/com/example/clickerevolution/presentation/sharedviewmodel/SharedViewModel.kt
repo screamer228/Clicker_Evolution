@@ -34,8 +34,8 @@ class SharedViewModel @Inject constructor(
 
     init {
         getInitialSkin()
-        getInitialGoldValue()
         getInitialResources()
+        getInitialStats()
         startPassiveGoldIncrement()
 //        calculateGoldForOfflineTime()
     }
@@ -113,10 +113,12 @@ class SharedViewModel @Inject constructor(
         setGoldValue(reducedGold)
     }
 
-    private fun getInitialGoldValue() {
+    private fun getInitialResources() {
         viewModelScope.launch(Dispatchers.IO) {
             val goldValue = prefsRepository.getGoldValueFromPrefs().toIntOrNull() ?: 0
+            val diamondValue = prefsRepository.getDiamondValueFromPrefs().toIntOrNull() ?: 0
             setGoldValue(goldValue)
+            setDiamondValue(diamondValue)
         }
     }
 
@@ -124,9 +126,10 @@ class SharedViewModel @Inject constructor(
         _currentResources.value = _currentResources.value.copy(gold = value)
     }
 
-    fun saveGoldValue() {
+    fun saveResources() {
         viewModelScope.launch(Dispatchers.IO) {
-            prefsRepository.saveGoldValueInPrefs(currentResources.value.toString())
+            prefsRepository.saveGoldValueInPrefs(currentResources.value.gold.toString())
+            prefsRepository.saveDiamondValueInPrefs(currentResources.value.diamonds.toString())
         }
     }
 
@@ -141,9 +144,9 @@ class SharedViewModel @Inject constructor(
         _currentSkin.value = skin
     }
 
-    private fun getInitialResources() {
+    private fun getInitialStats() {
         viewModelScope.launch(Dispatchers.IO) {
-            val resources = statsRepository.getResources()
+            val resources = statsRepository.getStats()
             _currentStats.value = resources
         }
     }
@@ -158,9 +161,9 @@ class SharedViewModel @Inject constructor(
         _currentStats.value = _currentStats.value.copy(goldTickPerSecValue = incrementedTick)
     }
 
-    fun saveResources() {
+    fun saveStats() {
         viewModelScope.launch(Dispatchers.IO) {
-            statsRepository.updateResources(currentStats.value)
+            statsRepository.updateStats(currentStats.value)
         }
     }
 }

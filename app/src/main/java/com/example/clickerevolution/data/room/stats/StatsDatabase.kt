@@ -45,12 +45,12 @@ abstract class StatsDatabase : RoomDatabase() {
             }
 
             suspend fun populateDatabase(skinDao: StatsDao) {
-                val initialResources = StatsEntity(
+                val initialStats = StatsEntity(
                     goldClickTickValue = 1,
                     goldTickPerSecValue = 1,
                     diamondProgressBar = 0
                 )
-                skinDao.insertResources(initialResources)
+                skinDao.insertStats(initialStats)
             }
         }
     }

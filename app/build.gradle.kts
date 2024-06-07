@@ -19,6 +19,7 @@ android {
     }
 
     buildTypes {
+
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -28,9 +29,16 @@ android {
             buildConfigField("String", "SHARED_PREFS", "\"sharedPreferences\"")
             buildConfigField("String", "PREFS_CURRENT_GOLD_TITLE_KEY", "\"prefsGoldValueKey\"")
             buildConfigField("String", "PREFS_CURRENT_GOLD_DEFAULT_VALUE", "\"0\"")
+            buildConfigField(
+                "String",
+                "PREFS_CURRENT_DIAMONDS_TITLE_KEY",
+                "\"prefsDiamondsValueKey\""
+            )
+            buildConfigField("String", "PREFS_CURRENT_DIAMONDS_DEFAULT_VALUE", "\"0\"")
             buildConfigField("String", "PREFS_LAST_EXIT_TIME_TITLE_KEY", "\"prefsExitTimeKey\"")
             buildConfigField("Long", "PREFS_LAST_EXIT_TIME_DEFAULT_VALUE", "0L")
         }
+
         debug {
             isMinifyEnabled = false
             proguardFiles(
@@ -40,6 +48,12 @@ android {
             buildConfigField("String", "SHARED_PREFS", "\"sharedPreferences\"")
             buildConfigField("String", "PREFS_CURRENT_GOLD_TITLE_KEY", "\"prefsGoldValueKey\"")
             buildConfigField("String", "PREFS_CURRENT_GOLD_DEFAULT_VALUE", "\"0\"")
+            buildConfigField(
+                "String",
+                "PREFS_CURRENT_DIAMONDS_TITLE_KEY",
+                "\"prefsDiamondsValueKey\""
+            )
+            buildConfigField("String", "PREFS_CURRENT_DIAMONDS_DEFAULT_VALUE", "\"0\"")
             buildConfigField("String", "PREFS_LAST_EXIT_TIME_TITLE_KEY", "\"prefsExitTimeKey\"")
             buildConfigField("Long", "PREFS_LAST_EXIT_TIME_DEFAULT_VALUE", "0L")
         }
@@ -89,9 +103,9 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
     implementation("androidx.navigation:navigation-dynamic-features-fragment:$navVersion")
 
-    implementation ("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    implementation ("androidx.activity:activity-ktx:1.9.0")
-    implementation ("androidx.fragment:fragment-ktx:1.6.2")
+    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+    implementation("androidx.activity:activity-ktx:1.9.0")
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

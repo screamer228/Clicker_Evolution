@@ -24,6 +24,22 @@ class PrefsRepositoryImpl @Inject constructor(
         return value
     }
 
+    override suspend fun saveDiamondValueInPrefs(value: String) {
+        with(sharedPreferences.edit()) {
+            putString(BuildConfig.PREFS_CURRENT_DIAMONDS_TITLE_KEY, value)
+            apply()
+        }
+    }
+
+    override suspend fun getDiamondValueFromPrefs(): String {
+        val value = sharedPreferences.getString(
+            BuildConfig.PREFS_CURRENT_DIAMONDS_TITLE_KEY,
+            BuildConfig.PREFS_CURRENT_DIAMONDS_DEFAULT_VALUE
+        )
+            ?: BuildConfig.PREFS_CURRENT_DIAMONDS_DEFAULT_VALUE
+        return value
+    }
+
     override suspend fun saveLastExitTime(time: Long) {
         with(sharedPreferences.edit()) {
             putLong(BuildConfig.PREFS_LAST_EXIT_TIME_TITLE_KEY, time)

@@ -3,7 +3,7 @@ package com.example.clickerevolution.data.room.stats.mapper
 import com.example.clickerevolution.data.room.stats.entity.StatsEntity
 import com.example.clickerevolution.presentation.model.Stats
 
-fun StatsEntity.toResources(): Stats {
+fun StatsEntity.toStats(): Stats {
     return Stats(
         goldClickTickValue = goldClickTickValue,
         goldTickPerSecValue = goldTickPerSecValue
