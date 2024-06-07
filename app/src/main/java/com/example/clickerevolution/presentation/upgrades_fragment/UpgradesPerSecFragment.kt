@@ -13,7 +13,6 @@ import androidx.lifecycle.lifecycleScope
 import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
 import com.example.clickerevolution.common.UpgradeType
-import com.example.clickerevolution.databinding.FragmentUpgradesClickBinding
 import com.example.clickerevolution.databinding.FragmentUpgradesPerSecBinding
 import com.example.clickerevolution.presentation.model.Upgrade
 import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModel
@@ -66,7 +65,7 @@ class UpgradesPerSecFragment : Fragment() {
         val soundIdReject = soundPoolReject.load(requireContext(), R.raw.sound_reject, 1)
 
         adapter = UpgradesAdapter(UpgradeType.TICK_PER_SEC) { upgrade ->
-            if (sharedViewModel.currentGold.value >= upgrade.price) {
+            if (sharedViewModel.currentResources.value.gold >= upgrade.price) {
                 buyUpgrade(upgrade.price, upgrade.power, upgrade.id)
                 playSound(soundPoolBuy, soundIdBuy)
             } else {

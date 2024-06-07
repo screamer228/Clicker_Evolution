@@ -15,6 +15,7 @@ import com.example.clickerevolution.app.App
 import com.example.clickerevolution.databinding.FragmentHomeBinding
 import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModel
 import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModelFactory
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,6 +25,7 @@ class HomeFragment : Fragment() {
     private lateinit var imageToClick: ImageView
     private lateinit var clickTick: TextView
     private lateinit var tickPerSec: TextView
+    private lateinit var progressBar: LinearProgressIndicator
 
     private lateinit var soundPool: SoundPool
 
@@ -63,16 +65,16 @@ class HomeFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             sharedViewModel.currentStats.collect {
+                progressBar.progress = it.diamondProgressBar
+                //TODO анимация прибавления алмаза
                 clickTick.text = "+${it.goldClickTickValue} за клик"
                 tickPerSec.text = "+${it.goldTickPerSecValue} в секунду"
             }
         }
 
-
-
         imageToClick.setOnClickListener {
 
-            sharedViewModel.incrementGoldByClick()
+            sharedViewModel.onButtonClick()
 
             soundPool.play(soundIdClick, 1.0f, 1.0f, 1, 0, 1.0f)
 
@@ -100,10 +102,6 @@ class HomeFragment : Fragment() {
         soundPool.release()
     }
 
-    private fun clickListeners() {
-
-    }
-
     private fun injectSharedViewModel() {
         sharedViewModel =
             ViewModelProvider(
@@ -116,5 +114,6 @@ class HomeFragment : Fragment() {
         imageToClick = binding.imageViewImageToClick
         clickTick = binding.textViewClickTickValue
         tickPerSec = binding.textViewTickPerSecondValue
+        progressBar = binding.progressBarDiamonds
     }
 }

@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 @Database(entities = [StatsEntity::class], version = 1, exportSchema = false)
 abstract class StatsDatabase : RoomDatabase() {
-    abstract fun resourcesDao(): StatsDao
+    abstract fun statsDao(): StatsDao
 
     companion object {
         @Volatile
@@ -39,7 +39,7 @@ abstract class StatsDatabase : RoomDatabase() {
                 super.onCreate(db)
                 INSTANCE?.let { database ->
                     CoroutineScope(Dispatchers.IO).launch {
-                        populateDatabase(database.resourcesDao())
+                        populateDatabase(database.statsDao())
                     }
                 }
             }

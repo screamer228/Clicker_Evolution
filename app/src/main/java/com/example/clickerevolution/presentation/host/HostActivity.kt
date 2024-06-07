@@ -25,7 +25,8 @@ import javax.inject.Inject
 class HostActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHostBinding
-    private lateinit var topBarCounterTV: TextView
+    private lateinit var goldCounterTV: TextView
+    private lateinit var diamondCounterTV: TextView
     private lateinit var bottomNavigationView: BottomNavigationView
 
     @Inject
@@ -54,9 +55,9 @@ class HostActivity : AppCompatActivity() {
 //        upgradesViewModel.getUpgradesPerSecList()
 
         lifecycleScope.launch {
-            viewModel.currentGold.collect {
-
-                topBarCounterTV.text = StringUtil.addCommaEveryThreeDigits(it)
+            viewModel.currentResources.collect {
+                goldCounterTV.text = StringUtil.addCommaEveryThreeDigits(it.gold)
+                diamondCounterTV.text = StringUtil.addCommaEveryThreeDigits(it.diamonds)
             }
         }
 
@@ -92,7 +93,8 @@ class HostActivity : AppCompatActivity() {
     }
 
     private fun bindViews() {
-        topBarCounterTV = binding.textViewTopBarGoldCounter
+        goldCounterTV = binding.textViewTopBarGoldCounter
+        diamondCounterTV = binding.textViewTopBarDiamondCounter
         bottomNavigationView = binding.bottomNavigationView
     }
 

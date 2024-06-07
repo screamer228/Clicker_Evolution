@@ -6,6 +6,7 @@ import com.example.clickerevolution.data.repository.prefs.PrefsRepository
 import com.example.clickerevolution.data.repository.stats.StatsRepository
 import com.example.clickerevolution.data.repository.skins.SkinsRepository
 import com.example.clickerevolution.presentation.model.CurrentSkin
+import com.example.clickerevolution.presentation.model.Resources
 import com.example.clickerevolution.presentation.model.Stats
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -25,8 +26,8 @@ class SharedViewModel @Inject constructor(
     private val _currentSkin = MutableStateFlow(CurrentSkin())
     val currentSkin: StateFlow<CurrentSkin> = _currentSkin.asStateFlow()
 
-    private val _currentGold = MutableStateFlow(0)
-    val currentGold: StateFlow<Int> = _currentGold.asStateFlow()
+    private val _currentResources = MutableStateFlow(Resources())
+    val currentResources: StateFlow<Resources> = _currentResources.asStateFlow()
 
     private val _currentStats = MutableStateFlow(Stats())
     val currentStats: StateFlow<Stats> = _currentStats.asStateFlow()
@@ -39,20 +40,26 @@ class SharedViewModel @Inject constructor(
 //        calculateGoldForOfflineTime()
     }
 
-//    fun onButtonClick() {
-//        val newCount = _currentResources.value.diamondProgressBar + 1
-//        _currentResources.value = _currentResources.value.copy(diamondProgressBar = )
-//        if (newCount >= 200) {
-//            // Выполняем необходимое действие
-//            onMaxClicksReached()
-//        }
-//    }
+    fun onButtonClick() {
+        incrementGoldByClick()
+        val newCount = _currentStats.value.diamondProgressBar + 1
+        _currentStats.value = _currentStats.value.copy(diamondProgressBar = newCount)
+        if (newCount >= 200) {
+            // Выполняем необходимое действие
+            onMaxClicksReached()
+        }
+    }
 
     private fun onMaxClicksReached() {
         // Выполняем действие по достижению 200 кликов
-        // Например, показываем сообщение
+        val incrementedDiamonds = _currentResources.value.diamonds + 1
+        setDiamondValue(incrementedDiamonds)
         // Сбрасываем счетчик кликов
         _currentStats.value = _currentStats.value.copy(diamondProgressBar = 0)
+    }
+
+    fun setDiamondValue(value: Int) {
+        _currentResources.value = _currentResources.value.copy(diamonds = value)
     }
 
     fun calculateGoldForOfflineTime(): Int {
@@ -65,7 +72,7 @@ class SharedViewModel @Inject constructor(
     }
 
     fun incrementGoldEarnedWhileOffline(goldValue: Int) {
-        setGoldValue(currentGold.value + goldValue)
+        setGoldValue(currentResources.value.gold + goldValue)
     }
 
 //    private fun getLastExitTime(): Long {
@@ -92,17 +99,17 @@ class SharedViewModel @Inject constructor(
     }
 
     private fun incrementGoldPerSecond() {
-        val incrementedGold = currentGold.value + currentStats.value.goldTickPerSecValue
+        val incrementedGold = currentResources.value.gold + currentStats.value.goldTickPerSecValue
         setGoldValue(incrementedGold)
     }
 
     fun incrementGoldByClick() {
-        val incrementedGold = currentGold.value + currentStats.value.goldClickTickValue
+        val incrementedGold = currentResources.value.gold + currentStats.value.goldClickTickValue
         setGoldValue(incrementedGold)
     }
 
     fun subtractGold(price: Int) {
-        val reducedGold = currentGold.value - price
+        val reducedGold = currentResources.value.gold - price
         setGoldValue(reducedGold)
     }
 
@@ -114,12 +121,12 @@ class SharedViewModel @Inject constructor(
     }
 
     private fun setGoldValue(value: Int) {
-        _currentGold.value = value
+        _currentResources.value = _currentResources.value.copy(gold = value)
     }
 
     fun saveGoldValue() {
         viewModelScope.launch(Dispatchers.IO) {
-            prefsRepository.saveGoldValueInPrefs(currentGold.value.toString())
+            prefsRepository.saveGoldValueInPrefs(currentResources.value.toString())
         }
     }
 

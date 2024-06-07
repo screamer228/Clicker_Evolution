@@ -27,7 +27,7 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideResourcesRepository(statsDao: StatsDao): StatsRepository {
+    fun provideStatsRepository(statsDao: StatsDao): StatsRepository {
         return StatsRepositoryImpl(statsDao)
     }
 

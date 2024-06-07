@@ -30,13 +30,13 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideResourcesDao(database: StatsDatabase): StatsDao {
-        return database.resourcesDao()
+    fun provideStatsDao(database: StatsDatabase): StatsDao {
+        return database.statsDao()
     }
 
     @Provides
     @Singleton
-    fun provideResourcesDatabase(context: Context): StatsDatabase {
+    fun provideStatsDatabase(context: Context): StatsDatabase {
         return StatsDatabase.getDatabase(context)
     }
 

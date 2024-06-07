@@ -68,7 +68,7 @@ class ShopFragment : Fragment() {
         adapter = SkinsAdapter { skin, action ->
             when (action) {
                 SkinsAdapter.Action.PURCHASE -> {
-                    if (sharedViewModel.currentGold.value >= skin.price) {
+                    if (sharedViewModel.currentResources.value.gold >= skin.price) {
                         buySkin(skin.price, skin.id)
                         playSound(soundPoolBuy, soundIdBuy)
                     } else {
