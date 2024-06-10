@@ -4,6 +4,8 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.RawRes
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.clickerevolution.common.CurrencyType
+import com.example.clickerevolution.common.Price
 import com.example.clickerevolution.common.Rarity
 
 @Entity(tableName = "skins")
@@ -12,7 +14,8 @@ data class SkinEntity(
     val title: String,
     @DrawableRes val imageId: Int,
     @RawRes val soundId: Int,
-    val price: Int,
+    val priceType: CurrencyType,
+    val priceValue: Int,
     val rarity: Rarity,
     val isPurchased: Boolean = false,
     val isEquipped: Boolean = false,

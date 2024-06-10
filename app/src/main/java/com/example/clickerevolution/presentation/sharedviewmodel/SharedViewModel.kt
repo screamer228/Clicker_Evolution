@@ -53,13 +53,9 @@ class SharedViewModel @Inject constructor(
     private fun onMaxClicksReached() {
         // Выполняем действие по достижению 200 кликов
         val incrementedDiamonds = _currentResources.value.diamonds + 1
-        setDiamondValue(incrementedDiamonds)
+        setDiamondsValue(incrementedDiamonds)
         // Сбрасываем счетчик кликов
         _currentStats.value = _currentStats.value.copy(diamondProgressBar = 0)
-    }
-
-    fun setDiamondValue(value: Int) {
-        _currentResources.value = _currentResources.value.copy(diamonds = value)
     }
 
     fun calculateGoldForOfflineTime(): Int {
@@ -113,17 +109,26 @@ class SharedViewModel @Inject constructor(
         setGoldValue(reducedGold)
     }
 
+    fun subtractDiamonds(price: Int) {
+        val reducedDiamonds = currentResources.value.diamonds - price
+        setDiamondsValue(reducedDiamonds)
+    }
+
     private fun getInitialResources() {
         viewModelScope.launch(Dispatchers.IO) {
             val goldValue = prefsRepository.getGoldValueFromPrefs().toIntOrNull() ?: 0
             val diamondValue = prefsRepository.getDiamondValueFromPrefs().toIntOrNull() ?: 0
             setGoldValue(goldValue)
-            setDiamondValue(diamondValue)
+            setDiamondsValue(diamondValue)
         }
     }
 
     private fun setGoldValue(value: Int) {
         _currentResources.value = _currentResources.value.copy(gold = value)
+    }
+
+    fun setDiamondsValue(value: Int) {
+        _currentResources.value = _currentResources.value.copy(diamonds = value)
     }
 
     fun saveResources() {

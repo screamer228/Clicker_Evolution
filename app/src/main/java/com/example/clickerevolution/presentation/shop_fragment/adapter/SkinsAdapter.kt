@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clickerevolution.R
+import com.example.clickerevolution.common.CurrencyType
 import com.example.clickerevolution.common.Rarity
 import com.example.clickerevolution.databinding.ItemSkinBinding
 import com.example.clickerevolution.presentation.model.Skin
@@ -28,7 +29,18 @@ class SkinsAdapter(
         fun bind(item: Skin) {
             binding.skinTitle.text = item.title
             binding.skinImage.setImageResource(item.imageId)
-            binding.skinPrice.text = addCommaEveryThreeDigits(item.price)
+
+            when (item.price.type) {
+                CurrencyType.GOLD -> {
+                    binding.skinIcPriceCoin.setImageResource(R.drawable.ic_coin)
+                }
+
+                CurrencyType.DIAMOND -> {
+                    binding.skinIcPriceCoin.setImageResource(R.drawable.ic_diamond)
+                }
+            }
+
+            binding.skinPrice.text = addCommaEveryThreeDigits(item.price.value)
 
             when (item.rarity) {
                 Rarity.COMMON -> {
