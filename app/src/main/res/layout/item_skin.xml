@@ -58,7 +58,7 @@
             android:orientation="horizontal">
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/skin_ic_priceCoin"
+                android:id="@+id/skin_iconPrice"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_marginEnd="4dp"

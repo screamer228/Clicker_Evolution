@@ -11,6 +11,7 @@ import com.example.clickerevolution.app.App
 import com.example.clickerevolution.databinding.FragmentDialogBinding
 import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModel
 import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModelFactory
+import com.example.clickerevolution.utils.StringUtil.addCommaEveryThreeDigits
 import javax.inject.Inject
 
 class DialogFragment(private val goldEarned: Int) : DialogFragment() {
@@ -48,8 +49,8 @@ class DialogFragment(private val goldEarned: Int) : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.dialogGoldEarned.text = "+$goldEarned"
-        binding.dialogGoldCouldEarned.text = "x2 +${goldEarned * 2}"
+        binding.dialogGoldEarned.text = "+ ${addCommaEveryThreeDigits(goldEarned)}"
+        binding.dialogGoldCouldEarned.text = "x2 +${addCommaEveryThreeDigits(goldEarned * 2)}"
 
         binding.buttonOk.setOnClickListener {
             sharedViewModel.incrementGoldEarnedWhileOffline(goldEarned)

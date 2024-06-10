@@ -32,11 +32,11 @@ class SkinsAdapter(
 
             when (item.price.type) {
                 CurrencyType.GOLD -> {
-                    binding.skinIcPriceCoin.setImageResource(R.drawable.ic_coin)
+                    binding.skinIconPrice.setImageResource(R.drawable.ic_coin)
                 }
 
                 CurrencyType.DIAMOND -> {
-                    binding.skinIcPriceCoin.setImageResource(R.drawable.ic_diamond)
+                    binding.skinIconPrice.setImageResource(R.drawable.ic_diamond)
                 }
             }
 

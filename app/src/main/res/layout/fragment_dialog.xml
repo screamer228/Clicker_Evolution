@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/dialog_frame"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
@@ -31,7 +30,7 @@
             style="@style/style_text_outline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             android:gravity="center"
             android:text="+156542"
             android:textSize="16sp"
@@ -53,12 +52,11 @@
             style="@style/style_text_outline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="x2 +313084"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/dialog_goldEarned"
             app:layout_constraintTop_toBottomOf="@+id/dialog_goldEarned" />
 
         <com.google.android.material.imageview.ShapeableImageView
@@ -74,7 +72,7 @@
             android:id="@+id/button_ok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             app:cardBackgroundColor="@color/blue"
             app:contentPadding="16dp"
             app:layout_constraintStart_toStartOf="parent"
