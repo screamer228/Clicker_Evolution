@@ -2,6 +2,7 @@ package com.example.clickerevolution.di
 
 import com.example.clickerevolution.presentation.dialog_fragment.DialogFragment
 import com.example.clickerevolution.presentation.HomeFragment
+import com.example.clickerevolution.presentation.dailyreward_fragment.DailyRewardsFragment
 import com.example.clickerevolution.presentation.shop_fragment.ShopFragment
 import com.example.clickerevolution.presentation.upgrades_fragment.UpgradesClickFragment
 import com.example.clickerevolution.presentation.host.HostActivity
@@ -21,4 +22,5 @@ interface AppComponent {
     fun injectUpgradesClickFragment(upgradesClickFragment: UpgradesClickFragment)
     fun injectUpgradesPerSecFragment(upgradesPerSecFragment: UpgradesPerSecFragment)
     fun injectDialogFragment(dialogFragment: DialogFragment)
+    fun injectDailyRewardsFragment(dialogFragment: DailyRewardsFragment)
 }

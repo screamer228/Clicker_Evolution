@@ -1,4 +1,4 @@
-package com.example.clickerevolution.presentation.dialog_fragment
+package com.example.clickerevolution.presentation.dailyreward_fragment
 
 import android.app.Dialog
 import android.os.Bundle
@@ -8,15 +8,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.clickerevolution.app.App
-import com.example.clickerevolution.databinding.FragmentDialogBinding
+import com.example.clickerevolution.databinding.FragmentDailyRewardBinding
 import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModel
 import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModelFactory
-import com.example.clickerevolution.utils.StringUtil.addCommaEveryThreeDigits
 import javax.inject.Inject
 
-class DialogFragment(private val goldEarned: Int) : DialogFragment() {
+class DailyRewardsFragment() : DialogFragment() {
 
-    private lateinit var binding: FragmentDialogBinding
+    private lateinit var binding: FragmentDailyRewardBinding
+//    private lateinit var adapter: DailyRewardAdapter
 
     @Inject
     lateinit var sharedViewModelFactory: SharedViewModelFactory
@@ -34,7 +34,7 @@ class DialogFragment(private val goldEarned: Int) : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        (requireActivity().applicationContext as App).appComponent.injectDialogFragment(this)
+        (requireActivity().applicationContext as App).appComponent.injectDailyRewardsFragment(this)
 
         sharedViewModel =
             ViewModelProvider(
@@ -42,23 +42,16 @@ class DialogFragment(private val goldEarned: Int) : DialogFragment() {
                 sharedViewModelFactory
             )[SharedViewModel::class.java]
 
-        binding = FragmentDialogBinding.inflate(inflater, container, false)
+        binding = FragmentDailyRewardBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.dialogGoldEarned.text = "+ ${addCommaEveryThreeDigits(goldEarned)}"
-        binding.dialogGoldCouldEarned.text = "x2 +${addCommaEveryThreeDigits(goldEarned * 2)}"
+//        adapter =
 
-        binding.dialogButtonOk.setOnClickListener {
-            sharedViewModel.incrementGoldEarnedWhileOffline(goldEarned)
-            dismiss()
-        }
-
-        binding.dialogButtonDoubleIt.setOnClickListener {
-            sharedViewModel.incrementGoldEarnedWhileOffline(goldEarned * 2)
+        binding.dailyRewardButtonClose.setOnClickListener {
             dismiss()
         }
     }

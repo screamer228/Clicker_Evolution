@@ -64,8 +64,7 @@ class HostActivity : AppCompatActivity() {
         val offlineEarned = viewModel.calculateGoldForOfflineTime()
 
         if (offlineEarned > 0) {
-            val dialogFragment = DialogFragment(offlineEarned)
-            dialogFragment.show(supportFragmentManager, "Dialog Fragment")
+            showDialogGoldOfflineEarned(offlineEarned)
         }
     }
 
@@ -90,6 +89,11 @@ class HostActivity : AppCompatActivity() {
         viewModel.saveResources()
         viewModel.saveStats()
         viewModel.saveLastExitTime()
+    }
+
+    private fun showDialogGoldOfflineEarned(goldValue: Int) {
+        val dialogFragment = DialogFragment(goldValue)
+        dialogFragment.show(supportFragmentManager, "Dialog Fragment")
     }
 
     private fun bindViews() {

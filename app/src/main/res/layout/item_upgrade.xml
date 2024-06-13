@@ -6,15 +6,13 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="4dp"
     android:layout_marginBottom="4dp"
-    app:contentPadding="12dp"
-    android:backgroundTint="@color/light_blue">
+    android:backgroundTint="@color/light_blue"
+    app:contentPadding="12dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/upgrade_constraint"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -87,7 +85,7 @@
                     android:paddingEnd="8dp"
                     android:text="500"
                     android:textColor="@color/white"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <com.google.android.material.textview.MaterialTextView
@@ -96,10 +94,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center|bottom"
-                android:layout_marginTop="20dp"
                 android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="20dp"
                 android:text="Улучшить"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
         </com.google.android.material.card.MaterialCardView>
 
         <View

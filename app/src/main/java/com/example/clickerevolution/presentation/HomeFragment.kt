@@ -13,6 +13,8 @@ import androidx.lifecycle.lifecycleScope
 import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
 import com.example.clickerevolution.databinding.FragmentHomeBinding
+import com.example.clickerevolution.presentation.dailyreward_fragment.DailyRewardsFragment
+import com.example.clickerevolution.presentation.dialog_fragment.DialogFragment
 import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModel
 import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModelFactory
 import com.google.android.material.progressindicator.LinearProgressIndicator
@@ -26,6 +28,7 @@ class HomeFragment : Fragment() {
     private lateinit var clickTick: TextView
     private lateinit var tickPerSec: TextView
     private lateinit var progressBar: LinearProgressIndicator
+    private lateinit var imageDailyReward: ImageView
 
     private lateinit var soundPool: SoundPool
 
@@ -72,6 +75,11 @@ class HomeFragment : Fragment() {
             }
         }
 
+        imageDailyReward.setOnClickListener {
+            val dialogFragment = DailyRewardsFragment()
+            dialogFragment.show(parentFragmentManager, "Daily Rewards Fragment")
+        }
+
         imageToClick.setOnClickListener {
 
             sharedViewModel.onButtonClick()
@@ -115,5 +123,6 @@ class HomeFragment : Fragment() {
         clickTick = binding.textViewClickTickValue
         tickPerSec = binding.textViewTickPerSecondValue
         progressBar = binding.progressBarDiamonds
+        imageDailyReward = binding.imageViewImageDailyReward
     }
 }

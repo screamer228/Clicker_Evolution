@@ -69,7 +69,7 @@
             app:layout_constraintTop_toTopOf="@+id/dialog_goldCouldEarned" />
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/button_ok"
+            android:id="@+id/dialog_button_ok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -79,7 +79,7 @@
             app:layout_constraintTop_toBottomOf="@+id/dialog_goldCouldEarned">
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/textView_ok"
+                android:id="@+id/dialog_textView_ok"
                 style="@style/style_text_default"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/button_doubleIt"
+            android:id="@+id/dialog_button_doubleIt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -98,7 +98,7 @@
             app:layout_constraintTop_toBottomOf="@+id/dialog_goldCouldEarned">
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/textView_doubleIt"
+                android:id="@+id/dialog_textView_doubleIt"
                 style="@style/style_text_default"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

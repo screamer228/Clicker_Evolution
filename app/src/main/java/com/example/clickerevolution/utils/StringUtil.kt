@@ -15,5 +15,4 @@ object StringUtil {
 
         return result.reverse().toString()
     }
-
 }
