@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
 import com.example.clickerevolution.common.CurrencyType
-import com.example.clickerevolution.common.Price
+import com.example.clickerevolution.common.Currency
 import com.example.clickerevolution.databinding.FragmentShopBinding
 import com.example.clickerevolution.presentation.shop_fragment.adapter.SkinsAdapter
 import com.example.clickerevolution.presentation.model.CurrentSkin
@@ -71,6 +71,7 @@ class ShopFragment : Fragment() {
             when (action) {
                 SkinsAdapter.Action.PURCHASE -> {
                     when (skin.price.type) {
+
                         CurrencyType.GOLD -> {
                             if (sharedViewModel.currentResources.value.gold >= skin.price.value) {
                                 buySkin(skin.price, skin.id)
@@ -125,7 +126,7 @@ class ShopFragment : Fragment() {
         }
     }
 
-    private fun buySkin(price: Price, id: Int) {
+    private fun buySkin(price: Currency, id: Int) {
         when (price.type) {
             CurrencyType.GOLD -> sharedViewModel.subtractGold(price.value)
             CurrencyType.DIAMOND -> sharedViewModel.subtractDiamonds(price.value)

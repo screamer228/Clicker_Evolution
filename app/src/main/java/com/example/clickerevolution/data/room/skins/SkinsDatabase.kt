@@ -1,9 +1,6 @@
 package com.example.clickerevolution.data.room.skins
 
 import android.content.Context
-import android.provider.ContactsContract.CommonDataKinds
-import android.util.Log
-import androidx.annotation.RawRes
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -11,7 +8,6 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.clickerevolution.R
 import com.example.clickerevolution.common.CurrencyType
-import com.example.clickerevolution.common.Price
 import com.example.clickerevolution.common.Rarity
 import com.example.clickerevolution.data.room.skins.entity.SkinEntity
 import kotlinx.coroutines.CoroutineScope

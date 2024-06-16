@@ -1,6 +1,6 @@
 package com.example.clickerevolution.data.room.skins.mapper
 
-import com.example.clickerevolution.common.Price
+import com.example.clickerevolution.common.Currency
 import com.example.clickerevolution.data.room.skins.entity.SkinEntity
 import com.example.clickerevolution.presentation.model.CurrentSkin
 import com.example.clickerevolution.presentation.model.Skin
@@ -11,7 +11,7 @@ fun SkinEntity.toSkin(): Skin {
         title = title,
         imageId = imageId,
         soundId = soundId,
-        price = Price(priceType, priceValue),
+        price = Currency(priceType, priceValue),
         isPurchased = isPurchased,
         isEquipped = isEquipped,
         rarity = rarity

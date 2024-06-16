@@ -8,12 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
 import com.example.clickerevolution.databinding.FragmentHomeBinding
 import com.example.clickerevolution.presentation.dailyreward_fragment.DailyRewardsFragment
+import com.example.clickerevolution.presentation.dailyreward_fragment.viewmodel.DailyRewardsViewModel
+import com.example.clickerevolution.presentation.dailyreward_fragment.viewmodel.DailyRewardsViewModelFactory
 import com.example.clickerevolution.presentation.dialog_fragment.DialogFragment
 import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModel
 import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModelFactory
@@ -36,6 +39,10 @@ class HomeFragment : Fragment() {
     lateinit var sharedViewModelFactory: SharedViewModelFactory
     private lateinit var sharedViewModel: SharedViewModel
 
+    @Inject
+    lateinit var dailyRewardsViewModelFactory: DailyRewardsViewModelFactory
+    private lateinit var dailyRewardsViewModel: DailyRewardsViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,6 +50,12 @@ class HomeFragment : Fragment() {
         (requireActivity().applicationContext as App).appComponent.injectHomeFragment(this)
 
         injectSharedViewModel()
+
+        dailyRewardsViewModel =
+            ViewModelProvider(
+                this,
+                dailyRewardsViewModelFactory
+            )[DailyRewardsViewModel::class.java]
 
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         bindViews()
@@ -72,6 +85,14 @@ class HomeFragment : Fragment() {
                 //TODO анимация прибавления алмаза
                 clickTick.text = "+${it.goldClickTickValue} за клик"
                 tickPerSec.text = "+${it.goldTickPerSecValue} в секунду"
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            dailyRewardsViewModel.dailyRewardAvailable.collect {
+                //TODO проверить изменяется ли сразу после получения
+                binding.cardViewIndicatorDailyReward.visibility = if (it) View.VISIBLE else View.GONE
+//                binding.cardViewIndicatorDailyReward.isVisible = it
             }
         }
 

@@ -40,7 +40,7 @@ class PrefsRepositoryImpl @Inject constructor(
         return value
     }
 
-    override suspend fun saveLastExitTime(time: Long) {
+    override fun saveLastExitTime(time: Long) {
         with(sharedPreferences.edit()) {
             putLong(BuildConfig.PREFS_LAST_EXIT_TIME_TITLE_KEY, time)
             apply()
@@ -54,5 +54,21 @@ class PrefsRepositoryImpl @Inject constructor(
         )
             ?: BuildConfig.PREFS_LAST_EXIT_TIME_DEFAULT_VALUE
         return value
+    }
+
+    override fun getLoginStreak(): Int {
+        return sharedPreferences.getInt("login_streak", 0)
+    }
+
+    override fun saveLoginStreak(streak: Int) {
+        sharedPreferences.edit().putInt("login_streak", streak).apply()
+    }
+
+    override fun isDailyRewardAvailable(): Boolean {
+        return sharedPreferences.getBoolean("daily_reward_available", false)
+    }
+
+    override fun setDailyRewardAvailable(available: Boolean) {
+        sharedPreferences.edit().putBoolean("daily_reward_available", available).apply()
     }
 }

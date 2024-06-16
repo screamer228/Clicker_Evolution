@@ -2,6 +2,8 @@ package com.example.clickerevolution.presentation.sharedviewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.clickerevolution.common.Currency
+import com.example.clickerevolution.common.CurrencyType
 import com.example.clickerevolution.data.repository.prefs.PrefsRepository
 import com.example.clickerevolution.data.repository.stats.StatsRepository
 import com.example.clickerevolution.data.repository.skins.SkinsRepository
@@ -38,6 +40,18 @@ class SharedViewModel @Inject constructor(
         getInitialStats()
         startPassiveGoldIncrement()
 //        calculateGoldForOfflineTime()
+    }
+
+    fun claimReward(currency: Currency) {
+        when (currency.type) {
+            CurrencyType.GOLD -> {
+                setGoldValue(_currentResources.value.gold + currency.value)
+            }
+
+            CurrencyType.DIAMOND -> {
+                setDiamondsValue(_currentResources.value.diamonds + currency.value)
+            }
+        }
     }
 
     fun onButtonClick() {

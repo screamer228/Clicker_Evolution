@@ -15,9 +15,7 @@ import com.example.clickerevolution.utils.SkinsDiffUtil
 import com.example.clickerevolution.utils.StringUtil.addCommaEveryThreeDigits
 
 class SkinsAdapter(
-//    var gold: Int,
     private val onAction: (Skin, Action) -> Unit
-//    private val itemClickListener: ItemClickListener
 ) : RecyclerView.Adapter<SkinsAdapter.ViewHolder>() {
 
     private var skinsList: List<Skin> = emptyList()

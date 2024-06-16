@@ -6,6 +6,7 @@ import com.example.clickerevolution.data.repository.prefs.PrefsRepository
 import com.example.clickerevolution.data.repository.stats.StatsRepository
 import com.example.clickerevolution.data.repository.skins.SkinsRepository
 import com.example.clickerevolution.data.repository.upgrades.UpgradesRepository
+import com.example.clickerevolution.presentation.dailyreward_fragment.viewmodel.DailyRewardsViewModelFactory
 import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModelFactory
 import com.example.clickerevolution.presentation.shop_fragment.viewmodel.ShopViewModelFactory
 import com.example.clickerevolution.presentation.upgrades_fragment.viewmodel.UpgradesViewModelFactory
@@ -15,6 +16,16 @@ import javax.inject.Singleton
 
 @Module
 class AppModule(private val context: Context) {
+
+    @Provides
+    @Singleton
+    fun provideDailyRewardsViewModelFactory(
+        prefsRepository: PrefsRepository
+    ): DailyRewardsViewModelFactory {
+        return DailyRewardsViewModelFactory(
+            prefsRepository
+        )
+    }
 
     @Provides
     @Singleton
@@ -53,7 +64,6 @@ class AppModule(private val context: Context) {
     @Provides
     @Singleton
     fun provideContext(): Context {
-        Log.d("sharedPrefs check", "providing application context $context")
         return context
     }
 }

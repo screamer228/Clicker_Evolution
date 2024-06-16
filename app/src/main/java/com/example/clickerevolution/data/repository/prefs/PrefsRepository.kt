@@ -5,6 +5,10 @@ interface PrefsRepository {
     suspend fun getGoldValueFromPrefs(): String
     suspend fun saveDiamondValueInPrefs(value: String)
     suspend fun getDiamondValueFromPrefs(): String
-    suspend fun saveLastExitTime(time: Long)
+    fun saveLastExitTime(time: Long)
     fun getLastExitTime(): Long
+    fun getLoginStreak(): Int
+    fun saveLoginStreak(streak: Int)
+    fun isDailyRewardAvailable(): Boolean
+    fun setDailyRewardAvailable(available: Boolean)
 }

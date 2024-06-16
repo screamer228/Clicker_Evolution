@@ -5,7 +5,6 @@ import androidx.annotation.RawRes
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.clickerevolution.common.CurrencyType
-import com.example.clickerevolution.common.Price
 import com.example.clickerevolution.common.Rarity
 
 @Entity(tableName = "skins")
