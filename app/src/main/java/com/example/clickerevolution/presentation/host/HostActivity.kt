@@ -1,8 +1,10 @@
 package com.example.clickerevolution.presentation.host
 
+import android.media.SoundPool
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -45,6 +47,9 @@ class HostActivity : AppCompatActivity() {
 
         (application as App).appComponent.injectHostActivity(this)
 
+        val soundPool = SoundPool.Builder().setMaxStreams(2).build()
+        val soundIdClick = soundPool.load(this, R.raw.sound_diamonds, 1)
+
         injectSharedViewModel()
 
         bindViews()
@@ -57,7 +62,32 @@ class HostActivity : AppCompatActivity() {
         lifecycleScope.launch {
             viewModel.currentResources.collect {
                 goldCounterTV.text = StringUtil.addCommaEveryThreeDigits(it.gold)
-                diamondCounterTV.text = StringUtil.addCommaEveryThreeDigits(it.diamonds)
+
+                val diamondsString = StringUtil.addCommaEveryThreeDigits(it.diamonds)
+                if (diamondsString != diamondCounterTV.text.toString()) {
+                    diamondCounterTV.text = diamondsString
+                }
+            }
+        }
+
+        diamondCounterTV.addTextChangedListener {
+
+            soundPool.play(soundIdClick, 1.0f, 1.0f, 1, 0, 1.0f)
+
+            binding.iconTopBarDiamond.animate().apply {
+                duration = 150
+                scaleXBy(1.0F)
+                scaleX(1.2F)
+                scaleYBy(1.0F)
+                scaleY(1.2F)
+            }.withEndAction {
+                binding.iconTopBarDiamond.animate().apply {
+                    duration = 150
+                    scaleXBy(1.2F)
+                    scaleX(1.0F)
+                    scaleYBy(1.2F)
+                    scaleY(1.0F)
+                }
             }
         }
 

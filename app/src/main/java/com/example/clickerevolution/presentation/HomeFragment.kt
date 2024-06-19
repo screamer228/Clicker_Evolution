@@ -107,7 +107,7 @@ class HomeFragment : Fragment() {
 
             sharedViewModel.onButtonClick()
 
-            soundPool.play(soundIdClick, 1.0f, 1.0f, 1, 0, 1.0f)
+            soundPool.play(soundIdClick, 0.9f, 0.9f, 1, 0, 1.0f)
 
             imageToClick.animate().apply {
                 duration = 50

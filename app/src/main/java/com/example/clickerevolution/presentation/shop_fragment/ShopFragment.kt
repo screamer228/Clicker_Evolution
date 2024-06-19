@@ -145,7 +145,7 @@ class ShopFragment : Fragment() {
     }
 
     private fun playSound(soundPool: SoundPool, soundId: Int) {
-        soundPool.play(soundId, 0.9f, 1.0f, 1, 0, 1.0f)
+        soundPool.play(soundId, 0.9f, 0.9f, 1, 0, 1.0f)
     }
 
     private fun injectSharedViewModel() {
