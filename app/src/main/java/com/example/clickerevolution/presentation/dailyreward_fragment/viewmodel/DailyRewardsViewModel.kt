@@ -50,16 +50,17 @@ class DailyRewardsViewModel @Inject constructor(
 
         _loginStreak.value = streak
         _dailyRewardAvailable.value = true
-        Log.d("DailyRewardsFragment", "viewModel: checkDailyLogin() - $streak")
+        Log.d("DailyRewards", "DailyViewModel: checkDailyLogin() - $streak")
     }
 
     fun claimDailyReward() {
         prefsRepository.setDailyRewardAvailable(false)
         _dailyRewardAvailable.value = false
+        Log.d("DailyRewards", "DailyViewModel: claimDailyRewards() - ${_dailyRewardAvailable.value}")
     }
 
     private fun isSameDay(currentDate: Long, lastLoginDate: Long): Boolean {
-        Log.d("DailyRewardsFragment", "viewModel: isSameDay()")
+        Log.d("DailyRewards", "DailyViewModel: isSameDay()")
 
         val currentCalendar = Calendar.getInstance()
         currentCalendar.timeInMillis = currentDate

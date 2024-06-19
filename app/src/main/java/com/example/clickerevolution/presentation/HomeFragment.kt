@@ -2,6 +2,7 @@ package com.example.clickerevolution.presentation
 
 import android.media.SoundPool
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -92,6 +93,7 @@ class HomeFragment : Fragment() {
             dailyRewardsViewModel.dailyRewardAvailable.collect {
                 //TODO проверить изменяется ли сразу после получения
                 binding.cardViewIndicatorDailyReward.visibility = if (it) View.VISIBLE else View.GONE
+                Log.d("DailyRewards", "HomeFragment: collect indicator visible")
 //                binding.cardViewIndicatorDailyReward.isVisible = it
             }
         }

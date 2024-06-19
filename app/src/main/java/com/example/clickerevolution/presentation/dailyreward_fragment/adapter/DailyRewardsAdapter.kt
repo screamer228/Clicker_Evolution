@@ -28,9 +28,8 @@ class DailyRewardAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: DailyReward) {
-            Log.d("DailyRewards", "adapter: bind($item)")
 
-            binding.dailyRewardTitle.text = "${item.day} день"
+            binding.dailyRewardTitle.text = "${item.day} день "
             binding.dailyRewardReward.text = item.reward.value.toString()
 
             when (item.reward.type) {
@@ -68,7 +67,6 @@ class DailyRewardAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        Log.d("DailyRewards", "Creating ViewHolder")
         val binding = ItemDailyRewardBinding.inflate(
             LayoutInflater.from(parent.context),
             parent, false
@@ -78,7 +76,6 @@ class DailyRewardAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = rewardsList[position]
-        Log.d("DailyRewards", "Binding ViewHolder at position $position with item $item")
         holder.bind(item)
     }
 
@@ -103,7 +100,8 @@ class DailyRewardAdapter(
         rewardAvailable: Boolean
     ): RewardButtonState {
         return when {
-            currentStreak >= day -> RewardButtonState.CLAIMED
+            currentStreak > day -> RewardButtonState.CLAIMED
+            currentStreak == day && !rewardAvailable -> RewardButtonState.CLAIMED
             currentStreak == day && rewardAvailable -> RewardButtonState.CLAIM
             else -> RewardButtonState.NOT_AVAILABLE
         }

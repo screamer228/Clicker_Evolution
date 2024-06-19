@@ -1,5 +1,6 @@
 package com.example.clickerevolution.presentation.sharedviewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.clickerevolution.common.Currency
@@ -52,6 +53,7 @@ class SharedViewModel @Inject constructor(
                 setDiamondsValue(_currentResources.value.diamonds + currency.value)
             }
         }
+        Log.d("DailyRewards", "SharedViewModel: claimReward()")
     }
 
     fun onButtonClick() {
