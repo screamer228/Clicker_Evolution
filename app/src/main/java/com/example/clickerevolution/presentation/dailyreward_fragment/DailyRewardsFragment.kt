@@ -1,6 +1,7 @@
 package com.example.clickerevolution.presentation.dailyreward_fragment
 
 import android.app.Dialog
+import android.media.SoundPool
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
 import com.example.clickerevolution.databinding.FragmentDailyRewardsBinding
 import com.example.clickerevolution.presentation.dailyreward_fragment.adapter.DailyRewardAdapter
@@ -25,6 +27,7 @@ class DailyRewardsFragment() : DialogFragment() {
 
     private lateinit var binding: FragmentDailyRewardsBinding
     private lateinit var adapter: DailyRewardAdapter
+    private lateinit var soundPool: SoundPool
 
     @Inject
     lateinit var sharedViewModelFactory: SharedViewModelFactory
@@ -38,6 +41,8 @@ class DailyRewardsFragment() : DialogFragment() {
         val dialog = super.onCreateDialog(savedInstanceState)
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setCanceledOnTouchOutside(false)
+
+
         return dialog
     }
 
@@ -60,6 +65,8 @@ class DailyRewardsFragment() : DialogFragment() {
                 dailyRewardsViewModelFactory
             )[DailyRewardsViewModel::class.java]
 
+        soundPool = SoundPool.Builder().setMaxStreams(2).build()
+
         binding = FragmentDailyRewardsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -67,11 +74,15 @@ class DailyRewardsFragment() : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val soundIdReceive = soundPool.load(requireContext(), R.raw.sound_equip, 1)
+        val soundIdClose = soundPool.load(requireContext(), R.raw.sound_unequip, 1)
+
         adapter = DailyRewardAdapter { reward, action ->
             when (action) {
                 DailyRewardAdapter.Action.CLAIM -> {
                     sharedViewModel.claimReward(reward.reward)
                     dailyRewardsViewModel.claimDailyReward()
+                    soundPool.play(soundIdReceive, 0.9f, 0.9f, 1, 0, 1.0f)
                 }
             }
         }
@@ -95,6 +106,7 @@ class DailyRewardsFragment() : DialogFragment() {
         }
 
         binding.dailyRewardButtonClose.setOnClickListener {
+            soundPool.play(soundIdClose, 0.9f, 0.9f, 1, 0, 1.0f)
             dismiss()
         }
     }

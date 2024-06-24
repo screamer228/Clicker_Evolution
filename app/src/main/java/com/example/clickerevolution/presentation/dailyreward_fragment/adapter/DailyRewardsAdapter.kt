@@ -2,6 +2,7 @@ package com.example.clickerevolution.presentation.dailyreward_fragment.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
@@ -37,29 +38,31 @@ class DailyRewardAdapter(
                 CurrencyType.DIAMOND -> binding.dailyRewardIconCoin.setImageResource(R.drawable.ic_diamond)
             }
 
+            binding.dailyRewardTextViewReceive.text = "Получить"
+
             val buttonState = getButtonState(item.day, currentStreak, rewardAvailable)
 
             binding.dailyRewardButtonReceive.apply {
                 when (buttonState) {
                     RewardButtonState.CLAIM -> {
+                        binding.dailyRewardImageCheckMark.visibility = View.GONE
                         isEnabled = true
                         setCardBackgroundColor(ContextCompat.getColor(context, R.color.green))
-                        binding.dailyRewardTextViewReceive.text = "Получить"
                         setOnClickListener {
                             onAction(item, Action.CLAIM)
                         }
                     }
 
                     RewardButtonState.CLAIMED -> {
+                        binding.dailyRewardImageCheckMark.visibility = View.VISIBLE
                         isEnabled = false
-                        setCardBackgroundColor(ContextCompat.getColor(context, R.color.gray))
-                        binding.dailyRewardTextViewReceive.text = "Получено"
+                        this.visibility = View.INVISIBLE
                     }
 
                     RewardButtonState.NOT_AVAILABLE -> {
+                        binding.dailyRewardImageCheckMark.visibility = View.GONE
                         isEnabled = false
                         setCardBackgroundColor(ContextCompat.getColor(context, R.color.gray))
-                        binding.dailyRewardTextViewReceive.text = "Недоступно"
                     }
                 }
             }

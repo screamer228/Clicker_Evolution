@@ -54,7 +54,7 @@ class HomeFragment : Fragment() {
 
         dailyRewardsViewModel =
             ViewModelProvider(
-                this,
+                requireActivity(),
                 dailyRewardsViewModelFactory
             )[DailyRewardsViewModel::class.java]
 
@@ -79,6 +79,7 @@ class HomeFragment : Fragment() {
         }
 
         val soundIdClick = soundPool.load(requireContext(), resIdClick, 1)
+        val soundIdDailyReward = soundPool.load(requireContext(), R.raw.sound_equip, 1)
 
         viewLifecycleOwner.lifecycleScope.launch {
             sharedViewModel.currentStats.collect {
@@ -92,8 +93,9 @@ class HomeFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             dailyRewardsViewModel.dailyRewardAvailable.collect {
                 //TODO проверить изменяется ли сразу после получения
-                binding.cardViewIndicatorDailyReward.visibility = if (it) View.VISIBLE else View.GONE
-                Log.d("DailyRewards", "HomeFragment: collect indicator visible")
+                binding.cardViewIndicatorDailyReward.visibility =
+                    if (it) View.VISIBLE else View.GONE
+                Log.d("DailyRewards", "HomeFragment: collect indicator visible: $it")
 //                binding.cardViewIndicatorDailyReward.isVisible = it
             }
         }
@@ -101,6 +103,7 @@ class HomeFragment : Fragment() {
         imageDailyReward.setOnClickListener {
             val dialogFragment = DailyRewardsFragment()
             dialogFragment.show(parentFragmentManager, "Daily Rewards Fragment")
+            soundPool.play(soundIdDailyReward, 0.9f, 0.9f, 1, 0, 1.0f)
         }
 
         imageToClick.setOnClickListener {
@@ -125,6 +128,11 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        Log.d("DailyRewards", "HomeFragment: onResume()")
+        super.onResume()
     }
 
     override fun onDestroy() {

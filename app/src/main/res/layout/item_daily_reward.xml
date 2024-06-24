@@ -62,4 +62,14 @@
             android:textSize="12sp" />
     </com.google.android.material.card.MaterialCardView>
 
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/dailyReward_image_checkMark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_check_mark"
+        app:layout_constraintStart_toStartOf="@+id/dailyReward_button_receive"
+        app:layout_constraintEnd_toEndOf="@+id/dailyReward_button_receive"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
