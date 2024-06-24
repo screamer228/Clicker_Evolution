@@ -74,8 +74,8 @@ class DailyRewardsFragment() : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val soundIdReceive = soundPool.load(requireContext(), R.raw.sound_equip, 1)
-        val soundIdClose = soundPool.load(requireContext(), R.raw.sound_unequip, 1)
+        val soundIdReceive = soundPool.load(requireContext(), R.raw.sound_action1, 1)
+        val soundIdClose = soundPool.load(requireContext(), R.raw.sound_action2, 1)
 
         adapter = DailyRewardAdapter { reward, action ->
             when (action) {

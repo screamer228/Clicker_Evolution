@@ -1,12 +1,14 @@
 package com.example.clickerevolution.presentation.dialog_fragment
 
 import android.app.Dialog
+import android.media.SoundPool
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
 import com.example.clickerevolution.databinding.FragmentDialogBinding
 import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModel
@@ -14,13 +16,16 @@ import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModel
 import com.example.clickerevolution.utils.StringUtil.addCommaEveryThreeDigits
 import javax.inject.Inject
 
-class DialogFragment(private val goldEarned: Int) : DialogFragment() {
+class DialogFragment(
+    private val goldEarned: Int
+) : DialogFragment() {
 
     private lateinit var binding: FragmentDialogBinding
 
     @Inject
     lateinit var sharedViewModelFactory: SharedViewModelFactory
     private lateinit var sharedViewModel: SharedViewModel
+    private lateinit var soundPool: SoundPool
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
@@ -36,55 +41,41 @@ class DialogFragment(private val goldEarned: Int) : DialogFragment() {
     ): View {
         (requireActivity().applicationContext as App).appComponent.injectDialogFragment(this)
 
-        sharedViewModel =
-            ViewModelProvider(
-                requireActivity(),
-                sharedViewModelFactory
-            )[SharedViewModel::class.java]
+        injectSharedViewModel()
 
         binding = FragmentDialogBinding.inflate(inflater, container, false)
+
+        soundPool = SoundPool.Builder().setMaxStreams(2).build()
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val soundIdClick = soundPool.load(requireContext(), R.raw.sound_action1, 1)
+
         binding.dialogGoldEarned.text = "+ ${addCommaEveryThreeDigits(goldEarned)}"
         binding.dialogGoldCouldEarned.text = "x2 +${addCommaEveryThreeDigits(goldEarned * 2)}"
 
         binding.dialogButtonOk.setOnClickListener {
             sharedViewModel.incrementGoldEarnedWhileOffline(goldEarned)
+            soundPool.play(soundIdClick, 0.9f, 0.9f, 1, 0, 1.0f)
             dismiss()
         }
 
         binding.dialogButtonDoubleIt.setOnClickListener {
             sharedViewModel.incrementGoldEarnedWhileOffline(goldEarned * 2)
+            soundPool.play(soundIdClick, 0.9f, 0.9f, 1, 0, 1.0f)
             dismiss()
         }
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//        observers()
-//    }
-//
-//    private fun clickListeners() {
-//        okButton.setOnClickListener {
-//            okButtonClicker()
-//        }
-//        closeButton.setOnClickListener {
-//            dismiss()
-//        }
-//    }
-//
-//    private fun observers() {
-//        dialogFragmentViewModel.todoItemResult.observe(this) {
-//            if (isNewItem) {
-//                //if (!shouldClearPrefs) {
-//                inputFieldTitle.setText(it.title)
-//                inputFieldDescription.setText(it.description)
-//                //}
-//            }
-//        }
-//    }
+    fun injectSharedViewModel() {
+        sharedViewModel =
+            ViewModelProvider(
+                requireActivity(),
+                sharedViewModelFactory
+            )[SharedViewModel::class.java]
+    }
 }

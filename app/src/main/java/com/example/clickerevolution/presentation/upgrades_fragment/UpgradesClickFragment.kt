@@ -30,6 +30,7 @@ class UpgradesClickFragment : Fragment() {
 
     private lateinit var soundPoolBuy: SoundPool
     private lateinit var soundPoolReject: SoundPool
+//    private lateinit var soundPoolSwipe: SoundPool
 
     @Inject
     lateinit var sharedViewModelFactory: SharedViewModelFactory
@@ -52,6 +53,7 @@ class UpgradesClickFragment : Fragment() {
 
         soundPoolBuy = SoundPool.Builder().setMaxStreams(3).build()
         soundPoolReject = SoundPool.Builder().setMaxStreams(3).build()
+//        soundPoolSwipe = SoundPool.Builder().setMaxStreams(2).build()
 
         return binding.root
     }
@@ -124,12 +126,12 @@ class UpgradesClickFragment : Fragment() {
             )[UpgradesViewModel::class.java]
     }
 
-    override fun onResume() {
-        super.onResume()
-
-
-        Log.d("upgrades check", "UpgradesClickFragment onResume()")
-    }
+//    override fun onResume() {
+//        super.onResume()
+//
+//        val soundIdSwipe = soundPoolSwipe.load(requireContext(), R.raw.sound_swipe, 1)
+//        playSound(soundPoolSwipe, soundIdSwipe)
+//    }
 
     companion object {
         fun newInstance() = UpgradesClickFragment()

@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.clickerevolution.R
@@ -18,7 +17,6 @@ import com.example.clickerevolution.databinding.FragmentHomeBinding
 import com.example.clickerevolution.presentation.dailyreward_fragment.DailyRewardsFragment
 import com.example.clickerevolution.presentation.dailyreward_fragment.viewmodel.DailyRewardsViewModel
 import com.example.clickerevolution.presentation.dailyreward_fragment.viewmodel.DailyRewardsViewModelFactory
-import com.example.clickerevolution.presentation.dialog_fragment.DialogFragment
 import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModel
 import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModelFactory
 import com.google.android.material.progressindicator.LinearProgressIndicator
@@ -52,11 +50,7 @@ class HomeFragment : Fragment() {
 
         injectSharedViewModel()
 
-        dailyRewardsViewModel =
-            ViewModelProvider(
-                requireActivity(),
-                dailyRewardsViewModelFactory
-            )[DailyRewardsViewModel::class.java]
+        injectDailyRewardsViewModel()
 
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         bindViews()
@@ -79,12 +73,11 @@ class HomeFragment : Fragment() {
         }
 
         val soundIdClick = soundPool.load(requireContext(), resIdClick, 1)
-        val soundIdDailyReward = soundPool.load(requireContext(), R.raw.sound_equip, 1)
+        val soundIdDailyReward = soundPool.load(requireContext(), R.raw.sound_action1, 1)
 
         viewLifecycleOwner.lifecycleScope.launch {
             sharedViewModel.currentStats.collect {
                 progressBar.progress = it.diamondProgressBar
-                //TODO анимация прибавления алмаза
                 clickTick.text = "+${it.goldClickTickValue} за клик"
                 tickPerSec.text = "+${it.goldTickPerSecValue} в секунду"
             }
@@ -130,11 +123,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-    override fun onResume() {
-        Log.d("DailyRewards", "HomeFragment: onResume()")
-        super.onResume()
-    }
-
     override fun onDestroy() {
         super.onDestroy()
 
@@ -147,6 +135,14 @@ class HomeFragment : Fragment() {
                 requireActivity(),
                 sharedViewModelFactory
             )[SharedViewModel::class.java]
+    }
+
+    private fun injectDailyRewardsViewModel() {
+        dailyRewardsViewModel =
+            ViewModelProvider(
+                requireActivity(),
+                dailyRewardsViewModelFactory
+            )[DailyRewardsViewModel::class.java]
     }
 
     private fun bindViews() {

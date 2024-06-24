@@ -64,8 +64,8 @@ class ShopFragment : Fragment() {
 
         val soundIdBuy = soundPoolBuy.load(requireContext(), R.raw.sound_buy, 1)
         val soundIdReject = soundPoolReject.load(requireContext(), R.raw.sound_reject, 1)
-        val soundIdEquip = soundPoolEquip.load(requireContext(), R.raw.sound_equip, 1)
-        val soundIdUnequip = soundPoolUnequip.load(requireContext(), R.raw.sound_unequip, 1)
+        val soundIdEquip = soundPoolEquip.load(requireContext(), R.raw.sound_action1, 1)
+        val soundIdUnequip = soundPoolUnequip.load(requireContext(), R.raw.sound_action2, 1)
 
         adapter = SkinsAdapter { skin, action ->
             when (action) {
