@@ -1,4 +1,4 @@
-package com.example.clickerevolution.presentation.home_fragment
+package com.example.clickerevolution.utils
 
 import android.animation.Animator
 import android.animation.AnimatorSet
@@ -10,11 +10,11 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import com.example.clickerevolution.R
 import java.util.Random
 
-object HomeAnimationUtils {
+object AnimationUtils {
 
     private const val EDGE_PADDING_DP = 65 // Отступ от краев контейнера в dp
 
-    fun startCoinAnimation(container: ViewGroup) {
+    fun startHomeCoinAnimation(container: ViewGroup) {
         val coin = ImageView(container.context).apply {
             setImageResource(R.drawable.ic_coin)
             layoutParams = ViewGroup.LayoutParams(
@@ -69,7 +69,7 @@ object HomeAnimationUtils {
         animatorSet.start()
     }
 
-    fun startScaleAnimation(view: View) {
+    fun startHomeClickAnimation(view: View) {
         view.animate().apply {
             duration = 50
             scaleXBy(1.0F)
@@ -82,6 +82,24 @@ object HomeAnimationUtils {
                 scaleXBy(0.9F)
                 scaleX(1.0F)
                 scaleYBy(0.9F)
+                scaleY(1.0F)
+            }
+        }
+    }
+
+    fun startHostDiamondAnimation(view: View) {
+        view.animate().apply {
+            duration = 150
+            scaleXBy(1.0F)
+            scaleX(1.3F)
+            scaleYBy(1.0F)
+            scaleY(1.3F)
+        }.withEndAction {
+            view.animate().apply {
+                duration = 150
+                scaleXBy(1.3F)
+                scaleX(1.0F)
+                scaleYBy(1.3F)
                 scaleY(1.0F)
             }
         }

@@ -19,6 +19,7 @@ import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.S
 import com.example.clickerevolution.presentation.upgrades_fragment.UpgradesFragment
 import com.example.clickerevolution.presentation.upgrades_fragment.viewmodel.UpgradesViewModel
 import com.example.clickerevolution.presentation.upgrades_fragment.viewmodel.UpgradesViewModelFactory
+import com.example.clickerevolution.utils.AnimationUtils.startHostDiamondAnimation
 import com.example.clickerevolution.utils.StringUtil
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
@@ -48,7 +49,7 @@ class HostActivity : AppCompatActivity() {
         (application as App).appComponent.injectHostActivity(this)
 
         val soundPool = SoundPool.Builder().setMaxStreams(2).build()
-        val soundIdClick = soundPool.load(this, R.raw.sound_diamonds, 1)
+        val soundIdDiamond = soundPool.load(this, R.raw.sound_diamonds, 1)
 
         injectSharedViewModel()
 
@@ -63,6 +64,12 @@ class HostActivity : AppCompatActivity() {
             viewModel.currentResources.collect {
                 goldCounterTV.text = StringUtil.addCommaEveryThreeDigits(it.gold)
 
+//                if (it.diamonds > diamondCounterTV.text.toString()
+//                        .toInt()
+//                ) startHostDiamondAnimation(binding.iconTopBarDiamond)
+//                diamondCounterTV.text = StringUtil.addCommaEveryThreeDigits(it.diamonds)
+
+
                 val diamondsString = StringUtil.addCommaEveryThreeDigits(it.diamonds)
                 if (diamondsString != diamondCounterTV.text.toString()) {
                     diamondCounterTV.text = diamondsString
@@ -70,25 +77,16 @@ class HostActivity : AppCompatActivity() {
             }
         }
 
+        fun diamondsIncrementUiActions() {
+            soundPool.play(soundIdDiamond, 0.8f, 0.8f, 1, 0, 1.0f)
+            startHostDiamondAnimation(binding.iconTopBarDiamond)
+        }
+
         diamondCounterTV.addTextChangedListener {
 
-            soundPool.play(soundIdClick, 1.0f, 1.0f, 1, 0, 1.0f)
+            soundPool.play(soundIdDiamond, 0.8f, 0.8f, 1, 0, 1.0f)
 
-            binding.iconTopBarDiamond.animate().apply {
-                duration = 150
-                scaleXBy(1.0F)
-                scaleX(1.2F)
-                scaleYBy(1.0F)
-                scaleY(1.2F)
-            }.withEndAction {
-                binding.iconTopBarDiamond.animate().apply {
-                    duration = 150
-                    scaleXBy(1.2F)
-                    scaleX(1.0F)
-                    scaleYBy(1.2F)
-                    scaleY(1.0F)
-                }
-            }
+            startHostDiamondAnimation(binding.iconTopBarDiamond)
         }
 
         val offlineEarned = viewModel.calculateGoldForOfflineTime()

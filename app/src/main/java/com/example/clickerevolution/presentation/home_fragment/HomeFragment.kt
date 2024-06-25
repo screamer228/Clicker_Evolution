@@ -16,8 +16,8 @@ import com.example.clickerevolution.databinding.FragmentHomeBinding
 import com.example.clickerevolution.presentation.dailyreward_fragment.DailyRewardsFragment
 import com.example.clickerevolution.presentation.dailyreward_fragment.viewmodel.DailyRewardsViewModel
 import com.example.clickerevolution.presentation.dailyreward_fragment.viewmodel.DailyRewardsViewModelFactory
-import com.example.clickerevolution.presentation.home_fragment.HomeAnimationUtils.startCoinAnimation
-import com.example.clickerevolution.presentation.home_fragment.HomeAnimationUtils.startScaleAnimation
+import com.example.clickerevolution.utils.AnimationUtils.startHomeCoinAnimation
+import com.example.clickerevolution.utils.AnimationUtils.startHomeClickAnimation
 import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModel
 import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModelFactory
 import com.google.android.material.progressindicator.LinearProgressIndicator
@@ -104,9 +104,9 @@ class HomeFragment : Fragment() {
 
             soundPool.play(soundIdClick, 0.9f, 0.9f, 1, 0, 1.0f)
 
-            startScaleAnimation(imageToClick)
+            startHomeClickAnimation(imageToClick)
 
-            startCoinAnimation(binding.coinsContainer)
+            startHomeCoinAnimation(binding.coinsContainer)
         }
     }
 
