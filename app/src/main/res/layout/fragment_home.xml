@@ -8,7 +8,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".presentation.HomeFragment">
+    tools:context=".presentation.home_fragment.HomeFragment">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textView_homeLabel"
@@ -67,20 +67,27 @@
         android:gravity="center"
         android:text="+50 в секунду"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView_imageToClick"
+        app:layout_constraintBottom_toTopOf="@+id/coinsContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageView_imageToClick"
+    <FrameLayout
+        android:id="@+id/coinsContainer"
         android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_height="300dp"
         android:layout_marginBottom="70dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/img_pig"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageView_imageToClick"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_gravity="bottom"
+            android:scaleType="fitXY"
+            android:src="@drawable/img_pig" />
+    </FrameLayout>
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/progressBar_diamonds"
@@ -92,7 +99,7 @@
         app:indicatorColor="@color/turquoise"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_imageToClick"
+        app:layout_constraintTop_toBottomOf="@+id/coinsContainer"
         app:trackColor="@color/gray" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

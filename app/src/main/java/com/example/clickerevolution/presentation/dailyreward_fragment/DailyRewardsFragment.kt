@@ -17,8 +17,8 @@ import com.example.clickerevolution.presentation.dailyreward_fragment.adapter.Da
 import com.example.clickerevolution.presentation.dailyreward_fragment.viewmodel.DailyRewardsViewModel
 import com.example.clickerevolution.presentation.dailyreward_fragment.viewmodel.DailyRewardsViewModelFactory
 import com.example.clickerevolution.presentation.model.DailyReward
-import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModel
-import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModelFactory
+import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModel
+import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModelFactory
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import javax.inject.Inject

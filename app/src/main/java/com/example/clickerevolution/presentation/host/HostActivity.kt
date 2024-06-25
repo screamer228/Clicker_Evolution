@@ -8,14 +8,14 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.example.clickerevolution.presentation.HomeFragment
-import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModel
+import com.example.clickerevolution.presentation.home_fragment.HomeFragment
+import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModel
 import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
 import com.example.clickerevolution.presentation.shop_fragment.ShopFragment
 import com.example.clickerevolution.databinding.ActivityHostBinding
 import com.example.clickerevolution.presentation.dialog_fragment.DialogFragment
-import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModelFactory
+import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModelFactory
 import com.example.clickerevolution.presentation.upgrades_fragment.UpgradesFragment
 import com.example.clickerevolution.presentation.upgrades_fragment.viewmodel.UpgradesViewModel
 import com.example.clickerevolution.presentation.upgrades_fragment.viewmodel.UpgradesViewModelFactory

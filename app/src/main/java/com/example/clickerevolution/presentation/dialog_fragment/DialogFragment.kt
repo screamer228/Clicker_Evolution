@@ -11,8 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
 import com.example.clickerevolution.databinding.FragmentDialogBinding
-import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModel
-import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModelFactory
+import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModel
+import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModelFactory
 import com.example.clickerevolution.utils.StringUtil.addCommaEveryThreeDigits
 import javax.inject.Inject
 

@@ -1,7 +1,7 @@
 package com.example.clickerevolution.di
 
 import com.example.clickerevolution.presentation.dialog_fragment.DialogFragment
-import com.example.clickerevolution.presentation.HomeFragment
+import com.example.clickerevolution.presentation.home_fragment.HomeFragment
 import com.example.clickerevolution.presentation.dailyreward_fragment.DailyRewardsFragment
 import com.example.clickerevolution.presentation.shop_fragment.ShopFragment
 import com.example.clickerevolution.presentation.upgrades_fragment.UpgradesClickFragment

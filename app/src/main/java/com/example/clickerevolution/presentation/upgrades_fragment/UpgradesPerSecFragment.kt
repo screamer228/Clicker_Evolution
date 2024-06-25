@@ -15,8 +15,8 @@ import com.example.clickerevolution.app.App
 import com.example.clickerevolution.common.UpgradeType
 import com.example.clickerevolution.databinding.FragmentUpgradesPerSecBinding
 import com.example.clickerevolution.presentation.model.Upgrade
-import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModel
-import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModelFactory
+import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModel
+import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModelFactory
 import com.example.clickerevolution.presentation.upgrades_fragment.adapter.UpgradesAdapter
 import com.example.clickerevolution.presentation.upgrades_fragment.viewmodel.UpgradesViewModel
 import com.example.clickerevolution.presentation.upgrades_fragment.viewmodel.UpgradesViewModelFactory

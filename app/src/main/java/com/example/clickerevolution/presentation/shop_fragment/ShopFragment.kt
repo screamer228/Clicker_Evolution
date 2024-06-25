@@ -16,8 +16,8 @@ import com.example.clickerevolution.common.Currency
 import com.example.clickerevolution.databinding.FragmentShopBinding
 import com.example.clickerevolution.presentation.shop_fragment.adapter.SkinsAdapter
 import com.example.clickerevolution.presentation.model.CurrentSkin
-import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModel
-import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModelFactory
+import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModel
+import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModelFactory
 import com.example.clickerevolution.presentation.shop_fragment.viewmodel.ShopViewModel
 import com.example.clickerevolution.presentation.shop_fragment.viewmodel.ShopViewModelFactory
 import kotlinx.coroutines.launch

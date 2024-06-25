@@ -1,8 +1,7 @@
-package com.example.clickerevolution.presentation
+package com.example.clickerevolution.presentation.home_fragment
 
 import android.media.SoundPool
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,8 +16,10 @@ import com.example.clickerevolution.databinding.FragmentHomeBinding
 import com.example.clickerevolution.presentation.dailyreward_fragment.DailyRewardsFragment
 import com.example.clickerevolution.presentation.dailyreward_fragment.viewmodel.DailyRewardsViewModel
 import com.example.clickerevolution.presentation.dailyreward_fragment.viewmodel.DailyRewardsViewModelFactory
-import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModel
-import com.example.clickerevolution.presentation.sharedviewmodel.SharedViewModelFactory
+import com.example.clickerevolution.presentation.home_fragment.HomeAnimationUtils.startCoinAnimation
+import com.example.clickerevolution.presentation.home_fragment.HomeAnimationUtils.startScaleAnimation
+import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModel
+import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModelFactory
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -85,10 +86,8 @@ class HomeFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             dailyRewardsViewModel.dailyRewardAvailable.collect {
-                //TODO проверить изменяется ли сразу после получения
                 binding.cardViewIndicatorDailyReward.visibility =
                     if (it) View.VISIBLE else View.GONE
-                Log.d("DailyRewards", "HomeFragment: collect indicator visible: $it")
 //                binding.cardViewIndicatorDailyReward.isVisible = it
             }
         }
@@ -105,21 +104,9 @@ class HomeFragment : Fragment() {
 
             soundPool.play(soundIdClick, 0.9f, 0.9f, 1, 0, 1.0f)
 
-            imageToClick.animate().apply {
-                duration = 50
-                scaleXBy(1.0F)
-                scaleX(0.9F)
-                scaleYBy(1.0F)
-                scaleY(0.9F)
-            }.withEndAction {
-                imageToClick.animate().apply {
-                    duration = 50
-                    scaleXBy(0.9F)
-                    scaleX(1.0F)
-                    scaleYBy(0.9F)
-                    scaleY(1.0F)
-                }
-            }
+            startScaleAnimation(imageToClick)
+
+            startCoinAnimation(binding.coinsContainer)
         }
     }
 
