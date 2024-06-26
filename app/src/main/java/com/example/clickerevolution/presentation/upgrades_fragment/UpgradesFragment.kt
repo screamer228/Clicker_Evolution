@@ -2,24 +2,19 @@ package com.example.clickerevolution.presentation.upgrades_fragment
 
 import android.media.SoundPool
 import android.os.Bundle
-import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
 import com.example.clickerevolution.databinding.FragmentUpgradesBinding
 import com.example.clickerevolution.presentation.upgrades_fragment.adapter.ViewPagerAdapter
-import com.example.clickerevolution.presentation.upgrades_fragment.viewmodel.UpgradesViewModel
-import com.example.clickerevolution.presentation.upgrades_fragment.viewmodel.UpgradesViewModelFactory
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import javax.inject.Inject
 
 class UpgradesFragment : Fragment() {
 

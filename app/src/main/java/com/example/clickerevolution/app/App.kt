@@ -1,9 +1,6 @@
 package com.example.clickerevolution.app
 
 import android.app.Application
-import android.content.Context
-import android.content.SharedPreferences
-import androidx.lifecycle.ViewModelProvider.NewInstanceFactory.Companion.instance
 import com.example.clickerevolution.di.AppComponent
 import com.example.clickerevolution.di.AppModule
 import com.example.clickerevolution.di.DaggerAppComponent

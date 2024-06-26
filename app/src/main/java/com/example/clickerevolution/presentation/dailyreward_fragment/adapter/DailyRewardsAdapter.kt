@@ -12,8 +12,6 @@ import com.example.clickerevolution.common.CurrencyType
 import com.example.clickerevolution.common.RewardButtonState
 import com.example.clickerevolution.databinding.ItemDailyRewardBinding
 import com.example.clickerevolution.presentation.model.DailyReward
-import com.example.clickerevolution.presentation.model.Skin
-import com.example.clickerevolution.presentation.shop_fragment.adapter.SkinsAdapter
 import com.example.clickerevolution.utils.DailyRewardDiffUtil
 
 class DailyRewardAdapter(

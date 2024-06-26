@@ -1,7 +1,6 @@
 package com.example.clickerevolution.di
 
 import android.content.Context
-import android.util.Log
 import com.example.clickerevolution.data.repository.prefs.PrefsRepository
 import com.example.clickerevolution.data.repository.stats.StatsRepository
 import com.example.clickerevolution.data.repository.skins.SkinsRepository
