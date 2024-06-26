@@ -35,11 +35,14 @@ class SharedViewModel @Inject constructor(
     private val _currentStats = MutableStateFlow(Stats())
     val currentStats: StateFlow<Stats> = _currentStats.asStateFlow()
 
+    var previousDiamonds = 0
+
     init {
         getInitialSkin()
         getInitialResources()
         getInitialStats()
         startPassiveGoldIncrement()
+        previousDiamonds = _currentResources.value.diamonds
 //        calculateGoldForOfflineTime()
     }
 
@@ -143,8 +146,12 @@ class SharedViewModel @Inject constructor(
         _currentResources.value = _currentResources.value.copy(gold = value)
     }
 
-    fun setDiamondsValue(value: Int) {
+    private fun setDiamondsValue(value: Int) {
         _currentResources.value = _currentResources.value.copy(diamonds = value)
+    }
+
+    fun synchronizeDiamonds() {
+        previousDiamonds = _currentResources.value.diamonds
     }
 
     fun saveResources() {

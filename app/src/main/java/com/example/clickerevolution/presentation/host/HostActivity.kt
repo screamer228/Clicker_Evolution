@@ -31,6 +31,7 @@ class HostActivity : AppCompatActivity() {
     private lateinit var goldCounterTV: TextView
     private lateinit var diamondCounterTV: TextView
     private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var soundPool: SoundPool
 
     @Inject
     lateinit var viewModelFactory: SharedViewModelFactory
@@ -48,69 +49,40 @@ class HostActivity : AppCompatActivity() {
 
         (application as App).appComponent.injectHostActivity(this)
 
-        val soundPool = SoundPool.Builder().setMaxStreams(2).build()
-        val soundIdDiamond = soundPool.load(this, R.raw.sound_diamonds, 1)
-
         injectSharedViewModel()
+        injectUpgradesViewModel()
 
         bindViews()
 
         prepareBottomNav()
 
-//        upgradesViewModel.getUpgradesClickList()
-//        upgradesViewModel.getUpgradesPerSecList()
+        soundPool = SoundPool.Builder().setMaxStreams(2).build()
+        val soundIdDiamond = soundPool.load(this, R.raw.sound_diamonds, 1)
 
         lifecycleScope.launch {
             viewModel.currentResources.collect {
                 goldCounterTV.text = StringUtil.addCommaEveryThreeDigits(it.gold)
 
-//                if (it.diamonds > diamondCounterTV.text.toString()
-//                        .toInt()
-//                ) startHostDiamondAnimation(binding.iconTopBarDiamond)
-//                diamondCounterTV.text = StringUtil.addCommaEveryThreeDigits(it.diamonds)
-
-
-                val diamondsString = StringUtil.addCommaEveryThreeDigits(it.diamonds)
-                if (diamondsString != diamondCounterTV.text.toString()) {
-                    diamondCounterTV.text = diamondsString
+                if (it.diamonds > viewModel.previousDiamonds) {
+                    soundPool.play(soundIdDiamond, 0.8f, 0.8f, 1, 0, 1.0f)
+                    startHostDiamondAnimation(binding.iconTopBarDiamond)
                 }
+                viewModel.synchronizeDiamonds()
+                diamondCounterTV.text = StringUtil.addCommaEveryThreeDigits(it.diamonds)
+
             }
         }
 
-        fun diamondsIncrementUiActions() {
-            soundPool.play(soundIdDiamond, 0.8f, 0.8f, 1, 0, 1.0f)
-            startHostDiamondAnimation(binding.iconTopBarDiamond)
-        }
+        checkOfflineProduction()
+    }
 
-        diamondCounterTV.addTextChangedListener {
-
-            soundPool.play(soundIdDiamond, 0.8f, 0.8f, 1, 0, 1.0f)
-
-            startHostDiamondAnimation(binding.iconTopBarDiamond)
-        }
-
+    private fun checkOfflineProduction() {
         val offlineEarned = viewModel.calculateGoldForOfflineTime()
 
         if (offlineEarned > 0) {
             showDialogGoldOfflineEarned(offlineEarned)
         }
     }
-
-//    override fun onStart() {
-//        super.onStart()
-//
-//        val offlineEarned = viewModel.calculateGoldForOfflineTime()
-//
-//        if (offlineEarned > 0) {
-//            val dialogFragment = DialogFragment(offlineEarned)
-//            dialogFragment.show(supportFragmentManager, "Dialog Fragment")
-//        }
-//    }
-
-//    override fun onStop() {
-//        super.onStop()
-//        viewModel.saveLastExitTime()
-//    }
 
     override fun onDestroy() {
         super.onDestroy()
@@ -167,7 +139,9 @@ class HostActivity : AppCompatActivity() {
     private fun injectSharedViewModel() {
         viewModel =
             ViewModelProvider(this, viewModelFactory)[SharedViewModel::class.java]
+    }
 
+    private fun injectUpgradesViewModel() {
         upgradesViewModel =
             ViewModelProvider(this, upgradesViewModelFactory)[UpgradesViewModel::class.java]
     }

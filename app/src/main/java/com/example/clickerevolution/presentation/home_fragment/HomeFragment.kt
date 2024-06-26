@@ -32,7 +32,6 @@ class HomeFragment : Fragment() {
     private lateinit var tickPerSec: TextView
     private lateinit var progressBar: LinearProgressIndicator
     private lateinit var imageDailyReward: ImageView
-
     private lateinit var soundPool: SoundPool
 
     @Inject
