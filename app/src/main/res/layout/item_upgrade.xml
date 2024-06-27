@@ -7,7 +7,9 @@
     android:layout_marginHorizontal="4dp"
     android:layout_marginBottom="4dp"
     android:backgroundTint="@color/light_blue"
-    app:contentPadding="12dp">
+    app:contentPadding="12dp"
+    app:strokeColor="@color/black"
+    app:strokeWidth="@dimen/stroke_width">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/upgrade_constraint"
@@ -38,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:text="сила: +3"
-                android:textColor="@color/yellow"
+                android:textColor="@color/light_green"
                 android:textSize="12sp" />
 
             <com.example.clickerevolution.custom.TextViewOutline
@@ -60,7 +62,9 @@
             app:contentPadding="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/black"
+            app:strokeWidth="@dimen/stroke_width">
 
             <LinearLayout
                 android:layout_width="wrap_content"

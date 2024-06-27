@@ -104,7 +104,6 @@ class HomeFragment : Fragment() {
             soundPool.play(soundIdClick, 0.9f, 0.9f, 1, 0, 1.0f)
 
             startHomeClickAnimation(imageToClick)
-
             startHomeCoinAnimation(binding.coinsContainer)
         }
     }

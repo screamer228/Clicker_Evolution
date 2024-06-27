@@ -4,10 +4,11 @@ import android.view.LayoutInflater
 import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clickerevolution.R
-import com.example.clickerevolution.common.CurrencyType
+import com.example.clickerevolution.common.Currency
 import com.example.clickerevolution.common.Rarity
 import com.example.clickerevolution.databinding.ItemSkinBinding
 import com.example.clickerevolution.presentation.model.Skin
@@ -29,11 +30,11 @@ class SkinsAdapter(
             binding.skinImage.setImageResource(item.imageId)
 
             when (item.price.type) {
-                CurrencyType.GOLD -> {
+                Currency.GOLD -> {
                     binding.skinIconPrice.setImageResource(R.drawable.ic_coin)
                 }
 
-                CurrencyType.DIAMOND -> {
+                Currency.DIAMOND -> {
                     binding.skinIconPrice.setImageResource(R.drawable.ic_diamond)
                 }
             }
@@ -43,36 +44,30 @@ class SkinsAdapter(
             when (item.rarity) {
                 Rarity.COMMON -> {
                     binding.skinCardView.setCardBackgroundColor(
-                        ContextCompat.getColor(
-                            binding.root.context,
-                            R.color.light_blue
-                        )
+                        getColor(binding.root.context, R.color.light_blue)
                     )
                 }
 
                 Rarity.RARE -> {
                     binding.skinCardView.setCardBackgroundColor(
-                        ContextCompat.getColor(
-                            binding.root.context,
-                            R.color.orange
+                        getColor(
+                            binding.root.context, R.color.light_green
                         )
                     )
                 }
 
                 Rarity.EPIC -> {
                     binding.skinCardView.setCardBackgroundColor(
-                        ContextCompat.getColor(
-                            binding.root.context,
-                            R.color.violet
+                        getColor(
+                            binding.root.context, R.color.violet
                         )
                     )
                 }
 
                 Rarity.LEGENDARY -> {
                     binding.skinCardView.setCardBackgroundColor(
-                        ContextCompat.getColor(
-                            binding.root.context,
-                            R.color.orange_red
+                        getColor(
+                            binding.root.context, R.color.orange
                         )
                     )
                 }
@@ -81,9 +76,8 @@ class SkinsAdapter(
             when {
                 !item.isPurchased -> {
                     binding.skinButtonAction.setCardBackgroundColor(
-                        ContextCompat.getColor(
-                            binding.root.context,
-                            R.color.green
+                        getColor(
+                            binding.root.context, R.color.green
                         )
                     )
                     binding.skinActionText.text = "Купить"
@@ -94,9 +88,8 @@ class SkinsAdapter(
 
                 item.isPurchased && !item.isEquipped -> {
                     binding.skinButtonAction.setCardBackgroundColor(
-                        ContextCompat.getColor(
-                            binding.root.context,
-                            R.color.blue
+                        getColor(
+                            binding.root.context, R.color.blue
                         )
                     )
                     binding.skinActionLinear.visibility = GONE
@@ -108,9 +101,8 @@ class SkinsAdapter(
 
                 item.isPurchased && item.isEquipped -> {
                     binding.skinButtonAction.setCardBackgroundColor(
-                        ContextCompat.getColor(
-                            binding.root.context,
-                            R.color.red
+                        getColor(
+                            binding.root.context, R.color.red
                         )
                     )
                     binding.skinActionLinear.visibility = GONE
@@ -134,9 +126,6 @@ class SkinsAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = skinsList[position]
         holder.bind(item)
-//        holder.itemView.setOnClickListener {
-//            itemClickListener.onItemClick(item.id)
-//        }
     }
 
     override fun getItemCount(): Int {

@@ -1,90 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/skin_cardView"
     android:layout_width="120dp"
     android:layout_height="wrap_content"
+    android:paddingHorizontal="4dp"
+    android:layout_marginHorizontal="4dp"
+    android:paddingBottom="8dp"
     android:layout_marginBottom="8dp"
-    android:layout_marginHorizontal="2dp"
-    android:orientation="vertical">
+    app:cardBackgroundColor="@color/light_blue"
+    app:cardElevation="10dp"
+    app:strokeColor="@color/black"
+    app:strokeWidth="@dimen/stroke_width">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/skin_cardView"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/light_blue"
-        app:contentPadding="8dp">
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <com.example.clickerevolution.custom.TextViewOutline
-                android:id="@+id/skin_title"
-                style="@style/style_text_outline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Название"
-                android:textSize="12sp"/>
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/skin_image"
-                android:layout_width="match_parent"
-                android:layout_height="110dp"
-                android:padding="8dp"
-                android:src="@mipmap/ic_launcher"
-                android:scaleType="fitXY"/>
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/skin_button_action"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/green"
-        app:cardCornerRadius="12dp"
-        app:contentPadding="8dp">
-
-        <LinearLayout
-            android:id="@+id/skin_actionLinear"
+        <com.example.clickerevolution.custom.TextViewOutline
+            android:id="@+id/skin_title"
+            style="@style/style_text_outline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:text="Название"
+            android:textSize="12sp" />
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/skin_iconPrice"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_marginEnd="4dp"
-                android:paddingBottom="2dp"
-                android:src="@drawable/ic_coin" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/skin_image"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_launcher" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/skin_price"
-                style="@style/style_text_default"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/skin_button_action"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:cardBackgroundColor="@color/green"
+            app:cardCornerRadius="12dp"
+            app:contentPadding="8dp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="@dimen/stroke_width">
+
+            <LinearLayout
+                android:id="@+id/skin_actionLinear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingEnd="8dp"
-                android:text="1000"
-                android:textColor="@color/white"
-                android:textSize="12sp"/>
-        </LinearLayout>
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/skin_actionText"
-            style="@style/style_text_default"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center|bottom"
-            android:layout_marginTop="20dp"
-            android:text="Купить"
-            android:textSize="12sp"/>
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/skin_iconPrice"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginEnd="4dp"
+                    android:paddingBottom="2dp"
+                    android:src="@drawable/ic_coin" />
 
-    </com.google.android.material.card.MaterialCardView>
-</LinearLayout>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/skin_price"
+                    style="@style/style_text_default"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="8dp"
+                    android:text="1000"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/skin_actionText"
+                style="@style/style_text_default"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center|bottom"
+                android:layout_marginTop="20dp"
+                android:text="Купить"
+                android:textSize="12sp" />
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</com.google.android.material.card.MaterialCardView>

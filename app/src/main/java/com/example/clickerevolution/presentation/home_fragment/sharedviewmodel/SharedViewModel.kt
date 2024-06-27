@@ -3,8 +3,8 @@ package com.example.clickerevolution.presentation.home_fragment.sharedviewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.clickerevolution.common.Price
 import com.example.clickerevolution.common.Currency
-import com.example.clickerevolution.common.CurrencyType
 import com.example.clickerevolution.data.repository.prefs.PrefsRepository
 import com.example.clickerevolution.data.repository.stats.StatsRepository
 import com.example.clickerevolution.data.repository.skins.SkinsRepository
@@ -46,17 +46,16 @@ class SharedViewModel @Inject constructor(
 //        calculateGoldForOfflineTime()
     }
 
-    fun claimReward(currency: Currency) {
-        when (currency.type) {
-            CurrencyType.GOLD -> {
-                setGoldValue(_currentResources.value.gold + currency.value)
+    fun claimReward(price: Price) {
+        when (price.type) {
+            Currency.GOLD -> {
+                setGoldValue(_currentResources.value.gold + price.value)
             }
 
-            CurrencyType.DIAMOND -> {
-                setDiamondsValue(_currentResources.value.diamonds + currency.value)
+            Currency.DIAMOND -> {
+                setDiamondsValue(_currentResources.value.diamonds + price.value)
             }
         }
-        Log.d("DailyRewards", "SharedViewModel: claimReward()")
     }
 
     fun onButtonClick() {
@@ -64,35 +63,33 @@ class SharedViewModel @Inject constructor(
         val newCount = _currentStats.value.diamondProgressBar + 1
         _currentStats.value = _currentStats.value.copy(diamondProgressBar = newCount)
         if (newCount >= 200) {
-            // Выполняем необходимое действие
             onMaxClicksReached()
         }
     }
 
     private fun onMaxClicksReached() {
-        // Выполняем действие по достижению 200 кликов
         val incrementedDiamonds = _currentResources.value.diamonds + 1
         setDiamondsValue(incrementedDiamonds)
-        // Сбрасываем счетчик кликов
         _currentStats.value = _currentStats.value.copy(diamondProgressBar = 0)
     }
 
     fun calculateGoldForOfflineTime(): Int {
         val lastExitTime = prefsRepository.getLastExitTime()
         val currentTime = System.currentTimeMillis()
-        val elapsedTime = (currentTime - lastExitTime) / 1000 // в секундах
-        val goldIncrement = elapsedTime * currentStats.value.goldTickPerSecValue
+        var elapsedTime = (currentTime - lastExitTime) / 1000
+
+        if (elapsedTime > 7200) {
+            elapsedTime = 7200
+        }
+
+        val goldIncrement =
+            elapsedTime * currentStats.value.goldTickPerSecValue * currentStats.value.goldOfflineMultiplier
         return goldIncrement.toInt()
-//        setGoldValue(currentGold.value + goldIncrement.toInt())
     }
 
     fun incrementGoldEarnedWhileOffline(goldValue: Int) {
         setGoldValue(currentResources.value.gold + goldValue)
     }
-
-//    private fun getLastExitTime(): Long {
-//        return prefsRepository.getLastExitTime()
-//    }
 
     fun saveLastExitTime() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -174,8 +171,8 @@ class SharedViewModel @Inject constructor(
 
     private fun getInitialStats() {
         viewModelScope.launch(Dispatchers.IO) {
-            val resources = statsRepository.getStats()
-            _currentStats.value = resources
+            val stats = statsRepository.getStats()
+            _currentStats.value = stats
         }
     }
 
@@ -187,6 +184,12 @@ class SharedViewModel @Inject constructor(
     fun setCurrentTickPerSec(plusTickValue: Int) {
         val incrementedTick = _currentStats.value.goldTickPerSecValue + plusTickValue
         _currentStats.value = _currentStats.value.copy(goldTickPerSecValue = incrementedTick)
+    }
+
+    fun setCurrentOfflineGoldMultiplier(plusPercent: Int) {
+        val incrementedMultiplier = _currentStats.value.goldTickPerSecValue + plusPercent
+        _currentStats.value =
+            _currentStats.value.copy(goldOfflineMultiplier = incrementedMultiplier.toFloat() / 100)
     }
 
     fun saveStats() {

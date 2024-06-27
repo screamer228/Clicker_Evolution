@@ -1,13 +1,11 @@
 package com.example.clickerevolution.presentation.upgrades_fragment.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.clickerevolution.common.UpgradeType
 import com.example.clickerevolution.data.repository.upgrades.UpgradesRepository
 import com.example.clickerevolution.presentation.model.Upgrade
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -24,24 +22,19 @@ class UpgradesViewModel @Inject constructor(
     private val _upgradesPerSecList = MutableStateFlow<List<Upgrade>>(listOf())
     val upgradesPerSecList: StateFlow<List<Upgrade>> = _upgradesPerSecList.asStateFlow()
 
+    private val _upgradesSpecialList = MutableStateFlow<List<Upgrade>>(listOf())
+    val upgradesSpecialList: StateFlow<List<Upgrade>> = _upgradesSpecialList.asStateFlow()
+
     init {
-        Log.d("upgrades check", "init UpgradesViewModel")
         getUpgradesClickList()
         getUpgradesPerSecList()
-        Log.d(
-            "upgrades check",
-            "after init: ${_upgradesClickList.value.size}; ${_upgradesPerSecList.value.size}"
-        )
+        getUpgradesSpecialList()
     }
 
     fun getUpgradesClickList() {
         viewModelScope.launch(Dispatchers.IO) {
             _upgradesClickList.value = upgradesRepository.getUpgradesByType(UpgradeType.CLICK_TICK)
         }
-        Log.d(
-            "upgrades check",
-            "clickTick: ${_upgradesClickList.value.size}"
-        )
     }
 
     fun getUpgradesPerSecList() {
@@ -49,17 +42,26 @@ class UpgradesViewModel @Inject constructor(
             _upgradesPerSecList.value =
                 upgradesRepository.getUpgradesByType(UpgradeType.TICK_PER_SEC)
         }
-        Log.d(
-            "upgrades check",
-            "tickPerSec: ${_upgradesPerSecList.value.size}"
-        )
     }
 
-    fun upgradeLevelAndPrice(upgradeId: Int) {
+    fun getUpgradesSpecialList() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _upgradesSpecialList.value =
+                upgradesRepository.getUpgradesByType(UpgradeType.SPECIAL)
+        }
+    }
+
+    fun upgradeLevelAndPrice(upgradeId: Int, upgradeType: UpgradeType) {
         viewModelScope.launch(Dispatchers.IO) {
             upgradesRepository.upgradeLevelAndPrice(upgradeId)
-            getUpgradesClickList()
-            getUpgradesPerSecList()
+
+            when (upgradeType) {
+                UpgradeType.CLICK_TICK -> getUpgradesClickList()
+
+                UpgradeType.TICK_PER_SEC -> getUpgradesPerSecList()
+
+                UpgradeType.SPECIAL -> getUpgradesSpecialList()
+            }
         }
     }
 }

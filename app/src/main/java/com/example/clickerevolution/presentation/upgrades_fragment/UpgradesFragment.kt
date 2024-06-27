@@ -57,9 +57,14 @@ class UpgradesFragment : Fragment() {
     private fun prepareViewPager() {
         val fragmentList = arrayListOf(
             UpgradesClickFragment.newInstance(),
-            UpgradesPerSecFragment.newInstance()
+            UpgradesPerSecFragment.newInstance(),
+            UpgradesSpecialFragment.newInstance()
         )
-        val tabTitleArray = arrayOf("За клик", "В секунду")
+        val tabTitleArray = arrayOf(
+            "За клик",
+            "В секунду",
+            "Особые"
+        )
 
         viewPager.adapter = ViewPagerAdapter(requireActivity(), fragmentList)
 
@@ -77,7 +82,7 @@ class UpgradesFragment : Fragment() {
     }
 
     private fun customizeTabLayout() {
-        val tabTitleArray = arrayOf("За клик", "В секунду")
+        val tabTitleArray = arrayOf("За клик", "В секунду", "Особые")
 
         for (i in tabTitleArray.indices) {
             val tab = tabLayout.getTabAt(i)
@@ -90,7 +95,7 @@ class UpgradesFragment : Fragment() {
                 tabView?.setTextSize(
                     TypedValue.COMPLEX_UNIT_SP,
                     14f
-                ) // Increase text size for selected tab
+                )
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
@@ -98,7 +103,7 @@ class UpgradesFragment : Fragment() {
                 tabView?.setTextSize(
                     TypedValue.COMPLEX_UNIT_SP,
                     10f
-                ) // Reset text size for unselected tab
+                )
             }
 
             override fun onTabReselected(tab: TabLayout.Tab) {
@@ -113,7 +118,7 @@ class UpgradesFragment : Fragment() {
         selectedTabView?.setTextSize(
             TypedValue.COMPLEX_UNIT_SP,
             14f
-        ) // Increase text size for selected tab
+        )
 
         for (i in 0 until tabLayout.tabCount) {
             if (i != tabLayout.selectedTabPosition) {
@@ -122,7 +127,7 @@ class UpgradesFragment : Fragment() {
                 tabView?.setTextSize(
                     TypedValue.COMPLEX_UNIT_SP,
                     10f
-                ) // Reset text size for unselected tab
+                )
             }
         }
     }

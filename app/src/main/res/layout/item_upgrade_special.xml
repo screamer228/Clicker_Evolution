@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/upgradeSpecial_cardView"
+    android:layout_width="120dp"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="16dp"
+    app:cardBackgroundColor="@color/light_blue"
+    app:contentPadding="8dp"
+    app:strokeColor="@color/black"
+    app:strokeWidth="@dimen/stroke_width">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.example.clickerevolution.custom.TextViewOutline
+            android:id="@+id/upgradeSpecial_title"
+            style="@style/style_text_outline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Название"
+            android:textSize="12sp" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/upgradeSpecial_image"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:padding="8dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_launcher" />
+
+        <com.example.clickerevolution.custom.TextViewOutline
+            android:id="@+id/upgradeSpecial_level"
+            style="@style/style_text_outline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Уровень: 1"
+            android:textColor="@color/yellow"
+            android:textSize="10sp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</com.google.android.material.card.MaterialCardView>

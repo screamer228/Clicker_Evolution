@@ -2,8 +2,8 @@ package com.example.clickerevolution.presentation.dailyreward_fragment.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.example.clickerevolution.common.Price
 import com.example.clickerevolution.common.Currency
-import com.example.clickerevolution.common.CurrencyType
 import com.example.clickerevolution.common.RewardButtonState
 import com.example.clickerevolution.data.repository.prefs.PrefsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -87,16 +87,16 @@ class DailyRewardsViewModel @Inject constructor(
                 currentCalendar.get(Calendar.DAY_OF_YEAR) == lastLoginCalendar.get(Calendar.DAY_OF_YEAR)
     }
 
-    fun generateReward(streak: Int): Currency {
+    fun generateReward(streak: Int): Price {
         return when (streak) {
-            1 -> Currency(CurrencyType.GOLD, 50)
-            2 -> Currency(CurrencyType.GOLD, 100)
-            3 -> Currency(CurrencyType.GOLD, 150)
-            4 -> Currency(CurrencyType.GOLD, 200)
-            5 -> Currency(CurrencyType.GOLD, 250)
-            6 -> Currency(CurrencyType.GOLD, 300)
-            7 -> Currency(CurrencyType.DIAMOND, 50)
-            else -> Currency(CurrencyType.GOLD, 50)
+            1 -> Price(Currency.GOLD, 50)
+            2 -> Price(Currency.GOLD, 100)
+            3 -> Price(Currency.GOLD, 150)
+            4 -> Price(Currency.GOLD, 200)
+            5 -> Price(Currency.GOLD, 250)
+            6 -> Price(Currency.GOLD, 300)
+            7 -> Price(Currency.DIAMOND, 50)
+            else -> Price(Currency.GOLD, 50)
         }
     }
 

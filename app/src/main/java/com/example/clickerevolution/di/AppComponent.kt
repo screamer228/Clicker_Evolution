@@ -6,8 +6,10 @@ import com.example.clickerevolution.presentation.dailyreward_fragment.DailyRewar
 import com.example.clickerevolution.presentation.shop_fragment.ShopFragment
 import com.example.clickerevolution.presentation.upgrades_fragment.UpgradesClickFragment
 import com.example.clickerevolution.presentation.host.HostActivity
+import com.example.clickerevolution.presentation.upgrades_fragment.UpgradeDetailFragment
 import com.example.clickerevolution.presentation.upgrades_fragment.UpgradesFragment
 import com.example.clickerevolution.presentation.upgrades_fragment.UpgradesPerSecFragment
+import com.example.clickerevolution.presentation.upgrades_fragment.UpgradesSpecialFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -21,6 +23,8 @@ interface AppComponent {
     fun injectUpgradesFragment(upgradesFragment: UpgradesFragment)
     fun injectUpgradesClickFragment(upgradesClickFragment: UpgradesClickFragment)
     fun injectUpgradesPerSecFragment(upgradesPerSecFragment: UpgradesPerSecFragment)
+    fun injectUpgradesSpecialFragment(upgradesSpecialFragment: UpgradesSpecialFragment)
+    fun injectUpgradeDetailFragment(upgradeDetailFragment: UpgradeDetailFragment)
     fun injectDialogFragment(dialogFragment: DialogFragment)
     fun injectDailyRewardsFragment(dialogFragment: DailyRewardsFragment)
 }

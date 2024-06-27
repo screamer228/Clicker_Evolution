@@ -4,6 +4,7 @@ import com.example.clickerevolution.data.room.stats.StatsDao
 import com.example.clickerevolution.data.room.stats.mapper.toEntity
 import com.example.clickerevolution.data.room.stats.mapper.toStats
 import com.example.clickerevolution.presentation.model.Stats
+import com.example.clickerevolution.presentation.model.Upgrade
 import javax.inject.Inject
 
 class StatsRepositoryImpl @Inject constructor(

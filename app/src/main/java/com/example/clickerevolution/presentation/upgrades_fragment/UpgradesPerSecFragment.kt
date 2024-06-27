@@ -59,14 +59,12 @@ class UpgradesPerSecFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        upgradesViewModel.getUpgradesPerSecList()
-
         val soundIdBuy = soundPoolBuy.load(requireContext(), R.raw.sound_buy, 1)
         val soundIdReject = soundPoolReject.load(requireContext(), R.raw.sound_reject, 1)
 
         adapter = UpgradesAdapter(UpgradeType.TICK_PER_SEC) { upgrade ->
-            if (sharedViewModel.currentResources.value.gold >= upgrade.price) {
-                buyUpgrade(upgrade.price, upgrade.power, upgrade.id)
+            if (sharedViewModel.currentResources.value.gold >= upgrade.price.value) {
+                buyUpgrade(upgrade)
                 playSound(soundPoolBuy, soundIdBuy)
             } else {
                 playSound(soundPoolReject, soundIdReject)
@@ -79,7 +77,6 @@ class UpgradesPerSecFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             upgradesViewModel.upgradesPerSecList.collect {
-                Log.d("upgrades check", "UpgradesPerSecFragment observer: ${it.size}")
                 updatesAdapterState(it)
             }
         }
@@ -94,13 +91,12 @@ class UpgradesPerSecFragment : Fragment() {
             }
         }
         adapter.updateList(updatedList)
-        Log.d("upgrades check", "UpgradesPerSecFragment updatesAdapterState")
     }
 
-    private fun buyUpgrade(price: Int, power: Int, id: Int) {
-        sharedViewModel.subtractGold(price)
-        sharedViewModel.setCurrentTickPerSec(power)
-        upgradesViewModel.upgradeLevelAndPrice(id)
+    private fun buyUpgrade(upgrade: Upgrade) {
+        sharedViewModel.subtractGold(upgrade.price.value)
+        sharedViewModel.setCurrentTickPerSec(upgrade.power)
+        upgradesViewModel.upgradeLevelAndPrice(upgrade.id, upgrade.type)
     }
 
     private fun playSound(soundPool: SoundPool, soundId: Int) {

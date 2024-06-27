@@ -6,7 +6,10 @@ import com.example.clickerevolution.presentation.model.Stats
 fun StatsEntity.toStats(): Stats {
     return Stats(
         goldClickTickValue = goldClickTickValue,
-        goldTickPerSecValue = goldTickPerSecValue
+        goldTickPerSecValue = goldTickPerSecValue,
+        diamondProgressBar = diamondProgressBar,
+        goldOfflineMultiplier = goldOfflineMultiplier,
+        generalSale = generalSale
     )
 }
 
@@ -14,6 +17,8 @@ fun Stats.toEntity(): StatsEntity {
     return StatsEntity(
         goldClickTickValue = goldClickTickValue,
         goldTickPerSecValue = goldTickPerSecValue,
-        diamondProgressBar = diamondProgressBar
+        diamondProgressBar = diamondProgressBar,
+        goldOfflineMultiplier = goldOfflineMultiplier,
+        generalSale = generalSale
     )
 }

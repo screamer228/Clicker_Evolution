@@ -75,6 +75,13 @@ class HostActivity : AppCompatActivity() {
         checkOfflineProduction()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.saveResources()
+        viewModel.saveStats()
+        viewModel.saveLastExitTime()
+    }
+
     private fun checkOfflineProduction() {
         val offlineEarned = viewModel.calculateGoldForOfflineTime()
 
@@ -83,22 +90,9 @@ class HostActivity : AppCompatActivity() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel.saveResources()
-        viewModel.saveStats()
-        viewModel.saveLastExitTime()
-    }
-
     private fun showDialogGoldOfflineEarned(goldValue: Int) {
         val dialogFragment = DialogFragment(goldValue)
         dialogFragment.show(supportFragmentManager, "Dialog Fragment")
-    }
-
-    private fun bindViews() {
-        goldCounterTV = binding.textViewTopBarGoldCounter
-        diamondCounterTV = binding.textViewTopBarDiamondCounter
-        bottomNavigationView = binding.bottomNavigationView
     }
 
     private fun prepareBottomNav() {
@@ -143,5 +137,11 @@ class HostActivity : AppCompatActivity() {
     private fun injectUpgradesViewModel() {
         upgradesViewModel =
             ViewModelProvider(this, upgradesViewModelFactory)[UpgradesViewModel::class.java]
+    }
+
+    private fun bindViews() {
+        goldCounterTV = binding.textViewTopBarGoldCounter
+        diamondCounterTV = binding.textViewTopBarDiamondCounter
+        bottomNavigationView = binding.bottomNavigationView
     }
 }

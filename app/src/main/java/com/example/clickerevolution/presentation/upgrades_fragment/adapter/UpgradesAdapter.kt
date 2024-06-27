@@ -15,7 +15,6 @@ import com.example.clickerevolution.utils.UpgradesDiffUtil
 class UpgradesAdapter(
     private val type: UpgradeType,
     private val onClick: (Upgrade) -> Unit
-//    private val itemClickListener: ItemClickListener
 ) : RecyclerView.Adapter<UpgradesAdapter.ViewHolder>() {
 
     private var upgradesList: List<Upgrade> = emptyList()
@@ -33,32 +32,32 @@ class UpgradesAdapter(
                 UpgradeType.CLICK_TICK -> {
                     binding.upgradePower.text = "Сила: +${item.power}"
                 }
+
                 UpgradeType.TICK_PER_SEC -> {
                     binding.upgradePower.text = "Сила: +${item.power}/сек"
                 }
+
+                else -> {}
             }
 
-            binding.upgradePrice.text = addCommaEveryThreeDigits(item.price)
+            binding.upgradePrice.text = addCommaEveryThreeDigits(item.price.value)
 
             if (isEnabled) {
-                binding.upgradeButtonUpgrade.setCardBackgroundColor(
-                    getColor(
-                        binding.root.context,
-                        R.color.green
+                binding.upgradeButtonUpgrade.apply {
+                    setCardBackgroundColor(
+                        getColor(
+                            binding.root.context,
+                            R.color.green
+                        )
                     )
-                )
+                    strokeColor = getColor(binding.root.context, R.color.black)
+                }
                 binding.upgradeTitle.setTextColor(
                     getColor(
                         binding.root.context,
                         R.color.white
                     )
                 )
-//                binding.upgradePower.setTextColor(
-//                    getColor(
-//                        binding.root.context,
-//                        R.color.yellow
-//                    )
-//                )
                 binding.upgradeLevel.setTextColor(
                     getColor(
                         binding.root.context,
@@ -71,13 +70,6 @@ class UpgradesAdapter(
                         R.color.light_green
                     )
                 )
-//                binding.upgradeLevel.setTextColor(
-//                    getColor(
-//                        binding.root.context,
-//                        R.color.light_green
-//                    )
-//                )
-
                 binding.upgradePrice.setTextColor(
                     getColor(
                         binding.root.context,
@@ -95,12 +87,15 @@ class UpgradesAdapter(
                     onClick(item)
                 }
             } else {
-                binding.upgradeButtonUpgrade.setCardBackgroundColor(
-                    getColor(
-                        binding.root.context,
-                        R.color.gray
+                binding.upgradeButtonUpgrade.apply {
+                    setCardBackgroundColor(
+                        getColor(
+                            binding.root.context,
+                            R.color.gray
+                        )
                     )
-                )
+                    strokeColor = getColor(binding.root.context, R.color.gray)
+                }
                 binding.upgradeTitle.setTextColor(
                     getColor(
                         binding.root.context,
@@ -133,9 +128,6 @@ class UpgradesAdapter(
                 )
                 binding.upgradeButtonUpgrade.isClickable = false
             }
-
-//            binding.overlayView.visibility = if (isEnabled) View.GONE else View.VISIBLE
-
         }
     }
 

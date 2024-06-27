@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.clickerevolution.R
-import com.example.clickerevolution.common.CurrencyType
+import com.example.clickerevolution.common.Currency
 import com.example.clickerevolution.common.Rarity
 import com.example.clickerevolution.data.room.skins.entity.SkinEntity
 import kotlinx.coroutines.CoroutineScope
@@ -54,7 +54,7 @@ abstract class SkinsDatabase : RoomDatabase() {
                         title = "Микрочел",
                         imageId = R.drawable.img_skin1,
                         soundId = R.raw.sound_click,
-                        priceType = CurrencyType.GOLD,
+                        priceType = Currency.GOLD,
                         priceValue = 100,
                         rarity = Rarity.COMMON
                     ),
@@ -62,7 +62,7 @@ abstract class SkinsDatabase : RoomDatabase() {
                         title = " Челикс ",
                         imageId = R.drawable.img_skin2,
                         soundId = R.raw.sound_cookie_click,
-                        priceType = CurrencyType.GOLD,
+                        priceType = Currency.GOLD,
                         priceValue = 500,
                         rarity = Rarity.COMMON
                     ),
@@ -70,7 +70,7 @@ abstract class SkinsDatabase : RoomDatabase() {
                         title = "Горемыка",
                         imageId = R.drawable.img_skin3,
                         soundId = R.raw.sound_cookie_click,
-                        priceType = CurrencyType.GOLD,
+                        priceType = Currency.GOLD,
                         priceValue = 1000,
                         rarity = Rarity.RARE
                     ),
@@ -78,7 +78,7 @@ abstract class SkinsDatabase : RoomDatabase() {
                         title = "Милашка",
                         imageId = R.drawable.img_skin4,
                         soundId = R.raw.sound_cookie_click,
-                        priceType = CurrencyType.GOLD,
+                        priceType = Currency.GOLD,
                         priceValue = 2000,
                         rarity = Rarity.RARE
                     ),
@@ -86,7 +86,7 @@ abstract class SkinsDatabase : RoomDatabase() {
                         title = "Жопа)",
                         imageId = R.drawable.img_skin_ass,
                         soundId = R.raw.sound_skin6,
-                        priceType = CurrencyType.GOLD,
+                        priceType = Currency.GOLD,
                         priceValue = 200,
                         rarity = Rarity.EPIC
                     ),
@@ -94,7 +94,7 @@ abstract class SkinsDatabase : RoomDatabase() {
                         title = "Костлявый",
                         imageId = R.drawable.img_skin7,
                         soundId = R.raw.sound_skin7,
-                        priceType = CurrencyType.DIAMOND,
+                        priceType = Currency.DIAMOND,
                         priceValue = 1,
                         rarity = Rarity.LEGENDARY
                     ),
@@ -102,7 +102,7 @@ abstract class SkinsDatabase : RoomDatabase() {
                         title = "Нежить",
                         imageId = R.drawable.img_skin8,
                         soundId = R.raw.sound_skin8,
-                        priceType = CurrencyType.DIAMOND,
+                        priceType = Currency.DIAMOND,
                         priceValue = 200,
                         rarity = Rarity.LEGENDARY
                     )

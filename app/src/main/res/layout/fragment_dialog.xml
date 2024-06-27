@@ -7,11 +7,15 @@
     android:layout_marginHorizontal="48dp"
     app:cardBackgroundColor="@color/light_blue"
     app:cardCornerRadius="14dp"
-    app:contentPadding="16dp">
+    app:strokeColor="@color/black"
+    app:strokeWidth="@dimen/stroke_width">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="16dp">
 
         <com.example.clickerevolution.custom.TextViewOutline
             android:id="@+id/dialog_title"
@@ -72,11 +76,15 @@
             android:id="@+id/dialog_button_ok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             app:cardBackgroundColor="@color/blue"
+            app:cardElevation="10dp"
             app:contentPadding="16dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dialog_goldCouldEarned">
+            app:layout_constraintTop_toBottomOf="@+id/dialog_goldCouldEarned"
+            app:strokeColor="@color/black"
+            app:strokeWidth="@dimen/stroke_width">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/dialog_textView_ok"
@@ -84,25 +92,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="20dp"
-                android:text="Ок" />
+                android:text="Ок"
+                android:textSize="12sp" />
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/dialog_button_doubleIt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:paddingBottom="4dp"
             app:cardBackgroundColor="@color/green"
             app:contentPadding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dialog_goldCouldEarned">
+            app:layout_constraintTop_toBottomOf="@+id/dialog_goldCouldEarned"
+            app:strokeColor="@color/black"
+            app:strokeWidth="@dimen/stroke_width">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/dialog_textView_doubleIt"
                 style="@style/style_text_default"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Удвоить" />
+                android:text="Удвоить"
+                android:textSize="12sp" />
         </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,7 +30,6 @@ class UpgradesClickFragment : Fragment() {
 
     private lateinit var soundPoolBuy: SoundPool
     private lateinit var soundPoolReject: SoundPool
-//    private lateinit var soundPoolSwipe: SoundPool
 
     @Inject
     lateinit var sharedViewModelFactory: SharedViewModelFactory
@@ -53,7 +52,6 @@ class UpgradesClickFragment : Fragment() {
 
         soundPoolBuy = SoundPool.Builder().setMaxStreams(3).build()
         soundPoolReject = SoundPool.Builder().setMaxStreams(3).build()
-//        soundPoolSwipe = SoundPool.Builder().setMaxStreams(2).build()
 
         return binding.root
     }
@@ -63,13 +61,14 @@ class UpgradesClickFragment : Fragment() {
 
         upgradesViewModel.getUpgradesClickList()
         upgradesViewModel.getUpgradesPerSecList()
+        upgradesViewModel.getUpgradesSpecialList()
 
         val soundIdBuy = soundPoolBuy.load(requireContext(), R.raw.sound_buy, 1)
         val soundIdReject = soundPoolReject.load(requireContext(), R.raw.sound_reject, 1)
 
         adapter = UpgradesAdapter(UpgradeType.CLICK_TICK) { upgrade ->
-            if (sharedViewModel.currentResources.value.gold >= upgrade.price) {
-                buyUpgrade(upgrade.price, upgrade.power, upgrade.id)
+            if (sharedViewModel.currentResources.value.gold >= upgrade.price.value) {
+                buyUpgrade(upgrade)
                 playSound(soundPoolBuy, soundIdBuy)
             } else {
                 playSound(soundPoolReject, soundIdReject)
@@ -82,7 +81,6 @@ class UpgradesClickFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             upgradesViewModel.upgradesClickList.collect {
-                Log.d("upgrades check", "UpgradesClickFragment observer: ${it.size}")
                 updatesAdapterState(it)
             }
         }
@@ -97,13 +95,12 @@ class UpgradesClickFragment : Fragment() {
             }
         }
         adapter.updateList(updatedList)
-        Log.d("upgrades check", "UpgradesClickFragment updatesAdapterState")
     }
 
-    private fun buyUpgrade(price: Int, power: Int, id: Int) {
-        sharedViewModel.subtractGold(price)
-        sharedViewModel.setCurrentClickTick(power)
-        upgradesViewModel.upgradeLevelAndPrice(id)
+    private fun buyUpgrade(upgrade: Upgrade) {
+        sharedViewModel.subtractGold(upgrade.price.value)
+        sharedViewModel.setCurrentClickTick(upgrade.power)
+        upgradesViewModel.upgradeLevelAndPrice(upgrade.id, upgrade.type)
     }
 
     private fun playSound(soundPool: SoundPool, soundId: Int) {
@@ -125,13 +122,6 @@ class UpgradesClickFragment : Fragment() {
                 upgradesViewModelFactory
             )[UpgradesViewModel::class.java]
     }
-
-//    override fun onResume() {
-//        super.onResume()
-//
-//        val soundIdSwipe = soundPoolSwipe.load(requireContext(), R.raw.sound_swipe, 1)
-//        playSound(soundPoolSwipe, soundIdSwipe)
-//    }
 
     companion object {
         fun newInstance() = UpgradesClickFragment()

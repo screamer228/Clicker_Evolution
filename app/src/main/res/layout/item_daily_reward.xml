@@ -51,7 +51,9 @@
         app:cardBackgroundColor="@color/green"
         app:contentPadding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/black"
+        app:strokeWidth="@dimen/stroke_width">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/dailyReward_textView_receive"
@@ -67,9 +69,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_check_mark"
-        app:layout_constraintStart_toStartOf="@+id/dailyReward_button_receive"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/dailyReward_button_receive"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/dailyReward_button_receive"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

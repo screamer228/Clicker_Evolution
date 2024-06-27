@@ -14,7 +14,7 @@ interface UpgradeDao {
     suspend fun getUpgradesByType(type: UpgradeType): List<UpgradeEntity>
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUpgrades(upgrades: List<UpgradeEntity>)
-    @Query("UPDATE upgrades SET level = level + 1, price = price * 1.2 WHERE id = :upgradeId")
+    @Query("UPDATE upgrades SET level = level + 1, priceValue = priceValue * 1.2 WHERE id = :upgradeId")
     suspend fun upgradeLevelAndPrice(upgradeId: Int)
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUpgrade(upgrade: UpgradeEntity)

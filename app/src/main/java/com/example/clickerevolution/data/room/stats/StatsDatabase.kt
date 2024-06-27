@@ -48,7 +48,9 @@ abstract class StatsDatabase : RoomDatabase() {
                 val initialStats = StatsEntity(
                     goldClickTickValue = 1,
                     goldTickPerSecValue = 1,
-                    diamondProgressBar = 0
+                    diamondProgressBar = 0,
+                    goldOfflineMultiplier = 0.2f,
+                    generalSale = 0.0f
                 )
                 skinDao.insertStats(initialStats)
             }

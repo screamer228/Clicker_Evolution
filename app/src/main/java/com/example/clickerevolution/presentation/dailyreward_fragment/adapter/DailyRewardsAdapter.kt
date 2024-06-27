@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clickerevolution.R
-import com.example.clickerevolution.common.CurrencyType
+import com.example.clickerevolution.common.Currency
 import com.example.clickerevolution.common.RewardButtonState
 import com.example.clickerevolution.databinding.ItemDailyRewardBinding
 import com.example.clickerevolution.presentation.model.DailyReward
@@ -32,8 +33,8 @@ class DailyRewardAdapter(
             binding.dailyRewardReward.text = item.reward.value.toString()
 
             when (item.reward.type) {
-                CurrencyType.GOLD -> binding.dailyRewardIconCoin.setImageResource(R.drawable.ic_coin)
-                CurrencyType.DIAMOND -> binding.dailyRewardIconCoin.setImageResource(R.drawable.ic_diamond)
+                Currency.GOLD -> binding.dailyRewardIconCoin.setImageResource(R.drawable.ic_coin)
+                Currency.DIAMOND -> binding.dailyRewardIconCoin.setImageResource(R.drawable.ic_diamond)
             }
 
             binding.dailyRewardTextViewReceive.text = "Получить"
@@ -45,7 +46,8 @@ class DailyRewardAdapter(
                     RewardButtonState.CLAIM -> {
                         binding.dailyRewardImageCheckMark.visibility = View.GONE
                         isEnabled = true
-                        setCardBackgroundColor(ContextCompat.getColor(context, R.color.green))
+                        setCardBackgroundColor(getColor(context, R.color.green))
+                        strokeColor = getColor(context, R.color.black)
                         setOnClickListener {
                             onAction(item, Action.CLAIM)
                         }
@@ -60,7 +62,8 @@ class DailyRewardAdapter(
                     RewardButtonState.NOT_AVAILABLE -> {
                         binding.dailyRewardImageCheckMark.visibility = View.GONE
                         isEnabled = false
-                        setCardBackgroundColor(ContextCompat.getColor(context, R.color.gray))
+                        setCardBackgroundColor(getColor(context, R.color.gray))
+                        strokeColor = getColor(context, R.color.gray)
                     }
                 }
             }
