@@ -3,7 +3,7 @@ package com.example.clickerevolution.utils
 import androidx.recyclerview.widget.DiffUtil
 import com.example.clickerevolution.presentation.model.DailyReward
 
-class DailyRewardDiffUtil(
+class DailyRewardsDiffUtil(
     private val oldList: List<DailyReward>,
     private val newList: List<DailyReward>
 ) : DiffUtil.Callback() {

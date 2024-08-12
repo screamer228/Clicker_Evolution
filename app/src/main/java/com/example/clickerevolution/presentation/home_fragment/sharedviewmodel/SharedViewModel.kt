@@ -1,13 +1,12 @@
 package com.example.clickerevolution.presentation.home_fragment.sharedviewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.clickerevolution.common.Price
 import com.example.clickerevolution.common.Currency
+import com.example.clickerevolution.common.Price
 import com.example.clickerevolution.data.repository.prefs.PrefsRepository
-import com.example.clickerevolution.data.repository.stats.StatsRepository
 import com.example.clickerevolution.data.repository.skins.SkinsRepository
+import com.example.clickerevolution.data.repository.stats.StatsRepository
 import com.example.clickerevolution.presentation.model.CurrentSkin
 import com.example.clickerevolution.presentation.model.Resources
 import com.example.clickerevolution.presentation.model.Stats
@@ -17,6 +16,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -115,7 +116,7 @@ class SharedViewModel @Inject constructor(
         setGoldValue(incrementedGold)
     }
 
-    fun incrementGoldByClick() {
+    private fun incrementGoldByClick() {
         val incrementedGold = currentResources.value.gold + currentStats.value.goldClickTickValue
         setGoldValue(incrementedGold)
     }
@@ -140,11 +141,19 @@ class SharedViewModel @Inject constructor(
     }
 
     private fun setGoldValue(value: Int) {
-        _currentResources.value = _currentResources.value.copy(gold = value)
+        _currentResources.update {
+            it.copy(
+                gold = value
+            )
+        }
     }
 
     private fun setDiamondsValue(value: Int) {
-        _currentResources.value = _currentResources.value.copy(diamonds = value)
+        _currentResources.update {
+            it.copy(
+                diamonds = value
+            )
+        }
     }
 
     fun synchronizeDiamonds() {
@@ -159,37 +168,55 @@ class SharedViewModel @Inject constructor(
     }
 
     private fun getInitialSkin() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val skin = skinsRepository.getCurrentSkin()
-            setCurrentSkin(skin)
+        viewModelScope.launch {
+            skinsRepository.getCurrentSkin()
+                .flowOn(Dispatchers.IO)
+                .collect {
+                    setCurrentSkin(it)
+                }
         }
     }
 
     fun setCurrentSkin(skin: CurrentSkin) {
-        _currentSkin.value = skin
+        _currentSkin.update {
+            skin
+        }
     }
 
     private fun getInitialStats() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val stats = statsRepository.getStats()
-            _currentStats.value = stats
+        viewModelScope.launch {
+            statsRepository.getStats()
+                .flowOn(Dispatchers.IO)
+                .collect { stats ->
+                    _currentStats.update {
+                        stats
+                    }
+                }
         }
     }
 
     fun setCurrentClickTick(plusTickValue: Int) {
-        val incrementedTick = _currentStats.value.goldClickTickValue + plusTickValue
-        _currentStats.value = _currentStats.value.copy(goldClickTickValue = incrementedTick)
+        _currentStats.update { stats ->
+            stats.copy(
+                goldClickTickValue = stats.goldClickTickValue + plusTickValue
+            )
+        }
     }
 
     fun setCurrentTickPerSec(plusTickValue: Int) {
-        val incrementedTick = _currentStats.value.goldTickPerSecValue + plusTickValue
-        _currentStats.value = _currentStats.value.copy(goldTickPerSecValue = incrementedTick)
+        _currentStats.update { stats ->
+            stats.copy(
+                goldTickPerSecValue = stats.goldTickPerSecValue + plusTickValue
+            )
+        }
     }
 
     fun setCurrentOfflineGoldMultiplier(plusPercent: Int) {
-        val incrementedMultiplier = _currentStats.value.goldTickPerSecValue + plusPercent
-        _currentStats.value =
-            _currentStats.value.copy(goldOfflineMultiplier = incrementedMultiplier.toFloat() / 100)
+        _currentStats.update { stats ->
+            stats.copy(
+                goldOfflineMultiplier = (stats.goldTickPerSecValue + plusPercent).toFloat() / 100
+            )
+        }
     }
 
     fun saveStats() {

@@ -1,15 +1,16 @@
 package com.example.clickerevolution.presentation.shop_fragment.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.clickerevolution.data.repository.skins.SkinsRepository
 import com.example.clickerevolution.presentation.model.Skin
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,20 +21,21 @@ class ShopViewModel @Inject constructor(
     private val _skinsList = MutableStateFlow<List<Skin>>(listOf())
     val skinsList: StateFlow<List<Skin>> = _skinsList.asStateFlow()
 
-//    val skinsList: StateFlow<List<Skin>> = skinsRepository.allSkins.stateIn(
-//        viewModelScope,
-//        SharingStarted.WhileSubscribed(5000),
-//        emptyList()
-//    )
-
     init {
         getSkinsList()
     }
 
     private fun getSkinsList() {
-        viewModelScope.launch(Dispatchers.IO) {
-            _skinsList.value = skinsRepository.getAllSkins()
+        viewModelScope.launch {
+            skinsRepository.getAllSkins()
+                .flowOn(Dispatchers.IO)
+                .collect { skinsList ->
+                    _skinsList.update {
+                        skinsList
+                    }
+                }
         }
+        Log.d("flow check", "${skinsList.value.size}")
     }
 
     fun purchaseSkin(skinId: Int) {

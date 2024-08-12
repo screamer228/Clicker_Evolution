@@ -9,6 +9,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -32,22 +34,38 @@ class UpgradesViewModel @Inject constructor(
     }
 
     fun getUpgradesClickList() {
-        viewModelScope.launch(Dispatchers.IO) {
-            _upgradesClickList.value = upgradesRepository.getUpgradesByType(UpgradeType.CLICK_TICK)
+        viewModelScope.launch {
+            upgradesRepository.getUpgradesByType(UpgradeType.CLICK_TICK)
+                .flowOn(Dispatchers.IO)
+                .collect { upgradesClickList ->
+                    _upgradesClickList.update {
+                        upgradesClickList
+                    }
+                }
         }
     }
 
     fun getUpgradesPerSecList() {
-        viewModelScope.launch(Dispatchers.IO) {
-            _upgradesPerSecList.value =
-                upgradesRepository.getUpgradesByType(UpgradeType.TICK_PER_SEC)
+        viewModelScope.launch {
+            upgradesRepository.getUpgradesByType(UpgradeType.TICK_PER_SEC)
+                .flowOn(Dispatchers.IO)
+                .collect { upgradesPerSecList ->
+                    _upgradesPerSecList.update {
+                        upgradesPerSecList
+                    }
+                }
         }
     }
 
     fun getUpgradesSpecialList() {
         viewModelScope.launch(Dispatchers.IO) {
-            _upgradesSpecialList.value =
-                upgradesRepository.getUpgradesByType(UpgradeType.SPECIAL)
+            upgradesRepository.getUpgradesByType(UpgradeType.SPECIAL)
+                .flowOn(Dispatchers.IO)
+                .collect { upgradesSpecialList ->
+                    _upgradesSpecialList.update {
+                        upgradesSpecialList
+                    }
+                }
         }
     }
 

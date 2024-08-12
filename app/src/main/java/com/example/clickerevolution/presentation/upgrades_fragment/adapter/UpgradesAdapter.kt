@@ -143,9 +143,6 @@ class UpgradesAdapter(
         val item = upgradesList[position]
         val isEnabled = position == 0 || upgradesList[position - 1].level >= 1
         holder.bind(item, isEnabled)
-//        holder.itemView.setOnClickListener {
-//            itemClickListener.onItemClick(item.id)
-//        }
     }
 
     override fun getItemCount(): Int {

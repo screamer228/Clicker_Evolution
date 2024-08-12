@@ -12,14 +12,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
-import com.example.clickerevolution.databinding.FragmentDialogBinding
 import com.example.clickerevolution.databinding.FragmentUpgradeDetailBinding
 import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModel
 import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModelFactory
 import com.example.clickerevolution.presentation.model.Upgrade
 import com.example.clickerevolution.presentation.upgrades_fragment.viewmodel.UpgradesViewModel
 import com.example.clickerevolution.presentation.upgrades_fragment.viewmodel.UpgradesViewModelFactory
-import com.example.clickerevolution.utils.StringUtil.addCommaEveryThreeDigits
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -70,6 +68,7 @@ class UpgradeDetailFragment(
         val soundIdReject = soundPool.load(requireContext(), R.raw.sound_reject, 1)
 
 //        var upgrade = Upgrade()
+        //TODO создать отдельную UpgradeDetailViewModel
 
         viewLifecycleOwner.lifecycleScope.launch {
             upgradesViewModel.upgradesSpecialList.collect {

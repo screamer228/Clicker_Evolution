@@ -4,7 +4,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +12,7 @@ import com.example.clickerevolution.common.Currency
 import com.example.clickerevolution.common.RewardButtonState
 import com.example.clickerevolution.databinding.ItemDailyRewardBinding
 import com.example.clickerevolution.presentation.model.DailyReward
-import com.example.clickerevolution.utils.DailyRewardDiffUtil
+import com.example.clickerevolution.utils.DailyRewardsDiffUtil
 
 class DailyRewardAdapter(
     private val onAction: (DailyReward, Action) -> Unit
@@ -88,7 +87,7 @@ class DailyRewardAdapter(
     fun updateList(newDataList: List<DailyReward>, currentStreak: Int, rewardAvailable: Boolean) {
         this.currentStreak = currentStreak
         this.rewardAvailable = rewardAvailable
-        val diffUtil = DailyRewardDiffUtil(rewardsList, newDataList)
+        val diffUtil = DailyRewardsDiffUtil(rewardsList, newDataList)
         val diffResult = DiffUtil.calculateDiff(diffUtil)
         rewardsList = newDataList
         Log.d("DailyRewards", "New RewardsList in adapter: $rewardsList")
