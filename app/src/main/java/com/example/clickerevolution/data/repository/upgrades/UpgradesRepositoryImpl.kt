@@ -27,4 +27,8 @@ class UpgradesRepositoryImpl @Inject constructor(
     override suspend fun upgradeLevelAndPrice(upgradeId: Int) {
         upgradeDao.upgradeLevelAndPrice(upgradeId)
     }
+
+    override suspend fun upgradeLevelAndPriceSpecial(upgradeId: Int) {
+        upgradeDao.upgradeLevelAndPriceSpecial(upgradeId)
+    }
 }

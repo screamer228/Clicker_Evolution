@@ -3,6 +3,7 @@ package com.example.clickerevolution.presentation.upgradedetail_fragment
 import android.app.Dialog
 import android.media.SoundPool
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -125,7 +126,8 @@ class UpgradeDetailFragment(
             }
         }
 
-        upgradesViewModel.upgradeLevelAndPrice(upgrade.id, upgrade.type)
+        upgradeDetailViewModel.upgradeLevelAndPriceSpecial(upgrade.id)
+        upgradesViewModel.getUpgradesSpecialList()
     }
 
     private fun playSound(soundPool: SoundPool, soundId: Int) {

@@ -69,9 +69,18 @@ class SharedViewModel @Inject constructor(
     }
 
     private fun onMaxClicksReached() {
-        val incrementedDiamonds = _currentResources.value.diamonds + 1
+        val incrementedDiamonds =
+            _currentResources.value.diamonds + _currentStats.value.diamondsTickByFullBar
         setDiamondsValue(incrementedDiamonds)
-        _currentStats.value = _currentStats.value.copy(diamondProgressBar = 0)
+        resetDiamondProgressBar()
+    }
+
+    private fun resetDiamondProgressBar() {
+        _currentStats.update { stats ->
+            stats.copy(
+                diamondProgressBar = 0
+            )
+        }
     }
 
     fun calculateGoldForOfflineTime(): Int {
@@ -79,8 +88,8 @@ class SharedViewModel @Inject constructor(
         val currentTime = System.currentTimeMillis()
         var elapsedTime = (currentTime - lastExitTime) / 1000
 
-        if (elapsedTime > 7200) {
-            elapsedTime = 7200
+        if (elapsedTime > MAX_OFFLINE_PRODUCTION_TIME) {
+            elapsedTime = MAX_OFFLINE_PRODUCTION_TIME.toLong()
         }
 
         val goldIncrement =
@@ -233,3 +242,5 @@ class SharedViewModel @Inject constructor(
         }
     }
 }
+
+private const val MAX_OFFLINE_PRODUCTION_TIME = 14400

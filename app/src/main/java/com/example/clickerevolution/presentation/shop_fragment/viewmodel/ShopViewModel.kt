@@ -35,7 +35,6 @@ class ShopViewModel @Inject constructor(
                     }
                 }
         }
-        Log.d("flow check", "${skinsList.value.size}")
     }
 
     fun purchaseSkin(skinId: Int) {

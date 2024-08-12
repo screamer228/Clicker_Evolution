@@ -19,8 +19,11 @@ interface UpgradeDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUpgrades(upgrades: List<UpgradeEntity>)
 
-    @Query("UPDATE upgrades SET level = level + 1, priceValue = priceValue * 1.2 WHERE id = :upgradeId")
+    @Query("UPDATE upgrades SET level = level + 1, priceValue = priceValue * $PRICE_MULTIPLIER WHERE id = :upgradeId")
     suspend fun upgradeLevelAndPrice(upgradeId: Int)
+
+    @Query("UPDATE upgrades SET level = level + 1, priceValue = priceValue + level * $PRICE_SPECIAL_MULTIPLIER WHERE id = :upgradeId")
+    suspend fun upgradeLevelAndPriceSpecial(upgradeId: Int)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUpgrade(upgrade: UpgradeEntity)
@@ -28,3 +31,6 @@ interface UpgradeDao {
     @Update
     suspend fun updateUpgrade(upgrade: UpgradeEntity)
 }
+
+private const val PRICE_MULTIPLIER = 1.2
+private const val PRICE_SPECIAL_MULTIPLIER = 10

@@ -1,6 +1,5 @@
 package com.example.clickerevolution.presentation.upgradedetail_fragment.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.clickerevolution.common.Currency
@@ -9,6 +8,7 @@ import com.example.clickerevolution.common.UpgradeType
 import com.example.clickerevolution.data.repository.upgrades.UpgradesRepository
 import com.example.clickerevolution.presentation.model.Upgrade
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -36,11 +36,7 @@ class UpgradeDetailViewModel @Inject constructor(
             isEnabled = true
         )
     )
-    val detailUpgrade : StateFlow<Upgrade> = _detailUpgrade.asStateFlow()
-
-//    init {
-//        getDetailUpgrade()
-//    }
+    val detailUpgrade: StateFlow<Upgrade> = _detailUpgrade.asStateFlow()
 
     fun getDetailUpgrade(upgradeId: Int) {
         viewModelScope.launch {
@@ -52,6 +48,12 @@ class UpgradeDetailViewModel @Inject constructor(
                     }
                 }
         }
-        Log.d("special check", "$upgradeId, ${detailUpgrade.value}")
+    }
+
+    fun upgradeLevelAndPriceSpecial(upgradeId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            async { upgradesRepository.upgradeLevelAndPriceSpecial(upgradeId) }.await()
+            getDetailUpgrade(upgradeId)
+        }
     }
 }
