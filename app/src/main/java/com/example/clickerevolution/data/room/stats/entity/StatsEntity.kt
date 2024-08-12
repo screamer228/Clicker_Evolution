@@ -8,7 +8,7 @@ data class StatsEntity(
     @PrimaryKey val id: Int = 0,
     val goldClickTickValue: Int,
     val goldTickPerSecValue: Int,
+    val diamondsTickByFullBar: Int,
     val diamondProgressBar: Int,
-    val goldOfflineMultiplier: Float,
-    val generalSale: Float
+    val goldOfflineMultiplier: Float
 )

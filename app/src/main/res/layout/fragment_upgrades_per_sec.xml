@@ -10,16 +10,10 @@
         android:id="@+id/recyclerView_upgradesPerSec"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="4dp"
+        android:paddingVertical="4dp"
         android:clipToPadding="false"
         android:paddingBottom="70dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_upgrade" />
-
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="PerSec"-->
-<!--        android:textSize="50sp"/>-->
 
 </FrameLayout>

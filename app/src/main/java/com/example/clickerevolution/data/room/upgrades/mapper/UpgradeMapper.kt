@@ -8,6 +8,7 @@ fun UpgradeEntity.toUpgrade() : Upgrade {
     return Upgrade(
         id = id,
         title = title,
+        description = description,
         power = power,
         level = level,
         price = Price(priceType, priceValue),

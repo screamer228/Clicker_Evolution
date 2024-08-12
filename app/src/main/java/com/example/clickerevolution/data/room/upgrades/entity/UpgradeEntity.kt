@@ -9,6 +9,7 @@ import com.example.clickerevolution.common.UpgradeType
 data class UpgradeEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val title: String,
+    val description: String = "",
     val power: Int,
     val level: Int = 0,
     val priceType: Currency,

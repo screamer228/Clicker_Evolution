@@ -18,6 +18,12 @@ class UpgradesRepositoryImpl @Inject constructor(
         )
     }
 
+    override fun getDetailUpgradeById(upgradeId: Int): Flow<Upgrade> = flow {
+        emit(
+            upgradeDao.getDetailUpgradeById(upgradeId).toUpgrade()
+        )
+    }
+
     override suspend fun upgradeLevelAndPrice(upgradeId: Int) {
         upgradeDao.upgradeLevelAndPrice(upgradeId)
     }

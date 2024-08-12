@@ -1,13 +1,11 @@
 package com.example.clickerevolution.data.room.upgrades
 
 import android.content.Context
-import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.clickerevolution.common.Currency
-import com.example.clickerevolution.common.Price
 import com.example.clickerevolution.common.UpgradeType
 import com.example.clickerevolution.data.room.upgrades.entity.UpgradeEntity
 import kotlinx.coroutines.CoroutineScope
@@ -121,22 +119,25 @@ abstract class UpgradesDatabase : RoomDatabase() {
                         type = UpgradeType.TICK_PER_SEC
                     ),
                     UpgradeEntity(
-                        title = "Любовь",
-                        power = 25,
+                        title = "Сон",
+                        description = "Оффлайн сбор становится эффективнее",
+                        power = 5,
+                        level = 1,
                         priceType = Currency.DIAMOND,
                         priceValue = 1,
                         type = UpgradeType.SPECIAL
                     ),
                     UpgradeEntity(
-                        title = "Компаньон",
-                        power = 20,
+                        title = " Жадность ",
+                        description = "Вы получаете больше алмазов за заполнение планки",
+                        power = 1,
+                        level = 1,
                         priceType = Currency.DIAMOND,
                         priceValue = 1,
                         type = UpgradeType.SPECIAL
                     )
                 )
                 upgradeDao.insertUpgrades(initialUpgradesList)
-                Log.d("populateDatabase check", "populateSkinsDatabase()")
             }
         }
     }

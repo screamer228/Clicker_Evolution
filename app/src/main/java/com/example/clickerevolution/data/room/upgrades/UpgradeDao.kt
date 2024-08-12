@@ -11,13 +11,20 @@ import com.example.clickerevolution.data.room.upgrades.entity.UpgradeEntity
 @Dao
 interface UpgradeDao {
     @Query("SELECT * FROM upgrades WHERE type = :type")
-    suspend fun getUpgradesByType(type: UpgradeType): List<UpgradeEntity>
+    fun getUpgradesByType(type: UpgradeType): List<UpgradeEntity>
+
+    @Query("SELECT * FROM upgrades WHERE id = :id")
+    fun getDetailUpgradeById(id: Int): UpgradeEntity
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUpgrades(upgrades: List<UpgradeEntity>)
+
     @Query("UPDATE upgrades SET level = level + 1, priceValue = priceValue * 1.2 WHERE id = :upgradeId")
     suspend fun upgradeLevelAndPrice(upgradeId: Int)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUpgrade(upgrade: UpgradeEntity)
+
     @Update
     suspend fun updateUpgrade(upgrade: UpgradeEntity)
 }

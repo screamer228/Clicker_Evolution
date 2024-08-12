@@ -13,7 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
 import com.example.clickerevolution.databinding.FragmentDailyRewardsBinding
-import com.example.clickerevolution.presentation.dailyreward_fragment.adapter.DailyRewardAdapter
+import com.example.clickerevolution.presentation.dailyreward_fragment.adapter.DailyRewardsAdapter
 import com.example.clickerevolution.presentation.dailyreward_fragment.viewmodel.DailyRewardsViewModel
 import com.example.clickerevolution.presentation.dailyreward_fragment.viewmodel.DailyRewardsViewModelFactory
 import com.example.clickerevolution.presentation.model.DailyReward
@@ -26,7 +26,7 @@ import javax.inject.Inject
 class DailyRewardsFragment() : DialogFragment() {
 
     private lateinit var binding: FragmentDailyRewardsBinding
-    private lateinit var adapter: DailyRewardAdapter
+    private lateinit var adapter: DailyRewardsAdapter
     private lateinit var soundPool: SoundPool
 
     @Inject
@@ -41,7 +41,6 @@ class DailyRewardsFragment() : DialogFragment() {
         val dialog = super.onCreateDialog(savedInstanceState)
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setCanceledOnTouchOutside(false)
-
 
         return dialog
     }
@@ -77,9 +76,9 @@ class DailyRewardsFragment() : DialogFragment() {
         val soundIdReceive = soundPool.load(requireContext(), R.raw.sound_action1, 1)
         val soundIdClose = soundPool.load(requireContext(), R.raw.sound_action2, 1)
 
-        adapter = DailyRewardAdapter { reward, action ->
+        adapter = DailyRewardsAdapter { reward, action ->
             when (action) {
-                DailyRewardAdapter.Action.CLAIM -> {
+                DailyRewardsAdapter.Action.CLAIM -> {
                     sharedViewModel.claimReward(reward.reward)
                     dailyRewardsViewModel.claimDailyReward()
                     soundPool.play(soundIdReceive, 0.9f, 0.9f, 1, 0, 1.0f)

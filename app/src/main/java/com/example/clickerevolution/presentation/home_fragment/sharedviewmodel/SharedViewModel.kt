@@ -211,10 +211,18 @@ class SharedViewModel @Inject constructor(
         }
     }
 
-    fun setCurrentOfflineGoldMultiplier(plusPercent: Int) {
+    fun setCurrentGoldOfflineMultiplier(plusPercent: Int) {
         _currentStats.update { stats ->
             stats.copy(
                 goldOfflineMultiplier = (stats.goldTickPerSecValue + plusPercent).toFloat() / 100
+            )
+        }
+    }
+
+    fun setCurrentDiamondsTick(plusTickValue: Int) {
+        _currentStats.update { stats ->
+            stats.copy(
+                diamondsTickByFullBar = stats.diamondsTickByFullBar + plusTickValue
             )
         }
     }

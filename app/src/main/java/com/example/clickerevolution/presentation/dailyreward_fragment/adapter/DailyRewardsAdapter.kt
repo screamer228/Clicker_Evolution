@@ -14,9 +14,9 @@ import com.example.clickerevolution.databinding.ItemDailyRewardBinding
 import com.example.clickerevolution.presentation.model.DailyReward
 import com.example.clickerevolution.utils.DailyRewardsDiffUtil
 
-class DailyRewardAdapter(
+class DailyRewardsAdapter(
     private val onAction: (DailyReward, Action) -> Unit
-) : RecyclerView.Adapter<DailyRewardAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<DailyRewardsAdapter.ViewHolder>() {
 
     private var rewardsList: List<DailyReward> = emptyList()
     private var currentStreak: Int = 0

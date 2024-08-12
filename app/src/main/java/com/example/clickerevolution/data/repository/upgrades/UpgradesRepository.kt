@@ -6,5 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface UpgradesRepository {
     fun getUpgradesByType(type: UpgradeType): Flow<List<Upgrade>>
+    fun getDetailUpgradeById(upgradeId: Int): Flow<Upgrade>
     suspend fun upgradeLevelAndPrice(upgradeId: Int)
 }

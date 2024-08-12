@@ -7,9 +7,9 @@ fun StatsEntity.toStats(): Stats {
     return Stats(
         goldClickTickValue = goldClickTickValue,
         goldTickPerSecValue = goldTickPerSecValue,
+        diamondsTickByFullBar = diamondsTickByFullBar,
         diamondProgressBar = diamondProgressBar,
-        goldOfflineMultiplier = goldOfflineMultiplier,
-        generalSale = generalSale
+        goldOfflineMultiplier = goldOfflineMultiplier
     )
 }
 
@@ -17,8 +17,8 @@ fun Stats.toEntity(): StatsEntity {
     return StatsEntity(
         goldClickTickValue = goldClickTickValue,
         goldTickPerSecValue = goldTickPerSecValue,
+        diamondsTickByFullBar = diamondsTickByFullBar,
         diamondProgressBar = diamondProgressBar,
-        goldOfflineMultiplier = goldOfflineMultiplier,
-        generalSale = generalSale
+        goldOfflineMultiplier = goldOfflineMultiplier
     )
 }
