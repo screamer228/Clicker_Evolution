@@ -16,9 +16,10 @@ import com.example.clickerevolution.databinding.FragmentDailyRewardsBinding
 import com.example.clickerevolution.presentation.dailyreward_fragment.adapter.DailyRewardsAdapter
 import com.example.clickerevolution.presentation.dailyreward_fragment.viewmodel.DailyRewardsViewModel
 import com.example.clickerevolution.presentation.dailyreward_fragment.viewmodel.DailyRewardsViewModelFactory
-import com.example.clickerevolution.presentation.model.DailyReward
 import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModel
 import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModelFactory
+import com.example.clickerevolution.presentation.model.DailyReward
+import com.example.clickerevolution.utils.NonScrollableLinearLayoutManager
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -65,8 +66,11 @@ class DailyRewardsFragment() : DialogFragment() {
             )[DailyRewardsViewModel::class.java]
 
         soundPool = SoundPool.Builder().setMaxStreams(2).build()
-
         binding = FragmentDailyRewardsBinding.inflate(inflater, container, false)
+
+        binding.recyclerViewDailyRewards.layoutManager =
+            NonScrollableLinearLayoutManager(requireContext())
+
         return binding.root
     }
 
