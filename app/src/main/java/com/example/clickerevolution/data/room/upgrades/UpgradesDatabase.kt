@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.clickerevolution.R
 import com.example.clickerevolution.common.Currency
 import com.example.clickerevolution.common.UpgradeType
 import com.example.clickerevolution.data.room.upgrades.entity.UpgradeEntity
@@ -121,6 +122,7 @@ abstract class UpgradesDatabase : RoomDatabase() {
                     UpgradeEntity(
                         title = "Сон",
                         description = "Оффлайн сбор становится эффективнее",
+                        imageId = R.drawable.img_upgrade_special1_2,
                         power = 5,
                         level = 1,
                         priceType = Currency.DIAMOND,
@@ -130,6 +132,7 @@ abstract class UpgradesDatabase : RoomDatabase() {
                     UpgradeEntity(
                         title = " Жадность ",
                         description = "Вы получаете больше алмазов за заполнение планки",
+                        imageId = R.drawable.img_upgrade_special2,
                         power = 1,
                         level = 1,
                         priceType = Currency.DIAMOND,

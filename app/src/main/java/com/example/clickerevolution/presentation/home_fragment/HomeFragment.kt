@@ -4,6 +4,7 @@ import android.media.SoundPool
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -20,6 +21,9 @@ import com.example.clickerevolution.utils.AnimationUtils.startHomeCoinAnimation
 import com.example.clickerevolution.utils.AnimationUtils.startHomeClickAnimation
 import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModel
 import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModelFactory
+import com.example.clickerevolution.utils.AnimationUtils.resetViewSize
+import com.example.clickerevolution.utils.AnimationUtils.setTouchAnimation
+import com.example.clickerevolution.utils.AnimationUtils.shrinkView
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -91,20 +95,24 @@ class HomeFragment : Fragment() {
             }
         }
 
-        imageDailyReward.setOnClickListener {
-            val dialogFragment = DailyRewardsFragment()
-            dialogFragment.show(parentFragmentManager, "Daily Rewards Fragment")
-            soundPool.play(soundIdDailyReward, 0.9f, 0.9f, 1, 0, 1.0f)
+        imageDailyReward.apply {
+            setTouchAnimation(0.9f)
+            setOnClickListener {
+                val dialogFragment = DailyRewardsFragment()
+                dialogFragment.show(parentFragmentManager, "Daily Rewards Fragment")
+                soundPool.play(soundIdDailyReward, 0.9f, 0.9f, 1, 0, 1.0f)
+            }
         }
 
-        imageToClick.setOnClickListener {
+        imageToClick.apply {
+            setTouchAnimation(0.9f)
+            setOnClickListener {
+                sharedViewModel.onButtonClick()
 
-            sharedViewModel.onButtonClick()
+                soundPool.play(soundIdClick, 0.9f, 0.9f, 1, 0, 1.0f)
 
-            soundPool.play(soundIdClick, 0.9f, 0.9f, 1, 0, 1.0f)
-
-            startHomeClickAnimation(imageToClick)
-            startHomeCoinAnimation(binding.coinsContainer)
+                startHomeCoinAnimation(binding.coinsContainer)
+            }
         }
     }
 

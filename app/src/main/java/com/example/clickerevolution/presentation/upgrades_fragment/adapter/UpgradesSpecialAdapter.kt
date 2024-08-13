@@ -10,6 +10,7 @@ import com.example.clickerevolution.common.UpgradeType
 import com.example.clickerevolution.databinding.ItemUpgradeBinding
 import com.example.clickerevolution.databinding.ItemUpgradeSpecialBinding
 import com.example.clickerevolution.presentation.model.Upgrade
+import com.example.clickerevolution.utils.AnimationUtils.setTouchAnimation
 import com.example.clickerevolution.utils.StringUtil.addCommaEveryThreeDigits
 import com.example.clickerevolution.utils.UpgradesDiffUtil
 
@@ -25,11 +26,14 @@ class UpgradesSpecialAdapter(
 
         fun bind(item: Upgrade) {
             binding.upgradeSpecialTitle.text = item.title
-//            binding.upgradeImage.setImageResource(item.imageId)
+            binding.upgradeSpecialImage.setImageResource(item.imageId)
             binding.upgradeSpecialLevel.text = "Уровень: ${item.level}"
 
-            binding.upgradeSpecialCardView.setOnClickListener {
-                onClick(item.id)
+            binding.upgradeSpecialCardView.apply {
+                setTouchAnimation(0.95f)
+                setOnClickListener {
+                    onClick(item.id)
+                }
             }
         }
     }

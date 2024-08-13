@@ -7,6 +7,7 @@ data class Upgrade(
     val id: Int,
     val title: String,
     val description: String,
+    val imageId: Int = 0,
     val power: Int,
     val level: Int,
     val price: Price,

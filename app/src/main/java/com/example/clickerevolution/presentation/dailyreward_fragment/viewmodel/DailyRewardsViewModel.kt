@@ -89,14 +89,14 @@ class DailyRewardsViewModel @Inject constructor(
 
     fun generateReward(streak: Int): Price {
         return when (streak) {
-            1 -> Price(Currency.GOLD, 50)
-            2 -> Price(Currency.GOLD, 100)
-            3 -> Price(Currency.GOLD, 150)
-            4 -> Price(Currency.GOLD, 200)
-            5 -> Price(Currency.GOLD, 250)
-            6 -> Price(Currency.GOLD, 300)
-            7 -> Price(Currency.DIAMOND, 50)
-            else -> Price(Currency.GOLD, 50)
+            1 -> Price(Currency.DIAMOND, 2)
+            2 -> Price(Currency.DIAMOND, 5)
+            3 -> Price(Currency.DIAMOND, 7)
+            4 -> Price(Currency.DIAMOND, 10)
+            5 -> Price(Currency.DIAMOND, 15)
+            6 -> Price(Currency.DIAMOND, 20)
+            7 -> Price(Currency.DIAMOND, 30)
+            else -> Price(Currency.DIAMOND, 10)
         }
     }
 

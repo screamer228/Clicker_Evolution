@@ -3,6 +3,7 @@ package com.example.clickerevolution.utils
 import android.animation.Animator
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -67,6 +68,44 @@ object AnimationUtils {
         })
 
         animatorSet.start()
+    }
+
+    fun View.setTouchAnimation(percentage: Float) {
+        this.setOnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    // Вызов функции анимации уменьшения размера при нажатии
+                    shrinkView(v, percentage)
+                    false
+                }
+
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                    // Вызов функции анимации восстановления размера при отпускании
+                    resetViewSize(v)
+                    false
+                }
+
+                else -> false
+            }
+        }
+    }
+
+    // Функция для уменьшения размера View
+    fun shrinkView(view: View, percentage: Float) {
+        view.animate()
+            .scaleX(percentage)  // Уменьшение размера по оси X
+            .scaleY(percentage)  // Уменьшение размера по оси Y
+            .setDuration(50)  // Длительность анимации
+            .start()
+    }
+
+    // Функция для восстановления исходного размера View
+    fun resetViewSize(view: View) {
+        view.animate()
+            .scaleX(1f)  // Восстановление исходного размера по оси X
+            .scaleY(1f)  // Восстановление исходного размера по оси Y
+            .setDuration(50)  // Длительность анимации
+            .start()
     }
 
     fun startHomeClickAnimation(view: View) {

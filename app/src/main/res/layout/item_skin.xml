@@ -47,6 +47,7 @@
             app:cardBackgroundColor="@color/green"
             app:cardCornerRadius="12dp"
             app:contentPadding="8dp"
+            app:rippleColor="@color/transparent"
             app:strokeColor="@color/black"
             app:strokeWidth="@dimen/stroke_width">
 

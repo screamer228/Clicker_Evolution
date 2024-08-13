@@ -8,6 +8,7 @@
     android:layout_marginVertical="16dp"
     app:cardBackgroundColor="@color/light_blue"
     app:contentPadding="8dp"
+    app:rippleColor="@color/transparent"
     app:strokeColor="@color/black"
     app:strokeWidth="@dimen/stroke_width">
 
@@ -26,13 +27,25 @@
             android:text="Название"
             android:textSize="12sp" />
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/upgradeSpecial_image"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="110dp"
+            android:layout_margin="8dp"
             android:padding="8dp"
-            android:scaleType="fitXY"
-            android:src="@mipmap/ic_launcher" />
+            app:cardBackgroundColor="@color/violet"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="@dimen/stroke_width">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/upgradeSpecial_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="2dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_launcher" />
+        </androidx.cardview.widget.CardView>
 
         <com.example.clickerevolution.custom.TextViewOutline
             android:id="@+id/upgradeSpecial_level"

@@ -1,6 +1,5 @@
 package com.example.clickerevolution.presentation.dailyreward_fragment.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +11,7 @@ import com.example.clickerevolution.common.Currency
 import com.example.clickerevolution.common.RewardButtonState
 import com.example.clickerevolution.databinding.ItemDailyRewardBinding
 import com.example.clickerevolution.presentation.model.DailyReward
+import com.example.clickerevolution.utils.AnimationUtils.setTouchAnimation
 import com.example.clickerevolution.utils.DailyRewardsDiffUtil
 
 class DailyRewardsAdapter(
@@ -27,7 +27,6 @@ class DailyRewardsAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: DailyReward) {
-
             binding.dailyRewardTitle.text = "${item.day} день "
             binding.dailyRewardReward.text = item.reward.value.toString()
 
@@ -44,9 +43,16 @@ class DailyRewardsAdapter(
                 when (buttonState) {
                     RewardButtonState.CLAIM -> {
                         binding.dailyRewardImageCheckMark.visibility = View.GONE
+                        binding.dailyRewardTextViewReceive.setTextColor(
+                            getColor(
+                                binding.root.context,
+                                R.color.white
+                            )
+                        )
                         isEnabled = true
                         setCardBackgroundColor(getColor(context, R.color.green))
                         strokeColor = getColor(context, R.color.black)
+                        setTouchAnimation(0.9f)
                         setOnClickListener {
                             onAction(item, Action.CLAIM)
                         }
@@ -60,6 +66,12 @@ class DailyRewardsAdapter(
 
                     RewardButtonState.NOT_AVAILABLE -> {
                         binding.dailyRewardImageCheckMark.visibility = View.GONE
+                        binding.dailyRewardTextViewReceive.setTextColor(
+                            getColor(
+                                binding.root.context,
+                                R.color.gray
+                            )
+                        )
                         isEnabled = false
                         setCardBackgroundColor(getColor(context, R.color.gray))
                         strokeColor = getColor(context, R.color.gray)
@@ -90,7 +102,6 @@ class DailyRewardsAdapter(
         val diffUtil = DailyRewardsDiffUtil(rewardsList, newDataList)
         val diffResult = DiffUtil.calculateDiff(diffUtil)
         rewardsList = newDataList
-        Log.d("DailyRewards", "New RewardsList in adapter: $rewardsList")
         diffResult.dispatchUpdatesTo(this)
 
         rewardsList = newDataList

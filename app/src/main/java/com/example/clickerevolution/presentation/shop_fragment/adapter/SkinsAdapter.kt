@@ -12,6 +12,7 @@ import com.example.clickerevolution.common.Currency
 import com.example.clickerevolution.common.Rarity
 import com.example.clickerevolution.databinding.ItemSkinBinding
 import com.example.clickerevolution.presentation.model.Skin
+import com.example.clickerevolution.utils.AnimationUtils.setTouchAnimation
 import com.example.clickerevolution.utils.SkinsDiffUtil
 import com.example.clickerevolution.utils.StringUtil.addCommaEveryThreeDigits
 
@@ -72,6 +73,8 @@ class SkinsAdapter(
                     )
                 }
             }
+
+            binding.skinButtonAction.setTouchAnimation(0.9f)
 
             when {
                 !item.isPurchased -> {

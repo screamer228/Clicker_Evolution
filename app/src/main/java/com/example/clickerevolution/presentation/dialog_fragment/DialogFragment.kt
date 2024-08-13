@@ -13,6 +13,7 @@ import com.example.clickerevolution.app.App
 import com.example.clickerevolution.databinding.FragmentDialogBinding
 import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModel
 import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModelFactory
+import com.example.clickerevolution.utils.AnimationUtils.setTouchAnimation
 import com.example.clickerevolution.utils.StringUtil.addCommaEveryThreeDigits
 import javax.inject.Inject
 
@@ -58,20 +59,26 @@ class DialogFragment(
         binding.dialogGoldEarned.text = "+ ${addCommaEveryThreeDigits(goldEarned)}"
         binding.dialogGoldCouldEarned.text = "x2 +${addCommaEveryThreeDigits(goldEarned * 2)}"
 
-        binding.dialogButtonOk.setOnClickListener {
-            sharedViewModel.incrementGoldEarnedWhileOffline(goldEarned)
-            soundPool.play(soundIdClick, 0.9f, 0.9f, 1, 0, 1.0f)
-            dismiss()
+        binding.dialogButtonOk.apply {
+            setTouchAnimation(0.9f)
+            setOnClickListener {
+                sharedViewModel.incrementGoldEarnedWhileOffline(goldEarned)
+                soundPool.play(soundIdClick, 0.9f, 0.9f, 1, 0, 1.0f)
+                dismiss()
+            }
         }
 
-        binding.dialogButtonDoubleIt.setOnClickListener {
-            sharedViewModel.incrementGoldEarnedWhileOffline(goldEarned * 2)
-            soundPool.play(soundIdClick, 0.9f, 0.9f, 1, 0, 1.0f)
-            dismiss()
+        binding.dialogButtonDoubleIt.apply {
+            setTouchAnimation(0.9f)
+            setOnClickListener {
+                sharedViewModel.incrementGoldEarnedWhileOffline(goldEarned * 2)
+                soundPool.play(soundIdClick, 0.9f, 0.9f, 1, 0, 1.0f)
+                dismiss()
+            }
         }
     }
 
-    fun injectSharedViewModel() {
+    private fun injectSharedViewModel() {
         sharedViewModel =
             ViewModelProvider(
                 requireActivity(),

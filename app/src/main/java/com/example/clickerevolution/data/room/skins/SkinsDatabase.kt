@@ -51,7 +51,7 @@ abstract class SkinsDatabase : RoomDatabase() {
             suspend fun populateDatabase(skinDao: SkinDao) {
                 val initialSkinsList = listOf(
                     SkinEntity(
-                        title = "Микрочел",
+                        title = " Микрочел ",
                         imageId = R.drawable.img_skin1,
                         soundId = R.raw.sound_click,
                         priceType = Currency.GOLD,
@@ -59,7 +59,7 @@ abstract class SkinsDatabase : RoomDatabase() {
                         rarity = Rarity.COMMON
                     ),
                     SkinEntity(
-                        title = " Челикс ",
+                        title = " Обжора ",
                         imageId = R.drawable.img_skin2,
                         soundId = R.raw.sound_cookie_click,
                         priceType = Currency.GOLD,
@@ -67,28 +67,36 @@ abstract class SkinsDatabase : RoomDatabase() {
                         rarity = Rarity.COMMON
                     ),
                     SkinEntity(
-                        title = "Горемыка",
-                        imageId = R.drawable.img_skin3,
-                        soundId = R.raw.sound_cookie_click,
-                        priceType = Currency.GOLD,
-                        priceValue = 1000,
-                        rarity = Rarity.RARE
-                    ),
-                    SkinEntity(
-                        title = "Милашка",
-                        imageId = R.drawable.img_skin4,
+                        title = " Младенец ",
+                        imageId = R.drawable.img_skin_baby,
                         soundId = R.raw.sound_cookie_click,
                         priceType = Currency.GOLD,
                         priceValue = 2000,
                         rarity = Rarity.RARE
                     ),
                     SkinEntity(
-                        title = "Жопа)",
+                        title = " Ситх ",
+                        imageId = R.drawable.img_skin_mage,
+                        soundId = R.raw.sound_cookie_click,
+                        priceType = Currency.GOLD,
+                        priceValue = 100,
+                        rarity = Rarity.EPIC
+                    ),
+                    SkinEntity(
+                        title = " Жопа)",
                         imageId = R.drawable.img_skin_ass,
                         soundId = R.raw.sound_skin6,
                         priceType = Currency.GOLD,
                         priceValue = 200,
                         rarity = Rarity.EPIC
+                    ),
+                    SkinEntity(
+                        title = " Король ",
+                        imageId = R.drawable.img_skin_king,
+                        soundId = R.raw.sound_skin7,
+                        priceType = Currency.DIAMOND,
+                        priceValue = 1,
+                        rarity = Rarity.LEGENDARY
                     ),
                     SkinEntity(
                         title = "Костлявый",
@@ -99,7 +107,7 @@ abstract class SkinsDatabase : RoomDatabase() {
                         rarity = Rarity.LEGENDARY
                     ),
                     SkinEntity(
-                        title = "Нежить",
+                        title = " Нежить ",
                         imageId = R.drawable.img_skin8,
                         soundId = R.raw.sound_skin8,
                         priceType = Currency.DIAMOND,

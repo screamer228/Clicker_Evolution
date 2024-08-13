@@ -9,6 +9,7 @@ import com.example.clickerevolution.R
 import com.example.clickerevolution.common.UpgradeType
 import com.example.clickerevolution.databinding.ItemUpgradeBinding
 import com.example.clickerevolution.presentation.model.Upgrade
+import com.example.clickerevolution.utils.AnimationUtils.setTouchAnimation
 import com.example.clickerevolution.utils.StringUtil.addCommaEveryThreeDigits
 import com.example.clickerevolution.utils.UpgradesDiffUtil
 
@@ -82,9 +83,12 @@ class UpgradesAdapter(
                         R.color.white
                     )
                 )
-                binding.upgradeButtonUpgrade.isClickable = true
-                binding.upgradeButtonUpgrade.setOnClickListener {
-                    onClick(item)
+                binding.upgradeButtonUpgrade.apply {
+                    isClickable = true
+                    setTouchAnimation(0.9f)
+                    setOnClickListener {
+                        onClick(item)
+                    }
                 }
             } else {
                 binding.upgradeButtonUpgrade.apply {

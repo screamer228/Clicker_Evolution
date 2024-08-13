@@ -63,6 +63,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:rippleColor="@color/transparent"
             app:strokeColor="@color/black"
             app:strokeWidth="@dimen/stroke_width">
 
