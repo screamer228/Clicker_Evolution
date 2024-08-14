@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getColor
+import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -81,22 +83,56 @@ class UpgradeDetailFragment(
             upgradeDetailViewModel.detailUpgrade.collect { upgrade ->
                 binding.upgradeDetailTitle.text = upgrade.title
                 binding.upgradeDetailImage.load(upgrade.imageId)
-                binding.upgradeDetailPower.text = when (upgrade.title) {
-                    "Сон" -> {
-                        "Сила: ${15 + (upgrade.power * upgrade.level)}% + ${upgrade.power}%"
-                    }
 
-                    " Жадность " -> {
-                        "Сила: ${upgrade.power * upgrade.level} + ${upgrade.power}"
+                when (upgrade.level) {
+                    MAX_LEVEL -> {
+                        binding.upgradeDetailPrice.isVisible = false
+                        binding.upgradeDetailIcPriceDiamond.isVisible = false
+                        binding.upgradeDetailPower.text = when (upgrade.title) {
+                            "Сон" -> {
+                                "Сила: ${15 + (upgrade.power * upgrade.level)}%"
+                            }
+
+                            " Жадность " -> {
+                                "Сила: ${upgrade.power * upgrade.level}"
+                            }
+
+                            else -> {
+                                ""
+                            }
+                        }
+                        binding.upgradeDetailActionText.text = "Макс. уровень"
+                        binding.upgradeDetailButtonUpgrade.setCardBackgroundColor(
+                            getColor(
+                                binding.root.context,
+                                R.color.gray
+                            )
+                        )
                     }
 
                     else -> {
-                        ""
+                        binding.upgradeDetailPower.text = when (upgrade.title) {
+                            "Сон" -> {
+                                "Сила: ${15 + (upgrade.power * upgrade.level)}% + ${upgrade.power}%"
+                            }
+
+                            " Жадность " -> {
+                                "Сила: ${upgrade.power * upgrade.level} + ${upgrade.power}"
+                            }
+
+                            else -> {
+                                ""
+                            }
+                        }
                     }
                 }
+
+                binding.upgradeDetailLevel.text = upgrade.level.toString()
+
                 binding.upgradeDetailDescription.text = upgrade.description
-                binding.upgradeDetailLevel.text = "Уровень: ${upgrade.level}"
+
                 binding.upgradeDetailPrice.text = upgrade.price.value.toString()
+
 
                 binding.upgradeDetailButtonUpgrade.apply {
                     setTouchAnimation(0.9f)
@@ -163,3 +199,5 @@ class UpgradeDetailFragment(
             )[UpgradeDetailViewModel::class.java]
     }
 }
+
+private const val MAX_LEVEL = 10

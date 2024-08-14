@@ -2,16 +2,11 @@ package com.example.clickerevolution.presentation.upgrades_fragment.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.clickerevolution.R
-import com.example.clickerevolution.common.UpgradeType
-import com.example.clickerevolution.databinding.ItemUpgradeBinding
 import com.example.clickerevolution.databinding.ItemUpgradeSpecialBinding
 import com.example.clickerevolution.presentation.model.Upgrade
 import com.example.clickerevolution.utils.AnimationUtils.setTouchAnimation
-import com.example.clickerevolution.utils.StringUtil.addCommaEveryThreeDigits
 import com.example.clickerevolution.utils.UpgradesDiffUtil
 
 class UpgradesSpecialAdapter(
@@ -27,7 +22,10 @@ class UpgradesSpecialAdapter(
         fun bind(item: Upgrade) {
             binding.upgradeSpecialTitle.text = item.title
             binding.upgradeSpecialImage.setImageResource(item.imageId)
-            binding.upgradeSpecialLevel.text = "Уровень: ${item.level}"
+            binding.upgradeSpecialLevel.text = when (item.level) {
+                MAX_LEVEL -> "Макс. уровень"
+                else -> item.level.toString()
+            }
 
             binding.upgradeSpecialCardView.apply {
                 setTouchAnimation(0.95f)
@@ -62,3 +60,5 @@ class UpgradesSpecialAdapter(
         diffResult.dispatchUpdatesTo(this)
     }
 }
+
+private const val MAX_LEVEL = 10
