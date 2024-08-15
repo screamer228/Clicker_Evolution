@@ -7,11 +7,12 @@ import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clickerevolution.R
+import com.example.clickerevolution.common.ANIMATION_SCALE
 import com.example.clickerevolution.common.Currency
 import com.example.clickerevolution.common.RewardButtonState
 import com.example.clickerevolution.databinding.ItemDailyRewardBinding
 import com.example.clickerevolution.presentation.model.DailyReward
-import com.example.clickerevolution.utils.AnimationUtils.setTouchAnimation
+import com.example.clickerevolution.utils.AnimationUtils.setOnTouchAnimation
 import com.example.clickerevolution.utils.DailyRewardsDiffUtil
 
 class DailyRewardsAdapter(
@@ -52,7 +53,7 @@ class DailyRewardsAdapter(
                         isEnabled = true
                         setCardBackgroundColor(getColor(context, R.color.green))
                         strokeColor = getColor(context, R.color.black)
-                        setTouchAnimation(0.9f)
+                        setOnTouchAnimation(ANIMATION_SCALE)
                         setOnClickListener {
                             onAction(item, Action.CLAIM)
                         }

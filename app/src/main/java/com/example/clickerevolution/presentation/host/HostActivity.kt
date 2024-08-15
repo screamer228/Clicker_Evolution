@@ -7,14 +7,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.example.clickerevolution.presentation.home_fragment.HomeFragment
-import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModel
 import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
-import com.example.clickerevolution.presentation.shop_fragment.ShopFragment
 import com.example.clickerevolution.databinding.ActivityHostBinding
 import com.example.clickerevolution.presentation.dialog_fragment.DialogFragment
+import com.example.clickerevolution.presentation.home_fragment.HomeFragment
+import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModel
 import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModelFactory
+import com.example.clickerevolution.presentation.shop_fragment.ShopFragment
 import com.example.clickerevolution.presentation.upgrades_fragment.UpgradesFragment
 import com.example.clickerevolution.presentation.upgrades_fragment.viewmodel.UpgradesViewModel
 import com.example.clickerevolution.presentation.upgrades_fragment.viewmodel.UpgradesViewModelFactory
@@ -75,11 +75,18 @@ class HostActivity : AppCompatActivity() {
         checkOfflineProduction()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onResume() {
+        super.onResume()
+
+        viewModel.cancelNotification()
+    }
+
+    override fun onStop() {
+        super.onStop()
         viewModel.saveResources()
         viewModel.saveStats()
         viewModel.saveLastExitTime()
+        viewModel.scheduleNotification(NOTIFICATION_DELAY)
     }
 
     private fun checkOfflineProduction() {
@@ -145,3 +152,5 @@ class HostActivity : AppCompatActivity() {
         bottomNavigationView = binding.bottomNavigationView
     }
 }
+
+private const val NOTIFICATION_DELAY: Long = 14400000

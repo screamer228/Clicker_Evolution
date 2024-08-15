@@ -17,6 +17,7 @@ import com.example.clickerevolution.presentation.upgradedetail_fragment.UpgradeD
 import com.example.clickerevolution.presentation.upgrades_fragment.adapter.UpgradesSpecialAdapter
 import com.example.clickerevolution.presentation.upgrades_fragment.viewmodel.UpgradesViewModel
 import com.example.clickerevolution.presentation.upgrades_fragment.viewmodel.UpgradesViewModelFactory
+import com.example.clickerevolution.utils.NoAnimationItemAnimator
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,10 +29,6 @@ class UpgradesSpecialFragment : Fragment() {
     private lateinit var soundPool: SoundPool
 
     @Inject
-    lateinit var sharedViewModelFactory: SharedViewModelFactory
-    private lateinit var sharedViewModel: SharedViewModel
-
-    @Inject
     lateinit var upgradesViewModelFactory: UpgradesViewModelFactory
     private lateinit var upgradesViewModel: UpgradesViewModel
 
@@ -41,7 +38,6 @@ class UpgradesSpecialFragment : Fragment() {
     ): View {
         (requireActivity().applicationContext as App).appComponent.injectUpgradesSpecialFragment(this)
 
-//        injectSharedViewModel()
         injectUpgradesViewModel()
 
         binding = FragmentUpgradesSpecialBinding.inflate(inflater, container, false)
@@ -63,16 +59,13 @@ class UpgradesSpecialFragment : Fragment() {
         }
 
         binding.recyclerViewUpgradesSpecial.adapter = adapter
+        binding.recyclerViewUpgradesSpecial.itemAnimator = NoAnimationItemAnimator()
 
         viewLifecycleOwner.lifecycleScope.launch {
             upgradesViewModel.upgradesSpecialList.collect {
                 adapter.updateList(it)
             }
         }
-    }
-
-    private fun playSound(soundPool: SoundPool, soundId: Int) {
-        soundPool.play(soundId, 0.9f, 1.0f, 1, 0, 1.0f)
     }
 
     private fun injectUpgradesViewModel() {

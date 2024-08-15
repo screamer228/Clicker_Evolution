@@ -22,7 +22,7 @@ fun UpgradeEntity.toUpgrade() : Upgrade {
 }
 
 val priceMap = mapOf(
-    1 to 5,
+    1 to 1,
     2 to 15,
     3 to 30,
     4 to 50,

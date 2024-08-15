@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.clickerevolution.common.Currency
 import com.example.clickerevolution.common.Price
+import com.example.clickerevolution.data.repository.notification.NotificationRepository
 import com.example.clickerevolution.data.repository.prefs.PrefsRepository
 import com.example.clickerevolution.data.repository.skins.SkinsRepository
 import com.example.clickerevolution.data.repository.stats.StatsRepository
@@ -24,7 +25,8 @@ import javax.inject.Inject
 class SharedViewModel @Inject constructor(
     private val prefsRepository: PrefsRepository,
     private val skinsRepository: SkinsRepository,
-    private val statsRepository: StatsRepository
+    private val statsRepository: StatsRepository,
+    private val notificationRepository: NotificationRepository
 ) : ViewModel() {
 
     private val _currentSkin = MutableStateFlow(CurrentSkin())
@@ -45,6 +47,14 @@ class SharedViewModel @Inject constructor(
         startPassiveGoldIncrement()
         previousDiamonds = _currentResources.value.diamonds
 //        calculateGoldForOfflineTime()
+    }
+
+    fun scheduleNotification(delay: Long) {
+        notificationRepository.scheduleNotification(delay)
+    }
+
+    fun cancelNotification() {
+        notificationRepository.cancelNotification()
     }
 
     fun claimReward(price: Price) {

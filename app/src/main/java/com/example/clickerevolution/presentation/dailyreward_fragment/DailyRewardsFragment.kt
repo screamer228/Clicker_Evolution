@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
+import com.example.clickerevolution.common.ANIMATION_SCALE
 import com.example.clickerevolution.databinding.FragmentDailyRewardsBinding
 import com.example.clickerevolution.presentation.dailyreward_fragment.adapter.DailyRewardsAdapter
 import com.example.clickerevolution.presentation.dailyreward_fragment.viewmodel.DailyRewardsViewModel
@@ -19,6 +20,8 @@ import com.example.clickerevolution.presentation.dailyreward_fragment.viewmodel.
 import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModel
 import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModelFactory
 import com.example.clickerevolution.presentation.model.DailyReward
+import com.example.clickerevolution.utils.AnimationUtils.setOnTouchAnimation
+import com.example.clickerevolution.utils.NoAnimationItemAnimator
 import com.example.clickerevolution.utils.NonScrollableLinearLayoutManager
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
@@ -91,6 +94,7 @@ class DailyRewardsFragment() : DialogFragment() {
         }
 
         binding.recyclerViewDailyRewards.adapter = adapter
+        binding.recyclerViewDailyRewards.itemAnimator = NoAnimationItemAnimator()
 
         viewLifecycleOwner.lifecycleScope.launch {
             combine(
@@ -108,9 +112,12 @@ class DailyRewardsFragment() : DialogFragment() {
             }
         }
 
-        binding.dailyRewardButtonClose.setOnClickListener {
-            soundPool.play(soundIdClose, 0.9f, 0.9f, 1, 0, 1.0f)
-            dismiss()
+        binding.dailyRewardButtonClose.apply {
+            setOnTouchAnimation(ANIMATION_SCALE)
+            setOnClickListener {
+                soundPool.play(soundIdClose, 0.9f, 0.9f, 1, 0, 1.0f)
+                dismiss()
+            }
         }
     }
 

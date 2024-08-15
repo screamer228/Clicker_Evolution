@@ -3,16 +3,16 @@ package com.example.clickerevolution.presentation.shop_fragment.adapter
 import android.view.LayoutInflater
 import android.view.View.GONE
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clickerevolution.R
+import com.example.clickerevolution.common.ANIMATION_SCALE
 import com.example.clickerevolution.common.Currency
 import com.example.clickerevolution.common.Rarity
 import com.example.clickerevolution.databinding.ItemSkinBinding
 import com.example.clickerevolution.presentation.model.Skin
-import com.example.clickerevolution.utils.AnimationUtils.setTouchAnimation
+import com.example.clickerevolution.utils.AnimationUtils.setOnTouchAnimation
 import com.example.clickerevolution.utils.SkinsDiffUtil
 import com.example.clickerevolution.utils.StringUtil.addCommaEveryThreeDigits
 
@@ -74,7 +74,7 @@ class SkinsAdapter(
                 }
             }
 
-            binding.skinButtonAction.setTouchAnimation(0.9f)
+            binding.skinButtonAction.setOnTouchAnimation(ANIMATION_SCALE)
 
             when {
                 !item.isPurchased -> {

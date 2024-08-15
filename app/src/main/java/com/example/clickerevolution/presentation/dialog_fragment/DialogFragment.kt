@@ -10,10 +10,11 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
+import com.example.clickerevolution.common.ANIMATION_SCALE
 import com.example.clickerevolution.databinding.FragmentDialogBinding
 import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModel
 import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModelFactory
-import com.example.clickerevolution.utils.AnimationUtils.setTouchAnimation
+import com.example.clickerevolution.utils.AnimationUtils.setOnTouchAnimation
 import com.example.clickerevolution.utils.StringUtil.addCommaEveryThreeDigits
 import javax.inject.Inject
 
@@ -60,7 +61,7 @@ class DialogFragment(
         binding.dialogGoldCouldEarned.text = "x2 +${addCommaEveryThreeDigits(goldEarned * 2)}"
 
         binding.dialogButtonOk.apply {
-            setTouchAnimation(0.9f)
+            setOnTouchAnimation(ANIMATION_SCALE)
             setOnClickListener {
                 sharedViewModel.incrementGoldEarnedWhileOffline(goldEarned)
                 soundPool.play(soundIdClick, 0.9f, 0.9f, 1, 0, 1.0f)
@@ -69,7 +70,7 @@ class DialogFragment(
         }
 
         binding.dialogButtonDoubleIt.apply {
-            setTouchAnimation(0.9f)
+            setOnTouchAnimation(ANIMATION_SCALE)
             setOnClickListener {
                 sharedViewModel.incrementGoldEarnedWhileOffline(goldEarned * 2)
                 soundPool.play(soundIdClick, 0.9f, 0.9f, 1, 0, 1.0f)

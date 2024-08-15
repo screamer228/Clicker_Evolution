@@ -4,9 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.clickerevolution.common.ANIMATION_SCALE
 import com.example.clickerevolution.databinding.ItemUpgradeSpecialBinding
 import com.example.clickerevolution.presentation.model.Upgrade
-import com.example.clickerevolution.utils.AnimationUtils.setTouchAnimation
+import com.example.clickerevolution.utils.AnimationUtils.setOnTouchAnimation
 import com.example.clickerevolution.utils.UpgradesDiffUtil
 
 class UpgradesSpecialAdapter(
@@ -28,7 +29,7 @@ class UpgradesSpecialAdapter(
             }
 
             binding.upgradeSpecialCardView.apply {
-                setTouchAnimation(0.95f)
+                setOnTouchAnimation(ANIMATION_SCALE)
                 setOnClickListener {
                     onClick(item.id)
                 }

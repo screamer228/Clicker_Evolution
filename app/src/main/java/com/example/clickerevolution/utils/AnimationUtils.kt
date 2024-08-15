@@ -6,8 +6,8 @@ import android.animation.ObjectAnimator
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.ImageView
 import com.example.clickerevolution.R
 import java.util.Random
 
@@ -37,8 +37,10 @@ object AnimationUtils {
 
         // Генерируем случайные начальные координаты с учетом отступа
         val random = Random()
-        val startX = edgePadding + random.nextFloat() * (containerWidth - coinWidth - 2 * edgePadding)
-        val startY = edgePadding + random.nextFloat() * (containerHeight - coinHeight - 2 * edgePadding)
+        val startX =
+            edgePadding + random.nextFloat() * (containerWidth - coinWidth - 2 * edgePadding)
+        val startY =
+            edgePadding + random.nextFloat() * (containerHeight - coinHeight - 2 * edgePadding)
 
         // Устанавливаем начальные координаты монетки
         coin.translationX = startX
@@ -47,7 +49,12 @@ object AnimationUtils {
         container.addView(coin)
 
         // Анимация для движения монетки вверх и затухания
-        val translationY = ObjectAnimator.ofFloat(coin, "translationY", startY, startY - (100..200).random().toFloat())
+        val translationY = ObjectAnimator.ofFloat(
+            coin,
+            "translationY",
+            startY,
+            startY - (100..200).random().toFloat()
+        )
         val alpha = ObjectAnimator.ofFloat(coin, "alpha", 1f, 0f).apply {
             startDelay = 400 // Задержка перед началом затухания
         }
@@ -63,6 +70,7 @@ object AnimationUtils {
             override fun onAnimationEnd(animation: Animator) {
                 container.removeView(coin)
             }
+
             override fun onAnimationCancel(animation: Animator) {}
             override fun onAnimationRepeat(animation: Animator) {}
         })
@@ -70,7 +78,7 @@ object AnimationUtils {
         animatorSet.start()
     }
 
-    fun View.setTouchAnimation(percentage: Float) {
+    fun View.setOnTouchAnimation(percentage: Float) {
         this.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -106,24 +114,6 @@ object AnimationUtils {
             .scaleY(1f)  // Восстановление исходного размера по оси Y
             .setDuration(50)  // Длительность анимации
             .start()
-    }
-
-    fun startHomeClickAnimation(view: View) {
-        view.animate().apply {
-            duration = 50
-            scaleXBy(1.0F)
-            scaleX(0.9F)
-            scaleYBy(1.0F)
-            scaleY(0.9F)
-        }.withEndAction {
-            view.animate().apply {
-                duration = 50
-                scaleXBy(0.9F)
-                scaleX(1.0F)
-                scaleYBy(0.9F)
-                scaleY(1.0F)
-            }
-        }
     }
 
     fun startHostDiamondAnimation(view: View) {

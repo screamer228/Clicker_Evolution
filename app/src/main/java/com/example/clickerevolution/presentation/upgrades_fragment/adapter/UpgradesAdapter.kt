@@ -6,10 +6,11 @@ import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clickerevolution.R
+import com.example.clickerevolution.common.ANIMATION_SCALE
 import com.example.clickerevolution.common.UpgradeType
 import com.example.clickerevolution.databinding.ItemUpgradeBinding
 import com.example.clickerevolution.presentation.model.Upgrade
-import com.example.clickerevolution.utils.AnimationUtils.setTouchAnimation
+import com.example.clickerevolution.utils.AnimationUtils.setOnTouchAnimation
 import com.example.clickerevolution.utils.StringUtil.addCommaEveryThreeDigits
 import com.example.clickerevolution.utils.UpgradesDiffUtil
 
@@ -85,7 +86,7 @@ class UpgradesAdapter(
                 )
                 binding.upgradeButtonUpgrade.apply {
                     isClickable = true
-                    setTouchAnimation(0.9f)
+                    setOnTouchAnimation(ANIMATION_SCALE)
                     setOnClickListener {
                         onClick(item)
                     }

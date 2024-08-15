@@ -1,6 +1,9 @@
 package com.example.clickerevolution.di
 
+import android.content.Context
 import android.content.SharedPreferences
+import com.example.clickerevolution.data.repository.notification.NotificationRepository
+import com.example.clickerevolution.data.repository.notification.NotificationRepositoryImpl
 import com.example.clickerevolution.data.repository.prefs.PrefsRepository
 import com.example.clickerevolution.data.repository.prefs.PrefsRepositoryImpl
 import com.example.clickerevolution.data.repository.stats.StatsRepository
@@ -18,6 +21,12 @@ import javax.inject.Singleton
 
 @Module
 class RepositoryModule {
+
+    @Provides
+    @Singleton
+    fun provideNotificationScheduler(context: Context) : NotificationRepository {
+        return NotificationRepositoryImpl(context)
+    }
 
     @Provides
     @Singleton

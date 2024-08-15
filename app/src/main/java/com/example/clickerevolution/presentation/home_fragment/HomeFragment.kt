@@ -4,26 +4,24 @@ import android.media.SoundPool
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
+import com.example.clickerevolution.common.ANIMATION_SCALE
 import com.example.clickerevolution.databinding.FragmentHomeBinding
 import com.example.clickerevolution.presentation.dailyreward_fragment.DailyRewardsFragment
 import com.example.clickerevolution.presentation.dailyreward_fragment.viewmodel.DailyRewardsViewModel
 import com.example.clickerevolution.presentation.dailyreward_fragment.viewmodel.DailyRewardsViewModelFactory
 import com.example.clickerevolution.utils.AnimationUtils.startHomeCoinAnimation
-import com.example.clickerevolution.utils.AnimationUtils.startHomeClickAnimation
 import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModel
 import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModelFactory
-import com.example.clickerevolution.utils.AnimationUtils.resetViewSize
-import com.example.clickerevolution.utils.AnimationUtils.setTouchAnimation
-import com.example.clickerevolution.utils.AnimationUtils.shrinkView
+import com.example.clickerevolution.utils.AnimationUtils.setOnTouchAnimation
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -89,14 +87,14 @@ class HomeFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             dailyRewardsViewModel.dailyRewardAvailable.collect {
-                binding.cardViewIndicatorDailyReward.visibility =
-                    if (it) View.VISIBLE else View.GONE
-//                binding.cardViewIndicatorDailyReward.isVisible = it
+//                binding.cardViewIndicatorDailyReward.visibility =
+//                    if (it) View.VISIBLE else View.GONE
+                binding.cardViewIndicatorDailyReward.isVisible = it
             }
         }
 
         imageDailyReward.apply {
-            setTouchAnimation(0.9f)
+            setOnTouchAnimation(ANIMATION_SCALE)
             setOnClickListener {
                 val dialogFragment = DailyRewardsFragment()
                 dialogFragment.show(parentFragmentManager, "Daily Rewards Fragment")
@@ -105,7 +103,7 @@ class HomeFragment : Fragment() {
         }
 
         imageToClick.apply {
-            setTouchAnimation(0.9f)
+            setOnTouchAnimation(ANIMATION_SCALE)
             setOnClickListener {
                 sharedViewModel.onButtonClick()
 

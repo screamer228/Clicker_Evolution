@@ -73,6 +73,9 @@ android {
 
 dependencies {
 
+    //workManager
+    implementation ("androidx.work:work-runtime-ktx:2.9.1")
+
     //splashScreen
     implementation("androidx.core:core-splashscreen:1.0.1")
 

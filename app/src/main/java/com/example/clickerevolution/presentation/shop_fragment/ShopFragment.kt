@@ -20,6 +20,7 @@ import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.S
 import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModelFactory
 import com.example.clickerevolution.presentation.shop_fragment.viewmodel.ShopViewModel
 import com.example.clickerevolution.presentation.shop_fragment.viewmodel.ShopViewModelFactory
+import com.example.clickerevolution.utils.NoAnimationItemAnimator
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -118,6 +119,7 @@ class ShopFragment : Fragment() {
         }
 
         binding.recyclerViewSkins.adapter = adapter
+        binding.recyclerViewSkins.itemAnimator = NoAnimationItemAnimator()
 
         viewLifecycleOwner.lifecycleScope.launch {
             shopViewModel.skinsList.collect {

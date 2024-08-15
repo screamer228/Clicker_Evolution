@@ -20,6 +20,7 @@ import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.S
 import com.example.clickerevolution.presentation.upgrades_fragment.adapter.UpgradesAdapter
 import com.example.clickerevolution.presentation.upgrades_fragment.viewmodel.UpgradesViewModel
 import com.example.clickerevolution.presentation.upgrades_fragment.viewmodel.UpgradesViewModelFactory
+import com.example.clickerevolution.utils.NoAnimationItemAnimator
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -74,6 +75,7 @@ class UpgradesPerSecFragment : Fragment() {
         }
 
         binding.recyclerViewUpgradesPerSec.adapter = adapter
+        binding.recyclerViewUpgradesPerSec.itemAnimator = NoAnimationItemAnimator()
 
         viewLifecycleOwner.lifecycleScope.launch {
             upgradesViewModel.upgradesPerSecList.collect {

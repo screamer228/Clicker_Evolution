@@ -15,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
+import com.example.clickerevolution.common.ANIMATION_SCALE
 import com.example.clickerevolution.databinding.FragmentUpgradeDetailBinding
 import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModel
 import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModelFactory
@@ -23,7 +24,7 @@ import com.example.clickerevolution.presentation.upgradedetail_fragment.viewmode
 import com.example.clickerevolution.presentation.upgradedetail_fragment.viewmodel.UpgradeDetailViewModelFactory
 import com.example.clickerevolution.presentation.upgrades_fragment.viewmodel.UpgradesViewModel
 import com.example.clickerevolution.presentation.upgrades_fragment.viewmodel.UpgradesViewModelFactory
-import com.example.clickerevolution.utils.AnimationUtils.setTouchAnimation
+import com.example.clickerevolution.utils.AnimationUtils.setOnTouchAnimation
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -127,15 +128,14 @@ class UpgradeDetailFragment(
                     }
                 }
 
-                binding.upgradeDetailLevel.text = upgrade.level.toString()
+                binding.upgradeDetailLevel.text = "Уровень: ${upgrade.level}"
 
                 binding.upgradeDetailDescription.text = upgrade.description
 
                 binding.upgradeDetailPrice.text = upgrade.price.value.toString()
 
-
                 binding.upgradeDetailButtonUpgrade.apply {
-                    setTouchAnimation(0.9f)
+                    setOnTouchAnimation(ANIMATION_SCALE)
                     setOnClickListener {
                         if (sharedViewModel.currentResources.value.diamonds >= upgrade.price.value) {
                             buyUpgrade(upgrade)

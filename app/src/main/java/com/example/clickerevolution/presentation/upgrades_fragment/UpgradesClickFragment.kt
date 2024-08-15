@@ -2,24 +2,24 @@ package com.example.clickerevolution.presentation.upgrades_fragment
 
 import android.media.SoundPool
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.clickerevolution.R
 import com.example.clickerevolution.app.App
 import com.example.clickerevolution.common.UpgradeType
 import com.example.clickerevolution.databinding.FragmentUpgradesClickBinding
-import com.example.clickerevolution.presentation.model.Upgrade
-import com.example.clickerevolution.presentation.upgrades_fragment.adapter.UpgradesAdapter
 import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModel
 import com.example.clickerevolution.presentation.home_fragment.sharedviewmodel.SharedViewModelFactory
+import com.example.clickerevolution.presentation.model.Upgrade
+import com.example.clickerevolution.presentation.upgrades_fragment.adapter.UpgradesAdapter
 import com.example.clickerevolution.presentation.upgrades_fragment.viewmodel.UpgradesViewModel
 import com.example.clickerevolution.presentation.upgrades_fragment.viewmodel.UpgradesViewModelFactory
+import com.example.clickerevolution.utils.NoAnimationItemAnimator
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -78,6 +78,7 @@ class UpgradesClickFragment : Fragment() {
         }
 
         binding.recyclerViewUpgradesClick.adapter = adapter
+        binding.recyclerViewUpgradesClick.itemAnimator = NoAnimationItemAnimator()
 
         viewLifecycleOwner.lifecycleScope.launch {
             upgradesViewModel.upgradesClickList.collect {
